@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import AudioTrack from './AudioTrack'
-import MasterControls from './MasterControls'
+import AudioTrack from './AudioTrack/AudioTrack'
+import MasterControls from './MasterControls/MasterControls'
 
-import styles from './stylesFourTrack';
+import styles from './_styles_FourTrack';
 
 export default class FourTrack extends React.Component {
   render() {

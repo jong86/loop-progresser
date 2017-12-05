@@ -4,7 +4,8 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
-import styles from './stylesAudioTrack';
+
+import styles from './_styles_AudioTrack';
 
 const TrackControl = (props) => {
   let specificStyle;

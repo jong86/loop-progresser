@@ -3,7 +3,7 @@ import { Alert, Button, Image, StyleSheet, ScrollView, Text, TextInput, View } f
 
 import FourTrackIcon from './FourTrackIcon';
 
-import styles from './styles';
+import styles from './_styles_World';
 
 export default class World extends React.Component {
   render() {

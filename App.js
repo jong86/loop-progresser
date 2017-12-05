@@ -15,8 +15,8 @@ import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 import store from './store/store.js';
 
-import FourTrack from './components/FourTrack';
-import World from './components/World';
+import FourTrack from './components/FourTrack/FourTrack';
+import World from './components/World/World';
 
 export default class App extends React.Component {
   render() {
