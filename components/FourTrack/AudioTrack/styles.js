@@ -11,7 +11,12 @@ export default StyleSheet.create({
   },
   trackControl: {
     borderWidth: 0.5,
-    padding: 5
+    padding: 5,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+
   },
   buttonPlay: {
     backgroundColor: '#0f0',
