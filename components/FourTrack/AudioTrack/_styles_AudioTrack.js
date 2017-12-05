@@ -21,7 +21,14 @@ export default StyleSheet.create({
   buttonPlay: {
     backgroundColor: '#0f0',
   },
-  buttonRec: {
+  buttonRecord: {
     backgroundColor: '#f00',
+  },
+  buttonStop: {
+    backgroundColor: '#33f',
+  },
+
+  text: {
+    color: '#fff',
   },
 });
