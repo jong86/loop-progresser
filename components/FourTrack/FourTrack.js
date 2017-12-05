@@ -2,9 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 
 import AudioTrack from './AudioTrack'
-import Controls from './Controls'
+import MasterControls from './MasterControls'
 
-import styles from './styles';
+import styles from './stylesFourTrack';
 
 export default class FourTrack extends React.Component {
   render() {
@@ -17,7 +17,7 @@ export default class FourTrack extends React.Component {
         <AudioTrack />
         <AudioTrack />
 
-        <Controls />
+        <MasterControls />
 
       </View>
     );

@@ -1,6 +1,10 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import styles from './styles';
+import {
+  Text,
+  View,
+  TouchableHighlight
+} from 'react-native';
+import styles from './stylesAudioTrack';
 
 const TrackControl = (props) => {
   let specificStyle;
@@ -15,14 +19,22 @@ const TrackControl = (props) => {
       break;
   }
 
+  onPress = () => {
+    return;
+  }
+
   return (
-    <View
-      style={[styles.trackControl, specificStyle]}>
+    <TouchableHighlight
+      style={[styles.trackControl, specificStyle]}
+      underlayColor="#ff00ff"
+      onPress={this.onPress}
+    >
       <Text
-        style={styles.trackControlText}>
+        style={styles.trackControlText}
+        >
         {props.type}
       </Text>
-    </View>
+    </TouchableHighlight>
   )
 }
 

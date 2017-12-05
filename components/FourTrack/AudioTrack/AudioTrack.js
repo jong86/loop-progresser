@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import styles from './styles';
+import styles from './stylesAudioTrack';
 import { Svg } from 'expo';
 import { TrackControl } from './TrackControl'
 

@@ -9,6 +9,7 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
+
   trackControl: {
     borderWidth: 0.5,
     padding: 5,
@@ -16,7 +17,6 @@ export default StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   buttonPlay: {
     backgroundColor: '#0f0',
