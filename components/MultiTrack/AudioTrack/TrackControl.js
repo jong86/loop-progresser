@@ -29,16 +29,16 @@ export default TrackControl = (props) => {
   //
   //
   //
-  const { isOn } = props;
+  const { isOn, specificFunction, type } = props;
   return (
     <TouchableHighlight
       style={[styles.trackControl, specificStyle, isOn ? { opacity: 0.45 } : { opacity: 1 }]}
       underlayColor="#ffff33"
-      onPress={props.specificFunction}>
-      {/* TODO: CAN REFACTOR THE FUNCTIONS TO BE ADDED AS 'onPress' IN PARENT */}
+      onPress={specificFunction}>
+      {/* TODO: CAN REFACTOR THE FUNCTIONS TO BE ADDED AS 'onPress' FROM PARENT?? */}
       <Text
         style={styles.trackControlText}>
-        {props.type}
+        {type}
       </Text>
     </TouchableHighlight>
   )

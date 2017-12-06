@@ -92368,15 +92368,15 @@ var _MultiTrack = require(841           ); // 841 = ./MultiTrack
 
 var _MultiTrack2 = _interopRequireDefault(_MultiTrack);
 
-var _MasterControls = require(846                              ); // 846 = ./MasterControls/MasterControls
+var _MasterControls = require(843                              ); // 843 = ./MasterControls/MasterControls
 
 var _MasterControls2 = _interopRequireDefault(_MasterControls);
 
-var _AddTrackButton = require(849               ); // 849 = ./AddTrackButton
+var _AddTrackButton = require(845               ); // 845 = ./AddTrackButton
 
 var _AddTrackButton2 = _interopRequireDefault(_AddTrackButton);
 
-var _AudioTrackContainer = require(842                               ); // 842 = ./AudioTrack/AudioTrackContainer
+var _AudioTrackContainer = require(846                               ); // 846 = ./AudioTrack/AudioTrackContainer
 
 var _AudioTrackContainer2 = _interopRequireDefault(_AudioTrackContainer);
 
@@ -92419,10 +92419,13 @@ var MultiTrackContainer = _wrapComponent('MultiTrackContainer')(function (_React
 
     var _this = _possibleConstructorReturn(this, (MultiTrackContainer.__proto__ || Object.getPrototypeOf(MultiTrackContainer)).call(this, props));
 
+    _this._addTrack = function () {
+      console.warn('Calling _addTrack...');
+    };
+
     _this.state = {
       audioTracksList: []
     };
-
     _this._addTrack = _this._addTrack.bind(_this);
     return _this;
   }
@@ -92430,41 +92433,30 @@ var MultiTrackContainer = _wrapComponent('MultiTrackContainer')(function (_React
   _createClass(MultiTrackContainer, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this._addTrack();
-    }
-  }, {
-    key: '_addTrack',
-    value: function _addTrack() {
-      console.warn('calling _addTrack');
-      this.setState({
-        audioTracksList: this.state.audioTracksList.concat([_react3.default.createElement(_AudioTrackContainer2.default, { key: (0, _v2.default)(), __source: {
-            fileName: _jsxFileName,
-            lineNumber: 28
-          }
-        })])
-      });
+      console.log("Component mounted.");
     }
   }, {
     key: 'render',
     value: function render() {
+      console.log("From outside:", this._addTrack);
       return _react3.default.createElement(
         _MultiTrack2.default,
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 34
+            lineNumber: 35
           }
         },
-        _react3.default.createElement(_AddTrackButton2.default, { onpress: this._addTrack, __source: {
+        _react3.default.createElement(_AddTrackButton2.default, { onPress: this._addTrack, other: 'stuff', __source: {
             fileName: _jsxFileName,
-            lineNumber: 35
+            lineNumber: 36
           }
         }),
         this.state.audioTracksList,
         _react3.default.createElement(_MasterControls2.default, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 39
+            lineNumber: 40
           }
         })
       );
@@ -92487,7 +92479,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactNative = require(99            ); // 99 = react-native
 
-var _styles_MultiTrack = require(848                   ); // 848 = ./_styles_MultiTrack
+var _styles_MultiTrack = require(842                   ); // 842 = ./_styles_MultiTrack
 
 var _styles_MultiTrack2 = _interopRequireDefault(_styles_MultiTrack);
 
@@ -92533,7 +92525,7 @@ exports.default = _reactNative.StyleSheet.create({
     fontSize: 25
   }
 });
-}, 848, null, "loop-progresser/components/MultiTrack/_styles_MultiTrack.js");
+}, 842, null, "loop-progresser/components/MultiTrack/_styles_MultiTrack.js");
 __d(/* loop-progresser/components/MultiTrack/MasterControls/MasterControls.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -92552,7 +92544,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _reactNative = require(99            ); // 99 = react-native
 
-var _styles_MasterControls = require(847                       ); // 847 = ./_styles_MasterControls
+var _styles_MasterControls = require(844                       ); // 844 = ./_styles_MasterControls
 
 var _styles_MasterControls2 = _interopRequireDefault(_styles_MasterControls);
 
@@ -92608,7 +92600,7 @@ var Controls = _wrapComponent('Controls')(function (_React$Component) {
 }(_react3.default.Component));
 
 exports.default = Controls;
-}, 846, null, "loop-progresser/components/MultiTrack/MasterControls/MasterControls.js");
+}, 843, null, "loop-progresser/components/MultiTrack/MasterControls/MasterControls.js");
 __d(/* loop-progresser/components/MultiTrack/MasterControls/_styles_MasterControls.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -92622,7 +92614,7 @@ exports.default = _reactNative.StyleSheet.create({
     height: '7.5%'
   }
 });
-}, 847, null, "loop-progresser/components/MultiTrack/MasterControls/_styles_MasterControls.js");
+}, 844, null, "loop-progresser/components/MultiTrack/MasterControls/_styles_MasterControls.js");
 __d(/* loop-progresser/components/MultiTrack/AddTrackButton.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -92634,32 +92626,32 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactNative = require(99            ); // 99 = react-native
 
-var _styles_MultiTrack = require(848                   ); // 848 = ./_styles_MultiTrack
+var _styles_MultiTrack = require(842                   ); // 842 = ./_styles_MultiTrack
 
 var _styles_MultiTrack2 = _interopRequireDefault(_styles_MultiTrack);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = AddTrackButton = function AddTrackButton(props) {
+exports.default = AddTrackButton = function AddTrackButton() {
   return _react2.default.createElement(
     _reactNative.View,
     { style: _styles_MultiTrack2.default.addTrackButton, __source: {
         fileName: _jsxFileName,
-        lineNumber: 7
+        lineNumber: 10
       }
     },
     _react2.default.createElement(
       _reactNative.Text,
       { style: _styles_MultiTrack2.default.addTrackButtonText, __source: {
           fileName: _jsxFileName,
-          lineNumber: 8
+          lineNumber: 11
         }
       },
       '+'
     )
   );
 };
-}, 849, null, "loop-progresser/components/MultiTrack/AddTrackButton.js");
+}, 845, null, "loop-progresser/components/MultiTrack/AddTrackButton.js");
 __d(/* loop-progresser/components/MultiTrack/AudioTrack/AudioTrackContainer.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -92678,15 +92670,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _reactNative = require(99            ); // 99 = react-native
 
-var _TrackControl = require(843             ); // 843 = ./TrackControl
+var _TrackControl = require(847             ); // 847 = ./TrackControl
 
 var _TrackControl2 = _interopRequireDefault(_TrackControl);
 
-var _AudioTrack = require(845           ); // 845 = ./AudioTrack
+var _AudioTrack = require(849           ); // 849 = ./AudioTrack
 
 var _AudioTrack2 = _interopRequireDefault(_AudioTrack);
 
-var _styles_AudioTrack = require(844                   ); // 844 = ./_styles_AudioTrack
+var _styles_AudioTrack = require(848                   ); // 848 = ./_styles_AudioTrack
 
 var _styles_AudioTrack2 = _interopRequireDefault(_styles_AudioTrack);
 
@@ -93211,7 +93203,7 @@ var AudioTrackContainer = _wrapComponent('AudioTrackContainer')(function (_Compo
 }(_react2.Component));
 
 exports.default = AudioTrackContainer;
-}, 842, null, "loop-progresser/components/MultiTrack/AudioTrack/AudioTrackContainer.js");
+}, 846, null, "loop-progresser/components/MultiTrack/AudioTrack/AudioTrackContainer.js");
 __d(/* loop-progresser/components/MultiTrack/AudioTrack/TrackControl.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -93223,7 +93215,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactNative = require(99            ); // 99 = react-native
 
-var _styles_AudioTrack = require(844                   ); // 844 = ./_styles_AudioTrack
+var _styles_AudioTrack = require(848                   ); // 848 = ./_styles_AudioTrack
 
 var _styles_AudioTrack2 = _interopRequireDefault(_styles_AudioTrack);
 
@@ -93245,14 +93237,16 @@ exports.default = TrackControl = function TrackControl(props) {
       break;
   }
 
-  var isOn = props.isOn;
+  var isOn = props.isOn,
+      specificFunction = props.specificFunction,
+      type = props.type;
 
   return _react2.default.createElement(
     _reactNative.TouchableHighlight,
     {
       style: [_styles_AudioTrack2.default.trackControl, specificStyle, isOn ? { opacity: 0.45 } : { opacity: 1 }],
       underlayColor: '#ffff33',
-      onPress: props.specificFunction, __source: {
+      onPress: specificFunction, __source: {
         fileName: _jsxFileName,
         lineNumber: 34
       }
@@ -93265,11 +93259,11 @@ exports.default = TrackControl = function TrackControl(props) {
           lineNumber: 39
         }
       },
-      props.type
+      type
     )
   );
 };
-}, 843, null, "loop-progresser/components/MultiTrack/AudioTrack/TrackControl.js");
+}, 847, null, "loop-progresser/components/MultiTrack/AudioTrack/TrackControl.js");
 __d(/* loop-progresser/components/MultiTrack/AudioTrack/_styles_AudioTrack.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -93293,7 +93287,6 @@ exports.default = _reactNative.StyleSheet.create({
   },
 
   trackControl: {
-    borderWidth: 0.5,
     padding: 5,
     width: 50,
     height: 50,
@@ -93318,7 +93311,7 @@ exports.default = _reactNative.StyleSheet.create({
     color: '#fff'
   }
 });
-}, 844, null, "loop-progresser/components/MultiTrack/AudioTrack/_styles_AudioTrack.js");
+}, 848, null, "loop-progresser/components/MultiTrack/AudioTrack/_styles_AudioTrack.js");
 __d(/* loop-progresser/components/MultiTrack/AudioTrack/AudioTrack.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -93330,7 +93323,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactNative = require(99            ); // 99 = react-native
 
-var _styles_AudioTrack = require(844                   ); // 844 = ./_styles_AudioTrack
+var _styles_AudioTrack = require(848                   ); // 848 = ./_styles_AudioTrack
 
 var _styles_AudioTrack2 = _interopRequireDefault(_styles_AudioTrack);
 
@@ -93347,7 +93340,7 @@ exports.default = AudioTrack = function AudioTrack(props) {
     props.children
   );
 };
-}, 845, null, "loop-progresser/components/MultiTrack/AudioTrack/AudioTrack.js");
+}, 849, null, "loop-progresser/components/MultiTrack/AudioTrack/AudioTrack.js");
 ;require(137);
 ;require(0);
 //# sourceMappingURL=crna-entry.map

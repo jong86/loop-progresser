@@ -17,7 +17,6 @@ export default StyleSheet.create({
   },
 
   trackControl: {
-    borderWidth: 0.5,
     padding: 5,
     width: 50,
     height: 50,
