@@ -76,6 +76,7 @@ export default class AudioTrackContainer extends Component {
   };
 
   _updateScreenForRecordingStatus = status => {
+    console.log("status:", status)
     if (status.canRecord) {
       this.setState({
         isRecording: status.isRecording,
@@ -114,6 +115,7 @@ export default class AudioTrackContainer extends Component {
     }
 
     const recording = new Audio.Recording();
+    await recording.setProgressUpdateInterval(1); // I added this line
     await recording.prepareToRecordAsync(this.recordingSettings);
     recording.setOnRecordingStatusUpdate(this._updateScreenForRecordingStatus);
 
@@ -160,7 +162,7 @@ export default class AudioTrackContainer extends Component {
   }
 
   _onRecordPressed = () => {
-    console.warn("_onRecordPressed");
+    console.log("_onRecordPressed");
     if (this.state.isRecording) {
       this._stopRecordingAndEnablePlayback();
     } else {
@@ -169,7 +171,7 @@ export default class AudioTrackContainer extends Component {
   };
 
   _onPlayPausePressed = () => {
-    console.warn("_onPlayPausePressed");
+    console.log("_onPlayPausePressed");
     if (this.sound != null) {
       if (this.state.isPlaying) {
         this.sound.pauseAsync();
@@ -180,7 +182,7 @@ export default class AudioTrackContainer extends Component {
   };
 
   _onStopPressed = () => {
-    console.warn("_onStopPressed");
+    console.log("_onStopPressed");
     if (this.sound != null) {
       this.sound.stopAsync();
     }
@@ -284,13 +286,14 @@ export default class AudioTrackContainer extends Component {
 
 
   render() {
+    console.log(this.state.isRecording)
     return (
       <AudioTrack>
         <TrackControl type="PLAY" specificFunction={this._onPlayPausePressed} />
         <TrackControl type="STOP" specificFunction={this._onStopPressed} />
         <TrackControl type="REC" specificFunction={this._onRecordPressed} />
 
-        <Text style={styles.text}></Text>
+        <Text style={styles.text}>{this._getRecordingTimestamp()}</Text>
       </AudioTrack>
     );
   }

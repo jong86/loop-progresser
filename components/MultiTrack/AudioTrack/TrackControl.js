@@ -6,7 +6,10 @@ import {
 import styles from './_styles_AudioTrack';
 
 export default TrackControl = (props) => {
-  // Sets specific attributes of the control button:
+
+  //
+  // Component style switch:
+  // (icons can go in here)
   let specificStyle;
   switch(props.type) {
     case "PLAY":
@@ -22,6 +25,10 @@ export default TrackControl = (props) => {
       break;
   }
 
+
+  //
+  //
+  //
   return (
     <TouchableHighlight
       style={[styles.trackControl, specificStyle]}
