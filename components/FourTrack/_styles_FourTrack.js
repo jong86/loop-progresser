@@ -5,6 +5,6 @@ export default StyleSheet.create({
     backgroundColor: '#AAA',
     width: '100%',
     height: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
 });

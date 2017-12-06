@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppRegistry } from 'react-native';
 import {
   Alert,
   Button,
@@ -11,14 +12,8 @@ import {
   View
 } from 'react-native';
 
-import { Provider } from 'react-redux';
-import { connect } from 'react-redux';
-import store from './store/store.js';
-
 import FourTrack from './components/FourTrack/FourTrack';
 import World from './components/World/World';
-
-
 
 
 async function askForMicPermission() {
@@ -29,8 +24,6 @@ async function askForMicPermission() {
   }
 }
 
-
-
 export default class App extends React.Component {
   componentWillMount() {
     askForMicPermission();
@@ -40,11 +33,10 @@ export default class App extends React.Component {
     return (
       <View>
         <StatusBar hidden />
-        <Provider store={store}>
-          <FourTrack />
-          {/* <World /> */}
-        </Provider>
+        <FourTrack />
       </View>
     );
   }
 }
+
+AppRegistry.registerComponent('loopprogresser', () => App);
