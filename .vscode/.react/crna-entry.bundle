@@ -92380,6 +92380,10 @@ var _AudioTrackContainer = require(842                               ); // 842 =
 
 var _AudioTrackContainer2 = _interopRequireDefault(_AudioTrackContainer);
 
+var _v = require(182      ); // 182 = uuid/v4
+
+var _v2 = _interopRequireDefault(_v);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92410,13 +92414,37 @@ function _wrapComponent(id) {
 var MultiTrackContainer = _wrapComponent('MultiTrackContainer')(function (_React$Component) {
   _inherits(MultiTrackContainer, _React$Component);
 
-  function MultiTrackContainer() {
+  function MultiTrackContainer(props) {
     _classCallCheck(this, MultiTrackContainer);
 
-    return _possibleConstructorReturn(this, (MultiTrackContainer.__proto__ || Object.getPrototypeOf(MultiTrackContainer)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (MultiTrackContainer.__proto__ || Object.getPrototypeOf(MultiTrackContainer)).call(this, props));
+
+    _this.state = {
+      audioTracksList: []
+    };
+
+    _this._addTrack = _this._addTrack.bind(_this);
+    return _this;
   }
 
   _createClass(MultiTrackContainer, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this._addTrack();
+    }
+  }, {
+    key: '_addTrack',
+    value: function _addTrack() {
+      console.warn('calling _addTrack');
+      this.setState({
+        audioTracksList: this.state.audioTracksList.concat([_react3.default.createElement(_AudioTrackContainer2.default, { key: (0, _v2.default)(), __source: {
+            fileName: _jsxFileName,
+            lineNumber: 28
+          }
+        })])
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react3.default.createElement(
@@ -92424,25 +92452,19 @@ var MultiTrackContainer = _wrapComponent('MultiTrackContainer')(function (_React
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 34
           }
         },
-        _react3.default.createElement(_AddTrackButton2.default, {
-          __source: {
+        _react3.default.createElement(_AddTrackButton2.default, { onpress: this._addTrack, __source: {
             fileName: _jsxFileName,
-            lineNumber: 27
+            lineNumber: 35
           }
         }),
-        _react3.default.createElement(_AudioTrackContainer2.default, {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 29
-          }
-        }),
+        this.state.audioTracksList,
         _react3.default.createElement(_MasterControls2.default, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 32
+            lineNumber: 39
           }
         })
       );
@@ -93240,7 +93262,7 @@ exports.default = TrackControl = function TrackControl(props) {
       {
         style: _styles_AudioTrack2.default.trackControlText, __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 39
         }
       },
       props.type
