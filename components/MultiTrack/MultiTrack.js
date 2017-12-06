@@ -1,15 +1,11 @@
 import React from "react";
 import { View } from 'react-native';
 
-import AudioTrackContainer from './AudioTrack/AudioTrackContainer';
-import MasterControls from './MasterControls/MasterControls';
-
 import styles from './_styles_MultiTrack';
 
-export default MultiTrack = () => (
+export default MultiTrack = (props) => (
   <View
     style={styles.main}>
-    <AudioTrackContainer />
-    <MasterControls />
+    {props.children}
   </View>
 )

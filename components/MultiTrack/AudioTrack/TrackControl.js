@@ -29,10 +29,11 @@ export default TrackControl = (props) => {
   //
   //
   //
+  const { isOn } = props;
   return (
     <TouchableHighlight
-      style={[styles.trackControl, specificStyle]}
-      underlayColor="#ff00ff"
+      style={[styles.trackControl, specificStyle, isOn ? { opacity: 0.45 } : { opacity: 1 }]}
+      underlayColor="#ffff33"
       onPress={props.specificFunction}>
       <Text
         style={styles.trackControlText}>

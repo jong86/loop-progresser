@@ -92368,6 +92368,18 @@ var _MultiTrack = require(841           ); // 841 = ./MultiTrack
 
 var _MultiTrack2 = _interopRequireDefault(_MultiTrack);
 
+var _MasterControls = require(846                              ); // 846 = ./MasterControls/MasterControls
+
+var _MasterControls2 = _interopRequireDefault(_MasterControls);
+
+var _AddTrackButton = require(849               ); // 849 = ./AddTrackButton
+
+var _AddTrackButton2 = _interopRequireDefault(_AddTrackButton);
+
+var _AudioTrackContainer = require(842                               ); // 842 = ./AudioTrack/AudioTrackContainer
+
+var _AudioTrackContainer2 = _interopRequireDefault(_AudioTrackContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92398,21 +92410,42 @@ function _wrapComponent(id) {
 var MultiTrackContainer = _wrapComponent('MultiTrackContainer')(function (_React$Component) {
   _inherits(MultiTrackContainer, _React$Component);
 
-  function MultiTrackContainer(props) {
+  function MultiTrackContainer() {
     _classCallCheck(this, MultiTrackContainer);
 
-    return _possibleConstructorReturn(this, (MultiTrackContainer.__proto__ || Object.getPrototypeOf(MultiTrackContainer)).call(this, props));
+    return _possibleConstructorReturn(this, (MultiTrackContainer.__proto__ || Object.getPrototypeOf(MultiTrackContainer)).apply(this, arguments));
   }
 
   _createClass(MultiTrackContainer, [{
     key: 'render',
     value: function render() {
-      return _react3.default.createElement(_MultiTrack2.default, {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 12
-        }
-      });
+      return _react3.default.createElement(
+        _MultiTrack2.default,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 26
+          }
+        },
+        _react3.default.createElement(_AddTrackButton2.default, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 27
+          }
+        }),
+        _react3.default.createElement(_AudioTrackContainer2.default, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 29
+          }
+        }),
+        _react3.default.createElement(_MasterControls2.default, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 32
+          }
+        })
+      );
     }
   }]);
 
@@ -92432,13 +92465,152 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactNative = require(99            ); // 99 = react-native
 
-var _AudioTrackContainer = require(842                               ); // 842 = ./AudioTrack/AudioTrackContainer
+var _styles_MultiTrack = require(848                   ); // 848 = ./_styles_MultiTrack
 
-var _AudioTrackContainer2 = _interopRequireDefault(_AudioTrackContainer);
+var _styles_MultiTrack2 = _interopRequireDefault(_styles_MultiTrack);
 
-var _MasterControls = require(846                              ); // 846 = ./MasterControls/MasterControls
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _MasterControls2 = _interopRequireDefault(_MasterControls);
+exports.default = MultiTrack = function MultiTrack(props) {
+  return _react2.default.createElement(
+    _reactNative.View,
+    {
+      style: _styles_MultiTrack2.default.main, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 7
+      }
+    },
+    props.children
+  );
+};
+}, 841, null, "loop-progresser/components/MultiTrack/MultiTrack.js");
+__d(/* loop-progresser/components/MultiTrack/_styles_MultiTrack.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactNative = require(99            ); // 99 = react-native
+
+exports.default = _reactNative.StyleSheet.create({
+  main: {
+    backgroundColor: '#AAA',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+
+  addTrackButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#ff0',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 50
+  },
+  addTrackButtonText: {
+    fontSize: 25
+  }
+});
+}, 848, null, "loop-progresser/components/MultiTrack/_styles_MultiTrack.js");
+__d(/* loop-progresser/components/MultiTrack/MasterControls/MasterControls.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react2 = require(122    ); // 122 = react
+
+var _react3 = _interopRequireDefault(_react2);
+
+var _index = require(214                                                       ); // 214 = ./../../../node_modules/react-transform-hmr/lib/index.js
+
+var _index2 = _interopRequireDefault(_index);
+
+var _jsxFileName = '/home/jon/coding-projects/loop-progresser/components/MultiTrack/MasterControls/MasterControls.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactNative = require(99            ); // 99 = react-native
+
+var _styles_MasterControls = require(847                       ); // 847 = ./_styles_MasterControls
+
+var _styles_MasterControls2 = _interopRequireDefault(_styles_MasterControls);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _components = {
+  Controls: {
+    displayName: 'Controls'
+  }
+};
+
+var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+  filename: '/home/jon/coding-projects/loop-progresser/components/MultiTrack/MasterControls/MasterControls.js',
+  components: _components,
+  locals: [module],
+  imports: [_react3.default]
+});
+
+function _wrapComponent(id) {
+  return function (Component) {
+    return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+  };
+}
+
+var Controls = _wrapComponent('Controls')(function (_React$Component) {
+  _inherits(Controls, _React$Component);
+
+  function Controls() {
+    _classCallCheck(this, Controls);
+
+    return _possibleConstructorReturn(this, (Controls.__proto__ || Object.getPrototypeOf(Controls)).apply(this, arguments));
+  }
+
+  _createClass(Controls, [{
+    key: 'render',
+    value: function render() {
+      return _react3.default.createElement(_reactNative.View, {
+        style: _styles_MasterControls2.default.main, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 11
+        }
+      });
+    }
+  }]);
+
+  return Controls;
+}(_react3.default.Component));
+
+exports.default = Controls;
+}, 846, null, "loop-progresser/components/MultiTrack/MasterControls/MasterControls.js");
+__d(/* loop-progresser/components/MultiTrack/MasterControls/_styles_MasterControls.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactNative = require(99            ); // 99 = react-native
+
+exports.default = _reactNative.StyleSheet.create({
+  main: {
+    backgroundColor: '#666',
+    width: '100%',
+    height: '7.5%'
+  }
+});
+}, 847, null, "loop-progresser/components/MultiTrack/MasterControls/_styles_MasterControls.js");
+__d(/* loop-progresser/components/MultiTrack/AddTrackButton.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/jon/coding-projects/loop-progresser/components/MultiTrack/AddTrackButton.js';
+
+var _react = require(122    ); // 122 = react
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactNative = require(99            ); // 99 = react-native
 
 var _styles_MultiTrack = require(848                   ); // 848 = ./_styles_MultiTrack
 
@@ -92446,30 +92618,26 @@ var _styles_MultiTrack2 = _interopRequireDefault(_styles_MultiTrack);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = MultiTrack = function MultiTrack() {
+exports.default = AddTrackButton = function AddTrackButton(props) {
   return _react2.default.createElement(
     _reactNative.View,
-    {
-      style: _styles_MultiTrack2.default.main, __source: {
+    { style: _styles_MultiTrack2.default.addTrackButton, __source: {
         fileName: _jsxFileName,
-        lineNumber: 10
+        lineNumber: 7
       }
     },
-    _react2.default.createElement(_AudioTrackContainer2.default, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 12
-      }
-    }),
-    _react2.default.createElement(_MasterControls2.default, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 13
-      }
-    })
+    _react2.default.createElement(
+      _reactNative.Text,
+      { style: _styles_MultiTrack2.default.addTrackButtonText, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 8
+        }
+      },
+      '+'
+    )
   );
 };
-}, 841, null, "loop-progresser/components/MultiTrack/MultiTrack.js");
+}, 849, null, "loop-progresser/components/MultiTrack/AddTrackButton.js");
 __d(/* loop-progresser/components/MultiTrack/AudioTrack/AudioTrackContainer.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -92591,7 +92759,6 @@ var AudioTrackContainer = _wrapComponent('AudioTrackContainer')(function (_Compo
     };
 
     _this._updateScreenForRecordingStatus = function (status) {
-      console.log("status:", status);
       if (status.canRecord) {
         _this.setState({
           isRecording: status.isRecording,
@@ -92609,7 +92776,6 @@ var AudioTrackContainer = _wrapComponent('AudioTrackContainer')(function (_Compo
     };
 
     _this._onRecordPressed = function () {
-      console.log("_onRecordPressed");
       if (_this.state.isRecording) {
         _this._stopRecordingAndEnablePlayback();
       } else {
@@ -92618,7 +92784,6 @@ var AudioTrackContainer = _wrapComponent('AudioTrackContainer')(function (_Compo
     };
 
     _this._onPlayPausePressed = function () {
-      console.log("_onPlayPausePressed");
       if (_this.sound != null) {
         if (_this.state.isPlaying) {
           _this.sound.pauseAsync();
@@ -92629,7 +92794,9 @@ var AudioTrackContainer = _wrapComponent('AudioTrackContainer')(function (_Compo
     };
 
     _this._onStopPressed = function () {
-      console.log("_onStopPressed");
+      if (_this.state.isRecording) {
+        _this._stopRecordingAndEnablePlayback();
+      }
       if (_this.sound != null) {
         _this.sound.stopAsync();
       }
@@ -92826,26 +92993,23 @@ var AudioTrackContainer = _wrapComponent('AudioTrackContainer')(function (_Compo
               }
 
               recording = new _expo.Audio.Recording();
-              _context7.next = 12;
-              return regeneratorRuntime.awrap(recording.setProgressUpdateInterval(1));
 
-            case 12:
-              _context7.next = 14;
+              recording.setProgressUpdateInterval(1);_context7.next = 13;
               return regeneratorRuntime.awrap(recording.prepareToRecordAsync(this.recordingSettings));
 
-            case 14:
+            case 13:
               recording.setOnRecordingStatusUpdate(this._updateScreenForRecordingStatus);
 
               this.recording = recording;
-              _context7.next = 18;
+              _context7.next = 17;
               return regeneratorRuntime.awrap(this.recording.startAsync());
 
-            case 18:
+            case 17:
               this.setState({
                 isLoading: false
               });
 
-            case 19:
+            case 18:
             case 'end':
               return _context7.stop();
           }
@@ -92957,45 +93121,65 @@ var AudioTrackContainer = _wrapComponent('AudioTrackContainer')(function (_Compo
     key: '_getRecordingTimestamp',
     value: function _getRecordingTimestamp() {
       if (this.state.recordingDuration != null) {
-        return '' + this._getMMSSFromMillis(this.state.recordingDuration);
+        return '' + this._formatMilliseconds(this.state.recordingDuration);
       }
-      return '' + this._getMMSSFromMillis(0);
+      return '' + this._formatMilliseconds(0);
+    }
+  }, {
+    key: '_formatMilliseconds',
+    value: function _formatMilliseconds(ms) {
+      return new Date(ms).toISOString().slice(14, -1);
     }
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.state.isRecording);
       return _react3.default.createElement(
         _AudioTrack2.default,
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 291
-          }
-        },
-        _react3.default.createElement(_TrackControl2.default, { type: 'PLAY', specificFunction: this._onPlayPausePressed, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 292
-          }
-        }),
-        _react3.default.createElement(_TrackControl2.default, { type: 'STOP', specificFunction: this._onStopPressed, __source: {
-            fileName: _jsxFileName,
-            lineNumber: 293
-          }
-        }),
-        _react3.default.createElement(_TrackControl2.default, { type: 'REC', specificFunction: this._onRecordPressed, __source: {
-            fileName: _jsxFileName,
             lineNumber: 294
           }
-        }),
+        },
         _react3.default.createElement(
           _reactNative.Text,
           { style: _styles_AudioTrack2.default.text, __source: {
               fileName: _jsxFileName,
-              lineNumber: 296
+              lineNumber: 295
             }
           },
           this._getRecordingTimestamp()
+        ),
+        _react3.default.createElement(
+          _reactNative.View,
+          { style: _styles_AudioTrack2.default.buttonWrapper, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 297
+            }
+          },
+          _react3.default.createElement(_TrackControl2.default, {
+            isOn: this.state.isPlaying,
+            type: 'PLAY',
+            specificFunction: this._onPlayPausePressed, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 298
+            }
+          }),
+          _react3.default.createElement(_TrackControl2.default, {
+            type: 'STOP',
+            specificFunction: this._onStopPressed, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 302
+            }
+          }),
+          _react3.default.createElement(_TrackControl2.default, {
+            isOn: this.state.isRecording,
+            type: 'REC',
+            specificFunction: this._onRecordPressed, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 305
+            }
+          })
         )
       );
     }
@@ -93039,14 +93223,16 @@ exports.default = TrackControl = function TrackControl(props) {
       break;
   }
 
+  var isOn = props.isOn;
+
   return _react2.default.createElement(
     _reactNative.TouchableHighlight,
     {
-      style: [_styles_AudioTrack2.default.trackControl, specificStyle],
-      underlayColor: '#ff00ff',
+      style: [_styles_AudioTrack2.default.trackControl, specificStyle, isOn ? { opacity: 0.45 } : { opacity: 1 }],
+      underlayColor: '#ffff33',
       onPress: props.specificFunction, __source: {
         fileName: _jsxFileName,
-        lineNumber: 33
+        lineNumber: 34
       }
     },
     _react2.default.createElement(
@@ -93054,7 +93240,7 @@ exports.default = TrackControl = function TrackControl(props) {
       {
         style: _styles_AudioTrack2.default.trackControlText, __source: {
           fileName: _jsxFileName,
-          lineNumber: 37
+          lineNumber: 38
         }
       },
       props.type
@@ -93073,8 +93259,14 @@ exports.default = _reactNative.StyleSheet.create({
     backgroundColor: '#333',
     width: '100%',
     height: '22.5%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  buttonWrapper: {
+    width: '60%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
 
@@ -93087,16 +93279,20 @@ exports.default = _reactNative.StyleSheet.create({
     alignItems: 'center'
   },
   buttonPlay: {
+    borderRadius: 5,
     backgroundColor: '#0f0'
   },
   buttonRecord: {
+    borderRadius: 25,
     backgroundColor: '#f00'
   },
   buttonStop: {
+    borderRadius: 5,
     backgroundColor: '#33f'
   },
 
   text: {
+    marginBottom: 25,
     color: '#fff'
   }
 });
@@ -93130,110 +93326,6 @@ exports.default = AudioTrack = function AudioTrack(props) {
   );
 };
 }, 845, null, "loop-progresser/components/MultiTrack/AudioTrack/AudioTrack.js");
-__d(/* loop-progresser/components/MultiTrack/MasterControls/MasterControls.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react2 = require(122    ); // 122 = react
-
-var _react3 = _interopRequireDefault(_react2);
-
-var _index = require(214                                                       ); // 214 = ./../../../node_modules/react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
-var _jsxFileName = '/home/jon/coding-projects/loop-progresser/components/MultiTrack/MasterControls/MasterControls.js';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _reactNative = require(99            ); // 99 = react-native
-
-var _styles_MasterControls = require(847                       ); // 847 = ./_styles_MasterControls
-
-var _styles_MasterControls2 = _interopRequireDefault(_styles_MasterControls);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _components = {
-  Controls: {
-    displayName: 'Controls'
-  }
-};
-
-var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
-  filename: '/home/jon/coding-projects/loop-progresser/components/MultiTrack/MasterControls/MasterControls.js',
-  components: _components,
-  locals: [module],
-  imports: [_react3.default]
-});
-
-function _wrapComponent(id) {
-  return function (Component) {
-    return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
-  };
-}
-
-var Controls = _wrapComponent('Controls')(function (_React$Component) {
-  _inherits(Controls, _React$Component);
-
-  function Controls() {
-    _classCallCheck(this, Controls);
-
-    return _possibleConstructorReturn(this, (Controls.__proto__ || Object.getPrototypeOf(Controls)).apply(this, arguments));
-  }
-
-  _createClass(Controls, [{
-    key: 'render',
-    value: function render() {
-      return _react3.default.createElement(_reactNative.View, {
-        style: _styles_MasterControls2.default.main, __source: {
-          fileName: _jsxFileName,
-          lineNumber: 11
-        }
-      });
-    }
-  }]);
-
-  return Controls;
-}(_react3.default.Component));
-
-exports.default = Controls;
-}, 846, null, "loop-progresser/components/MultiTrack/MasterControls/MasterControls.js");
-__d(/* loop-progresser/components/MultiTrack/MasterControls/_styles_MasterControls.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactNative = require(99            ); // 99 = react-native
-
-exports.default = _reactNative.StyleSheet.create({
-  main: {
-    backgroundColor: '#666',
-    width: '100%',
-    height: '7.5%'
-  }
-});
-}, 847, null, "loop-progresser/components/MultiTrack/MasterControls/_styles_MasterControls.js");
-__d(/* loop-progresser/components/MultiTrack/_styles_MultiTrack.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactNative = require(99            ); // 99 = react-native
-
-exports.default = _reactNative.StyleSheet.create({
-  main: {
-    backgroundColor: '#AAA',
-    width: '100%',
-    height: '100%',
-    justifyContent: 'flex-end'
-  }
-});
-}, 848, null, "loop-progresser/components/MultiTrack/_styles_MultiTrack.js");
 ;require(137);
 ;require(0);
 //# sourceMappingURL=crna-entry.map
