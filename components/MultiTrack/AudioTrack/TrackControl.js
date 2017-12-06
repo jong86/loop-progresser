@@ -26,11 +26,9 @@ export default TrackControl = (props) => {
     <TouchableHighlight
       style={[styles.trackControl, specificStyle]}
       underlayColor="#ff00ff"
-      onPress={props.specificFunction}
-    >
+      onPress={props.specificFunction}>
       <Text
-        style={styles.trackControlText}
-        >
+        style={styles.trackControlText}>
         {props.type}
       </Text>
     </TouchableHighlight>
