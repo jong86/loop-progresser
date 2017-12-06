@@ -1,17 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Text, View } from 'react-native';
 
+import TrackControl from './TrackControl'
+import AudioTrack from './AudioTrack'
 import styles from './_styles_AudioTrack';
-import { TrackControl } from './TrackControl'
 
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 
-const uuidv4 = require('uuid/v4');
 
-export default class AudioTrack extends React.Component {
+export default class AudioTrackContainer extends Component {
   constructor(props) {
     super(props);
-    this.id = uuidv4();
     this.recording = null;
     this.sound = null;
     this.isSeeking = false;
@@ -38,7 +37,6 @@ export default class AudioTrack extends React.Component {
   }
 
   componentDidMount() {
-    
     (async () => {
       this.setState({ fontLoaded: true });
     })();
@@ -285,23 +283,15 @@ export default class AudioTrack extends React.Component {
   }
 
 
-
   render() {
-    // console.warn("this:", this.id, "parent:", this.props.idParent);
-
     return (
-      <View
-        style={styles.main}>
-
+      <AudioTrack>
         <TrackControl type="PLAY" specificFunction={this._onPlayPausePressed} />
-
         <TrackControl type="STOP" specificFunction={this._onStopPressed} />
-
         <TrackControl type="REC" specificFunction={this._onRecordPressed} />
 
-        <Text style={styles.text}>{this._getRecordingTimestamp()}</Text>
-
-      </View>
+        <Text style={styles.text}></Text>
+      </AudioTrack>
     );
   }
 }

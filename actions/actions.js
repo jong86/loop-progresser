@@ -1,3 +1,5 @@
+const uuidv4 = require('uuid/v4');
+
 //
 // Action types
 //
@@ -20,5 +22,9 @@ export function addAudioTrack(multiTrackId) {
 }
 
 export function saveAudioRecording(audioTrackId) {
-  return { type: SAVE_AUDIO_RECORDING, audioTrackId: audioTrackId }
+  return {
+    type: SAVE_AUDIO_RECORDING,
+    id: uuidv4(),
+    audioTrackId: audioTrackId
+  }
 }

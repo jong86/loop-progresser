@@ -12,9 +12,7 @@ import {
   View
 } from 'react-native';
 
-import FourTrack from './components/FourTrack/FourTrack';
-import World from './components/World/World';
-
+import MultiTrackContainer from './components/MultiTrack/MultiTrackContainer';
 
 async function askForMicPermission() {
   const { Permissions } = Expo;
@@ -33,7 +31,7 @@ export default class App extends React.Component {
     return (
       <View>
         <StatusBar hidden />
-        <FourTrack />
+        <MultiTrackContainer />
       </View>
     );
   }
