@@ -2,22 +2,16 @@ import React from "react";
 import {
   Text,
   View,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  addons
 } from 'react-native';
 import styles from './_styles_MultiTrack';
 
-
-_addTrack = () => {
-  console.warn('Calling _addTrack...');
-  // this.setState({
-  //   audioTracksList: this.state.audioTracksList.concat([<AudioTrackContainer key={uuidv4()} />])
-  // })
-}
-
-export default AddTrackButton = () => {
+export default AddTrackButton = (props) => {
+  const { _addTrack } = props;
   return (
-    <TouchableWithoutFeedback style={styles.addTrackButton} onPress={_addTrack} >
-      <View>
+    <TouchableWithoutFeedback onPress={_addTrack}>
+      <View style={styles.addTrackButton}>
         <Text style={styles.addTrackButtonText}>+</Text>
       </View>
     </TouchableWithoutFeedback>

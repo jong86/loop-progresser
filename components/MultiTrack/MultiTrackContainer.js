@@ -17,15 +17,28 @@ export default class MultiTrackContainer extends React.Component {
   }
 
   componentWillMount() {
-    // this._addTrack()
-    console.log("Component mounted.")
+    this._addTrack()
+  }
+
+
+  _addTrack = () => {
+    if (this.state.audioTracksList.length < 3)
+      this.setState({
+        audioTracksList: this.state.audioTracksList.concat([
+          <AudioTrackContainer key={uuidv4()}/>,
+          <AudioTrackContainer key={uuidv4()}/>,
+          <AudioTrackContainer key={uuidv4()}/>,
+          <AudioTrackContainer key={uuidv4()}/>,
+        ])
+      })
   }
 
 
   render() {
+    console.log(this.state.audioTracksList)
     return (
       <MultiTrack>
-        <AddTrackButton />
+        {/* { this.state.audioTracksList.length < 3 && <AddTrackButton _addTrack={this._addTrack} /> } */}
 
         { this.state.audioTracksList }
 

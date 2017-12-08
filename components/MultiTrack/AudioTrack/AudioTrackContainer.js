@@ -92,6 +92,8 @@ export default class AudioTrackContainer extends Component {
     }
   };
 
+
+  // TODO: need to get rid of the async stuff before recording starts to try and eliminate lag:
   async _stopPlaybackAndBeginRecording() {
     this.setState({
       isLoading: true,
