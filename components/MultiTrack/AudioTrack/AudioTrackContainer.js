@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { Text, View } from 'react-native';
 
-import TrackControl from './TrackControl'
 import AudioTrack from './AudioTrack'
 import styles from './_styles_AudioTrack';
 
@@ -295,21 +294,6 @@ export default class AudioTrackContainer extends Component {
     return (
       <AudioTrack>
         <Text style={styles.text}>{this._getRecordingTimestamp()}</Text>
-
-        <View style={styles.buttonWrapper}>
-          <TrackControl
-            isOn={this.state.isPlaying}
-            type="PLAY"
-            specificFunction={this._onPlayPausePressed} />
-          <TrackControl
-            type="STOP"
-            specificFunction={this._onStopPressed} />
-          <TrackControl
-            isOn={this.state.isRecording}
-            type="REC"
-            specificFunction={this._onRecordPressed} />
-        </View>
-
       </AudioTrack>
     );
   }

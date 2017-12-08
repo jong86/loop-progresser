@@ -10,33 +10,6 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
 
-  buttonWrapper: {
-    width: '60%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
-  trackControl: {
-    padding: 5,
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonPlay: {
-    borderRadius: 5,
-    backgroundColor: '#0f0',
-  },
-  buttonRecord: {
-    borderRadius: 25,
-    backgroundColor: '#f00',
-  },
-  buttonStop: {
-    borderRadius: 5,
-    backgroundColor: '#33f',
-  },
-
   text: {
     marginBottom: 25,
     color: '#fff',
