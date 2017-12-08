@@ -27,6 +27,16 @@ import {
 
 function recordings(state = {}, action) {
   switch (action.type) {
+    case CREATE_AUDIO_RECORDING:
+      return Object.assign({}, ...state,
+        {
+          id: {
+            id: action.id,
+            audioTrackId: action.audioTrackId,
+            path: 'fake/path/'
+          }
+        }
+      )
     case SAVE_AUDIO_RECORDING:
       return Object.assign({}, ...state,
         {
