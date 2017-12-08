@@ -1,30 +1,18 @@
-const uuidv4 = require('uuid/v4');
-
-//
-// Action types
-//
-
-export const ADD_MULTITRACK = 'ADD_MULTITRACK'
-export const ADD_AUDIOTRACK = 'ADD_AUDIOTRACK'
-export const SAVE_AUDIO_RECORDING = 'SAVE_AUDIO_RECORDING'
-
-
 //
 // Action creators
 //
 
-export function addMultiTrack() {
-  return { type: ADD_MULTITRACK }
-}
+// export function saveTake(filepath, audioTrackId, multiTrackId) {
+//   return {
+//     type: SAVE_AUDIO_RECORDING,
+//     filepath: filepath,
+//     audioTrackId,
+//     multiTrackId,
+//   }
+// }
 
-export function addAudioTrack(multiTrackId) {
-  return { type: ADD_AUDIOTRACK, multiTrackId: multiTrackId }
-}
-
-export function saveAudioRecording(audioTrackId) {
+export const armTrackToggle = () => {
   return {
-    type: SAVE_AUDIO_RECORDING,
-    id: uuidv4(),
-    audioTrackId: audioTrackId
+    type: 'ARM_TRACK_TOGGLE',
   }
 }

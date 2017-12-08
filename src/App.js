@@ -1,40 +1,20 @@
-import React from 'react';
-import { AppRegistry } from 'react-native';
-import {
-  Alert,
-  Button,
-  Image,
-  StyleSheet,
-  ScrollView,
-  StatusBar,
-  Text,
-  TextInput,
-  View
-} from 'react-native';
+import React, { Component } from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
-import MultiTrackContainer from './components/MultiTrack/MultiTrackContainer';
+import AppWithState from './AppWithState'
+import multiTracks from './redux/reducers'
 
-async function askForMicPermission() {
-  const { Permissions } = Expo;
-  const { status } = await Permissions.getAsync(Permissions.AUDIO_RECORDING);
-  if (status !== 'granted') {
-    alert(`Recording is disabled.`);
-  }
-}
+const store = createStore(multiTracks)
 
-export default class App extends React.Component {
-  componentWillMount() {
-    askForMicPermission();
-  }
-
+export default class App extends Component {
   render() {
     return (
-      <View>
-        <StatusBar hidden />
-        <MultiTrackContainer />
-      </View>
-    );
+      <Provider store={store}>
+        <AppWithState />
+      </Provider>
+    )
   }
 }
 
-AppRegistry.registerComponent('loopprogresser', () => App);
+Expo.registerRootComponent(App);

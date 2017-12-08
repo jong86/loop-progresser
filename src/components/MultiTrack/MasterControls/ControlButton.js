@@ -33,19 +33,17 @@ export default ControlButton = (props) => {
   //
   const {
     isOn,
-    // specificFunction,
+    specificFunction,
     type
   } = props;
 
 
-  console.log("got here")
   return (
     <TouchableHighlight
       style={[styles.trackControl, specificStyle, isOn ? { opacity: 0.45 } : { opacity: 1 }]}
       underlayColor="#ffff33"
-      // onPress={specificFunction}
+      onPress={specificFunction}
       >
-      {/* TODO: CAN REFACTOR THE FUNCTIONS TO BE ADDED AS 'onPress' FROM PARENT?? */}
       <Text
         style={styles.trackControlText}>
         {type}

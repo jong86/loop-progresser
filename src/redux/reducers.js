@@ -1,11 +1,4 @@
 import { combineReducers } from 'redux'
-import {
-  ADD_MULTITRACK,
-  ADD_AUDIOTRACK,
-  SAVE_AUDIO_RECORDING
-} from '../actions'
-
-
 
 // function multiTracks(state = {}, action) {
 //   switch (action.type) {
@@ -24,36 +17,47 @@ import {
 //   }
 // }
 
+initialState = {
+  isArmed: false
+}
 
-function recordings(state = {}, action) {
+const multiTracks = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_AUDIO_RECORDING:
-      return Object.assign({}, ...state,
-        {
-          id: {
-            id: action.id,
-            audioTrackId: action.audioTrackId,
-            path: 'fake/path/'
-          }
-        }
-      )
-    case SAVE_AUDIO_RECORDING:
-      return Object.assign({}, ...state,
-        {
-          id: {
-            id: action.id,
-            audioTrackId: action.audioTrackId,
-            path: 'fake/path/'
-          }
-        }
-      )
+    case 'ARM_TRACK_TOGGLE':
+      return {
+        ...state,
+        isArmed: !state.isArmed
+      }
+
+    // ### After it's hooked up i can maybe use this to toggle:
+    // case 'TOGGLE_TODO':
+    // return state.map(todo =>
+    //   (todo.id === action.id)
+    //     ? {...todo, completed: !todo.completed}
+    //     : todo
+    // )
+
     default:
       return state;
   }
 }
 
-const appReducers = combineReducers({
-  recordings
-})
+// const mapStateToProps = state => {
+//   return {
+//     multiTracks: multiTracks(state.todos, state.visibilityFilter)
+//   }
+// }
 
-export default appReducers
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onTodoClick: id => {
+//       dispatch(toggleTodo(id))
+//     }
+//   }
+// }
+
+// const reducer = combineReducers({
+//   multiTracks
+// })
+
+export default multiTracks

@@ -12,7 +12,8 @@ export default class MultiTrackContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      audioTracksList: []
+      audioTracksList: [],
+      numAudioTracks: 0
     }
   }
 
@@ -22,25 +23,22 @@ export default class MultiTrackContainer extends React.Component {
 
 
   _addTrack = () => {
-    if (this.state.audioTracksList.length < 3)
-      this.setState({
-        audioTracksList: this.state.audioTracksList.concat([
-          <AudioTrackContainer key={uuidv4()} />,
-          <AudioTrackContainer key={uuidv4()} />,
-          <AudioTrackContainer key={uuidv4()} />,
-          <AudioTrackContainer key={uuidv4()} />,
-        ])
-      })
+    this.setState({
+      audioTracksList: this.state.audioTracksList.concat([
+        <AudioTrackContainer key={uuidv4()} id={0} />,
+      ]),
+      numAudioTracks: this.state.numAudioTracks + 1
+    })
   }
 
 
   render() {
     return (
-      <MultiTrack>
+      <MultiTrack id={0}>
 
         { this.state.audioTracksList }
 
-        <MasterControlsContainer />
+        <MasterControlsContainer multiTrackId={0} />
       </MultiTrack>
     )
   }

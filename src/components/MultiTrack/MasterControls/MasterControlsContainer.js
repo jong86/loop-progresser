@@ -5,9 +5,22 @@ import MasterControls from './MasterControls';
 import ControlButton from './ControlButton';
 import styles from './_styles_MasterControls';
 
+
+
 export default class MasterControlsContainer extends Component {
+  constructor(props) {
+    super(props)
+
+    this._onMasterRecordPressed = this._onMasterRecordPressed.bind(this)
+  }
+
+
+  _onMasterRecordPressed() {
+    return;
+  }
 
   render() {
+
     return (
       <MasterControls>
 
@@ -26,7 +39,7 @@ export default class MasterControlsContainer extends Component {
           <ControlButton
             // isOn={this.state.isRecording}
             type="REC"
-            // specificFunction={this._onRecordPressed}
+            specificFunction={this._onMasterRecordPressed}
             />
 
         </View>

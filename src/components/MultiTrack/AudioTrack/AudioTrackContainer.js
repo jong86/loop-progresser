@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { Text, View } from 'react-native';
 
-import AudioTrack from './AudioTrack'
+import AudioTrack from './AudioTrack';
+import ArmButton from './ArmButton';
 import styles from './_styles_AudioTrack';
 
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
@@ -39,15 +40,7 @@ export default class AudioTrackContainer extends Component {
     (async () => {
       this.setState({ fontLoaded: true });
     })();
-    this._askForPermissions();
   }
-
-  _askForPermissions = async () => {
-    const response = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
-    this.setState({
-      haveRecordingPermissions: response.status === 'granted',
-    });
-  };
 
   _updateScreenForSoundStatus = status => {
     if (status.isLoaded) {
@@ -293,6 +286,7 @@ export default class AudioTrackContainer extends Component {
   render() {
     return (
       <AudioTrack>
+        <ArmButton />
         <Text style={styles.text}>{this._getRecordingTimestamp()}</Text>
       </AudioTrack>
     );
