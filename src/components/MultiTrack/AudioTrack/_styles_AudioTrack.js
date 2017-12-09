@@ -6,18 +6,18 @@ export default StyleSheet.create({
     backgroundColor: '#333',
     width: '100%',
     height: '22%',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
 
   text: {
-    marginBottom: 25,
     color: '#fff',
   },
 
   armButton: {
-    width: 40,
-    height: 20,
+    width: 60,
+    height: 40,
     justifyContent: "center",
     alignItems: "center",
   }

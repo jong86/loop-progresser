@@ -25,7 +25,7 @@ export default class MultiTrackContainer extends React.Component {
   _addTrack = () => {
     this.setState({
       audioTracksList: this.state.audioTracksList.concat([
-        <AudioTrackContainer key={uuidv4()} id={0} />,
+        <AudioTrackContainer key={uuidv4()} id={0} multiTrackId={0} />,
       ]),
       numAudioTracks: this.state.numAudioTracks + 1
     })

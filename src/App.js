@@ -3,9 +3,9 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 import AppWithState from './AppWithState'
-import multiTracks from './redux/reducers'
+import rootReducer from './redux/reducers'
 
-const store = createStore(multiTracks)
+const store = createStore(rootReducer)
 
 export default class App extends Component {
   render() {

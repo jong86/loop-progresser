@@ -11,8 +11,11 @@
 //   }
 // }
 
-export const armTrackToggle = () => {
+export const armTrackToggle = (audioTrackId, multiTrackId) => {
+  console.log("arm track toggled for:", audioTrackId, multiTrackId);
   return {
     type: 'ARM_TRACK_TOGGLE',
+    audioTrackId,
+    multiTrackId,
   }
 }

@@ -286,7 +286,7 @@ export default class AudioTrackContainer extends Component {
   render() {
     return (
       <AudioTrack>
-        <ArmButton />
+        <ArmButton audioTrackId={this.props.id} multiTrackId={this.props.multiTrackId} />
         <Text style={styles.text}>{this._getRecordingTimestamp()}</Text>
       </AudioTrack>
     );

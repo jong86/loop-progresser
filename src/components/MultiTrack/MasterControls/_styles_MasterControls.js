@@ -26,15 +26,15 @@ export default StyleSheet.create({
   },
   buttonPlay: {
     borderRadius: 5,
-    backgroundColor: '#0f0',
+    backgroundColor: 'forestgreen',
   },
   buttonRecord: {
     borderRadius: 25,
-    backgroundColor: '#f00',
+    backgroundColor: 'tomato',
   },
   buttonStop: {
     borderRadius: 5,
-    backgroundColor: '#33f',
+    backgroundColor: 'steelblue',
   },
 
 });
