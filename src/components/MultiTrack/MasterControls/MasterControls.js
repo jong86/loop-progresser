@@ -16,7 +16,6 @@ export default class MasterControls extends Component {
   }
 
   render() {
-    console.log("master controls props:", this.props);
     return (
       <View style={styles.main}>
 

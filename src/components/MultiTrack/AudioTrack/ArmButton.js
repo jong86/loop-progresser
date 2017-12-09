@@ -23,6 +23,8 @@ const ArmButton = (props) => {
 }
 
 const mapStateToProps = (state, props) => {
+  console.log('entire state', state);
+  console.log('state for armButton', state);
   return { isArmed: state.multiTracks[props.multiTrackId].audioTracks[props.audioTrackId].isArmed };
 };
 

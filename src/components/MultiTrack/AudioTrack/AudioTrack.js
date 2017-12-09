@@ -8,10 +8,10 @@ import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 
 export default class AudioTrack extends Component {
   render() {
-    console.log('audioTrack props:', this.props);
+    console.log('audioTrack props2:', this.props);
     return (
       <View style={styles.main}>
-        <ArmButton audioTrackId={this.props.id} multiTrackId={this.props.multiTrackId} />
+        <ArmButton audioTrackId={this.props.id} multiTrackId={'0'} />
         {/* <Text style={styles.text}>{this._getRecordingTimestamp()}</Text> */}
       </View>
     )

@@ -1,15 +1,19 @@
+import { Audio } from 'expo';
+
 //
 // Action creators
 //
 
-export const addAudioTrack = (audioTrackId, multiTrackId) => {
+export const addTrack = (audioTrackId, multiTrackId) => {
   console.log('addAudioTrack called for:', audioTrackId, multiTrackId)
   return {
-    type: 'ADD_AUDIO_TRACK',
-    audioTrackId,
-    multiTrackId,
+    type: 'ADD_TRACK',
+    audioTrackId: String(audioTrackId),
+    multiTrackId: String(multiTrackId),
     audioTrackInitialState: {
+      id: audioTrackId,
       fontLoaded: false,
+      isArmed: false,
       isLoading: false,
       isPlaybackAllowed: false,
       isPlaying: false,
@@ -26,8 +30,8 @@ export const addAudioTrack = (audioTrackId, multiTrackId) => {
       soundDuration: null,
       soundPosition: null,
       volume: 1.0,
-      recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY))
-    }
+      recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
+    },
   }
 }
 
@@ -35,8 +39,8 @@ export const toggleArmTrack = (audioTrackId, multiTrackId) => {
   console.log("arm track toggled for:", audioTrackId, multiTrackId);
   return {
     type: 'TOGGLE_ARM_TRACK',
-    audioTrackId,
-    multiTrackId,
+    audioTrackId: String(audioTrackId),
+    multiTrackId: String(multiTrackId),
   }
 }
 
