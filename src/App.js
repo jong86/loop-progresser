@@ -1,20 +1,33 @@
-import React, { Component } from 'react'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import React from 'react';
+import {
+  Alert,
+  StatusBar,
+  View,
+} from 'react-native';
 
-import AppWithState from './AppWithState'
-import rootReducer from './redux/reducers'
+import MultiTrackContainer from './components/MultiTrack/MultiTrackContainer';
 
-const store = createStore(rootReducer)
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <AppWithState />
-      </Provider>
-    )
+async function askForMicPermission() {
+  const { Permissions } = Expo;
+  const { status } = await Permissions.getAsync(Permissions.AUDIO_RECORDING);
+  if (status !== 'granted') {
+    alert(`Recording is disabled.`);
   }
 }
 
-Expo.registerRootComponent(App);
+
+export default class App extends React.Component {
+  componentWillMount() {
+    askForMicPermission();
+  }
+
+  render() {
+    return (
+      <View>
+        <StatusBar hidden />
+        <MultiTrackContainer />
+      </View>
+    );
+  }
+}
