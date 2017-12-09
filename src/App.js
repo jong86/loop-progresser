@@ -12,7 +12,7 @@ async function askForMicPermission() {
   const { Permissions } = Expo;
   const { status } = await Permissions.getAsync(Permissions.AUDIO_RECORDING);
   if (status !== 'granted') {
-    alert(`Recording is disabled.`);
+    alert('Recording is disabled.');
   }
 }
 

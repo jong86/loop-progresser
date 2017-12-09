@@ -228,16 +228,18 @@ const audioTrackHelpers = {
     return '';
   },
 
-  _getRecordingTimestamp() {
-    if (this.state.recordingDuration != null) {
-      return `${this._formatMilliseconds(this.state.recordingDuration)}`;
+  _getRecordingTimestamp = () => {
+    _formatMilliseconds = (ms) => {
+      return new Date(ms).toISOString().slice(14, -1);
     }
-    return `${this._formatMilliseconds(0)}`;
+
+    if (this.state.recordingDuration != null) {
+      return `${_formatMilliseconds(this.state.recordingDuration)}`;
+    }
+    return `${_formatMilliseconds(0)}`;
   },
 
-  _formatMilliseconds(ms) {
-    return new Date(ms).toISOString().slice(14, -1);
-  },
+
 }
 
 export default audioTrackHelpers
