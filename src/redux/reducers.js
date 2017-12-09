@@ -11,31 +11,29 @@ initialState = {
 const rootReducer = (state = initialState, action) => {
   const { audioTrackIndex, audioTrackId, multiTrackId} = action;
   switch (action.type) {
+
     case 'ADD_TRACK':
-      return {
-        ...state,
+      return update(state, {
         multiTracks: {
-          ...state.multiTracks,
           [multiTrackId]: {
-            ...state.multiTracks[multiTrackId],
-            audioTracks: state.multiTracks[multiTrackId].audioTracks.concat([action.audioTrackInitialState]),
+            audioTracks: {$push: [action.audioTrackInitialState]},
           }
         }
-      }
+      })
 
-      case 'TOGGLE_ARM_TRACK':
-        console.log('action', action);
-        return update(state, {
-          multiTracks: {
-            [multiTrackId]: {
-              audioTracks: {
-                [audioTrackIndex]: {
-                  isArmed: {$set: !state.multiTracks[multiTrackId].audioTracks[audioTrackIndex].isArmed}
-                }
+    case 'TOGGLE_ARM_TRACK':
+      return update(state, {
+        multiTracks: {
+          [multiTrackId]: {
+            audioTracks: {
+              [audioTrackIndex]: {
+                isArmed: {$set: !state.multiTracks[multiTrackId].audioTracks[audioTrackIndex].isArmed}
               }
             }
           }
-        })
+        }
+      })
+
     default:
       return state;
   }
