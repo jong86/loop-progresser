@@ -12,7 +12,7 @@ export default class MasterControls extends Component {
   }
 
   _onRecordPressed = () => {
-    console.log('hey');
+    console.log('You invoked _onRecordPressed');
   }
 
   render() {
