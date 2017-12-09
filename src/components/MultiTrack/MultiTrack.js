@@ -17,7 +17,7 @@ export default class MultiTrack extends Component {
 
   render() {
     const audioTracks = this.props.multiTrackStatus.audioTracks;
-    console.log('audioTracks', audioTracks);
+    // console.log('audioTracks', audioTracks);
     return (
       <View style={styles.main}>
 

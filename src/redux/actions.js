@@ -5,7 +5,7 @@ import { Audio } from 'expo';
 //
 
 export const addTrack = (audioTrackId, multiTrackId) => {
-  console.log('addAudioTrack called for:', audioTrackId, multiTrackId)
+  // console.log('addAudioTrack called for:', audioTrackId, multiTrackId)
   return {
     type: 'ADD_TRACK',
     audioTrackId: String(audioTrackId),
@@ -36,7 +36,7 @@ export const addTrack = (audioTrackId, multiTrackId) => {
 }
 
 export const toggleArmTrack = (audioTrackIndex, audioTrackId, multiTrackId) => {
-  console.log("arm track toggled for:", audioTrackId, multiTrackId);
+  // console.log("arm track toggled for:", audioTrackId, multiTrackId);
   return {
     type: 'TOGGLE_ARM_TRACK',
     audioTrackIndex: String(audioTrackIndex),

@@ -27,7 +27,7 @@ const rootReducer = (state = initialState, action) => {
 
       if (!targetTrack.isArmed) {
       // TODO could do this ^ check before dispatching
-        console.log('exclusively arming track', targetTrack.id);
+        // console.log('exclusively arming track', targetTrack.id);
 
         // Disable all first (track arming is exclusive)
         for (let i = 0; i < targetTrackList.length; i++) {
