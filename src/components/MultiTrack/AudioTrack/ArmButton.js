@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import styles from './_styles_AudioTrack';
 
-// import { connect } from 'react-redux'
-
-// import { toggleArmTrack } from '../../../redux/actions';
 
 export default class ArmButton extends Component {
   constructor(props) {
@@ -33,11 +30,3 @@ export default class ArmButton extends Component {
     )
   }
 }
-
-// const mapStateToProps = (state, props) => {
-//   console.log('entire state', state);
-//   console.log('state for armButton', state);
-//   return { isArmed: state.multiTracks[props.multiTrackId].audioTracks[props.audioTrackIndex].isArmed };
-// };
-
-// export default connect(mapStateToProps)(ArmButton)
