@@ -8,6 +8,7 @@ import AudioTrackContainer from './AudioTrack/AudioTrackContainer';
 
 import uuidv4 from 'uuid/v4';
 
+
 export default class MultiTrackContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +22,6 @@ export default class MultiTrackContainer extends React.Component {
     this._addTrack()
   }
 
-
   _addTrack = () => {
     this.setState({
       audioTracksList: this.state.audioTracksList.concat([
@@ -30,7 +30,6 @@ export default class MultiTrackContainer extends React.Component {
       numAudioTracks: this.state.numAudioTracks + 1
     })
   }
-
 
   render() {
     return (

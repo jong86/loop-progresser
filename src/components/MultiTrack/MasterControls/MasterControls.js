@@ -11,6 +11,10 @@ export default class MasterControls extends Component {
     super(props)
   }
 
+  _onRecordPressed = () => {
+    console.log('hey');
+  }
+
   render() {
     console.log("master controls props:", this.props);
     return (
@@ -29,7 +33,7 @@ export default class MasterControls extends Component {
           <ControlButton
             // isOn={this.state.isRecording}
             type="REC"
-            specificFunction={this.onRecordPressed}
+            specificFunction={this._onRecordPressed}
           />
         </View>
 

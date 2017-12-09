@@ -43,7 +43,7 @@ export default ControlButton = (props) => {
       style={[styles.trackControl, specificStyle, isOn ? { opacity: 0.45 } : { opacity: 1 }]}
       underlayColor="#ffff33"
       onPress={specificFunction}
-      >
+    >
       <Text
         style={styles.trackControlText}>
         {type}
