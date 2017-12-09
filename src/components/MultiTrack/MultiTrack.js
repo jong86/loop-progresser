@@ -12,6 +12,7 @@ export default class MultiTrack extends Component {
     this.props.addTrack()
     this.props.addTrack()
     this.props.addTrack()
+    this.props.addTrack()
   }
 
   render() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import styles from './_styles_AudioTrack';
 
 import { connect } from 'react-redux'
@@ -9,16 +9,19 @@ import { toggleArmTrack } from '../../../redux/actions';
 const ArmButton = (props) => {
   const { dispatch, isArmed, audioTrackIndex, audioTrackId, multiTrackId } = props
   return (
-    <TouchableHighlight
-      style={[styles.armButton, { backgroundColor: isArmed ? "tomato" : "grey" }]}
+    <TouchableWithoutFeedback
       onPress={() => {
         dispatch(toggleArmTrack(audioTrackIndex, audioTrackId, multiTrackId))
       }}
     >
-      <Text>
-        ARM
-      </Text>
-    </TouchableHighlight>
+      <View
+        style={[styles.armButton, { backgroundColor: isArmed ? "tomato" : "grey" }]}
+      >
+        <Text>
+          ARM
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 
