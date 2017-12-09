@@ -1,7 +1,11 @@
 initialState = {
-  0: {
+  multiTracks: {
     0: {
-      isArmed: true
+      audioTracks: {
+        0: {
+          isArmed: true
+        }
+      }
     }
   }
 }
@@ -12,9 +16,13 @@ const rootReducer = (state = initialState, action) => {
     case 'TOGGLE_ARM_TRACK':
       return {
         ...state,
-        [multiTrackId]: {
-          [audioTrackId]: {
-            isArmed: !state[multiTrackId][audioTrackId].isArmed
+        multiTracks: {
+          [multiTrackId]: {
+            audioTracks: {
+              [audioTrackId]: {
+                isArmed: !state.multiTracks[multiTrackId].audioTracks[audioTrackId].isArmed
+              }
+            }
           }
         }
       }

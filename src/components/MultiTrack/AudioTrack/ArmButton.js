@@ -25,7 +25,7 @@ const ArmButton = (props) => {
 
 const mapStateToProps = (state, props) => {
   console.log('in mapStateToProps, props:', props);
-  return { isArmed: state[props.multiTrackId][props.audioTrackId].isArmed };
+  return { isArmed: state.multiTracks[props.multiTrackId].audioTracks[props.audioTrackId].isArmed };
 };
 
 export default connect(mapStateToProps)(ArmButton)
