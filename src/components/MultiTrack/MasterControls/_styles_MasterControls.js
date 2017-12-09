@@ -24,6 +24,12 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  trackControlText: {
+    margin: 0,
+    padding: 0,
+  },
+
   buttonPlay: {
     borderRadius: 5,
     backgroundColor: 'forestgreen',
