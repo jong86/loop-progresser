@@ -11,6 +11,13 @@ export const toggleArmTrack = (audioTrackId, multiTrackId) => {
   }
 }
 
+export const getArmedTrack = (multiTrackId) => {
+  console.log('getting armed track...');
+  return {
+    type: 'GET_ARMED_TRACK'
+  }
+}
+
 export const saveTake = (filepath, audioTrackId, multiTrackId) => {
   return {
     type: 'SAVE_TAKE',
