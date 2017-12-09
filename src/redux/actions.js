@@ -35,10 +35,11 @@ export const addTrack = (audioTrackId, multiTrackId) => {
   }
 }
 
-export const toggleArmTrack = (audioTrackId, multiTrackId) => {
+export const toggleArmTrack = (audioTrackIndex, audioTrackId, multiTrackId) => {
   console.log("arm track toggled for:", audioTrackId, multiTrackId);
   return {
     type: 'TOGGLE_ARM_TRACK',
+    audioTrackIndex: String(audioTrackIndex),
     audioTrackId: String(audioTrackId),
     multiTrackId: String(multiTrackId),
   }

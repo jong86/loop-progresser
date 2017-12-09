@@ -7,7 +7,8 @@ import styles from './_styles_MultiTrack';
 
 
 export default class MultiTrack extends Component {
-  componentWillMount = () => {
+  constructor(props) {
+    super(props)
     this.props.addTrack()
     this.props.addTrack()
     this.props.addTrack()
@@ -15,14 +16,16 @@ export default class MultiTrack extends Component {
 
   render() {
     const audioTracks = this.props.multiTrackStatus.audioTracks;
+    console.log('audioTracks', audioTracks);
     return (
       <View style={styles.main}>
 
-        { Object.keys(audioTracks).map(track =>
+        { audioTracks.map((audioTrackData, audioTrackIndex) =>
           <AudioTrackContainer
-            {...audioTracks[track]}
-            key={audioTracks[track].id}
-            id={audioTracks[track].id}
+            {...audioTrackData}
+            key={audioTrackData.id} // For React
+            id={audioTrackData.id} // Unique identifier (uuid)
+            audioTrackIndex={audioTrackIndex} // Index/position in multiTrack array
             multiTrackId={'0'}
           />
         )}

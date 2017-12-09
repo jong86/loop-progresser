@@ -11,7 +11,7 @@ export default class AudioTrack extends Component {
     console.log('audioTrack props2:', this.props);
     return (
       <View style={styles.main}>
-        <ArmButton audioTrackId={this.props.id} multiTrackId={'0'} />
+        <ArmButton audioTrackIndex={this.props.audioTrackIndex} multiTrackId={'0'}  />
         {/* <Text style={styles.text}>{this._getRecordingTimestamp()}</Text> */}
       </View>
     )

@@ -7,12 +7,12 @@ import { connect } from 'react-redux'
 import { toggleArmTrack } from '../../../redux/actions';
 
 const ArmButton = (props) => {
-  const { dispatch, isArmed, audioTrackId, multiTrackId } = props
+  const { dispatch, isArmed, audioTrackIndex, audioTrackId, multiTrackId } = props
   return (
     <TouchableHighlight
       style={[styles.armButton, { backgroundColor: isArmed ? "tomato" : "grey" }]}
       onPress={() => {
-        dispatch(toggleArmTrack(audioTrackId, multiTrackId))
+        dispatch(toggleArmTrack(audioTrackIndex, audioTrackId, multiTrackId))
       }}
     >
       <Text>
@@ -25,7 +25,7 @@ const ArmButton = (props) => {
 const mapStateToProps = (state, props) => {
   console.log('entire state', state);
   console.log('state for armButton', state);
-  return { isArmed: state.multiTracks[props.multiTrackId].audioTracks[props.audioTrackId].isArmed };
+  return { isArmed: state.multiTracks[props.multiTrackId].audioTracks[props.audioTrackIndex].isArmed };
 };
 
 export default connect(mapStateToProps)(ArmButton)
