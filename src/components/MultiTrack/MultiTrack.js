@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View } from 'react-native';
 
-import MasterControlsContainer from './MasterControls/MasterControlsContainer';
-import AudioTrackContainer from './AudioTrack/AudioTrackContainer';
+import MasterControlsContainer from '../../containers/MultiTrack/MasterControls/MasterControlsContainer';
+import AudioTrackContainer from '../../containers/MultiTrack/AudioTrack/AudioTrackContainer';
 import styles from './_styles_MultiTrack';
 
 

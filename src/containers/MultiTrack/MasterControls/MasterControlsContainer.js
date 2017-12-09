@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MasterControls from './MasterControls';
+import MasterControls from '../../../components/MultiTrack/MasterControls/MasterControls';
 
 function mapStateToProps(state, props) {
   return {
