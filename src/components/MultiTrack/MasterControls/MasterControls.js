@@ -9,15 +9,10 @@ import styles from './_styles_MasterControls';
 export default class MasterControls extends Component {
   constructor(props) {
     super(props)
-    this.onRecordPressed = this.onRecordPressed.bind(this)
-  }
-
-
-  onRecordPressed() {
-    this.props.onRecordPressed()
   }
 
   render() {
+    console.log("master controls props:", this.props);
     return (
       <View style={styles.main}>
 

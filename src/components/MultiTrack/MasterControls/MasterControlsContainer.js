@@ -9,15 +9,14 @@ import styles from './_styles_MasterControls';
 import { getArmedTrack } from '../../../redux/actions';
 
 
-function mapStateToProps(state) {
-  return {};
+function mapStateToProps(state, props) {
+  return {
+    multiTrackStatus: state[props.multiTrackId]
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return({
-    onRecordPressed: () => { dispatch(getArmedTrack()) }
-  })
+  return {}
 }
 
-export default MasterControlsContainer = connect(mapStateToProps, mapDispatchToProps)(MasterControls)
-
+export default MasterControlsContainer = connect(mapStateToProps)(MasterControls)
