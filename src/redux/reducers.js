@@ -23,16 +23,4 @@ const rootReducer = (state = initialState, action) => {
   }
 }
 
-//## For nested reducers:
-// const audioTracks = (state = {}, action) => {
-//   switch (action.type) {
-//     case 'ARM_TRACK_TOGGLE':
-//       return {
-//         ...state,
-//         obj
-//       }
-//   }
-// }
-
-
 export default rootReducer
