@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 
-import MultiTrackContainer from './components/MultiTrack/MultiTrackContainer';
+import MultiTrackContainer from './containers/MultiTrack/MultiTrackContainer';
 
 
 async function askForMicPermission() {
