@@ -2,10 +2,10 @@
 // Action creators
 //
 
-export const armTrackToggle = (audioTrackId, multiTrackId) => {
+export const toggleArmTrack = (audioTrackId, multiTrackId) => {
   console.log("arm track toggled for:", audioTrackId, multiTrackId);
   return {
-    type: 'ARM_TRACK_TOGGLE',
+    type: 'TOGGLE_ARM_TRACK',
     audioTrackId,
     multiTrackId,
   }
@@ -13,7 +13,7 @@ export const armTrackToggle = (audioTrackId, multiTrackId) => {
 
 export const saveTake = (filepath, audioTrackId, multiTrackId) => {
   return {
-    type: 'SAVE_AUDIO_RECORDING',
+    type: 'SAVE_TAKE',
     filepath: filepath,
     audioTrackId,
     multiTrackId,

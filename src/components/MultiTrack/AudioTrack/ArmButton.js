@@ -4,7 +4,7 @@ import styles from './_styles_AudioTrack';
 
 import { connect } from 'react-redux'
 
-import { armTrackToggle } from '../../../redux/actions';
+import { toggleArmTrack } from '../../../redux/actions';
 
 const ArmButton = (props) => {
   console.log("ArmButton props:", props);
@@ -13,7 +13,7 @@ const ArmButton = (props) => {
     <TouchableHighlight
       style={[styles.armButton, { backgroundColor: isArmed ? "tomato" : "grey" }]}
       onPress={() => {
-        dispatch(armTrackToggle(audioTrackId, multiTrackId))
+        dispatch(toggleArmTrack(audioTrackId, multiTrackId))
       }}
     >
       <Text>

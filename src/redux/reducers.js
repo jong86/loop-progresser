@@ -9,7 +9,7 @@ initialState = {
 const rootReducer = (state = initialState, action) => {
   const { multiTrackId, audioTrackId } = action;
   switch (action.type) {
-    case 'ARM_TRACK_TOGGLE':
+    case 'TOGGLE_ARM_TRACK':
       return {
         ...state,
         [multiTrackId]: {
