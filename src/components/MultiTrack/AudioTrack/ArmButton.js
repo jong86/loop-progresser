@@ -19,7 +19,7 @@ export default class ArmButton extends Component {
       >
 
         <View
-          style={[styles.armButton, { backgroundColor: isArmed ? "tomato" : "grey" }]}
+          style={[styles.armButton, { backgroundColor: isArmed ? "tomato" : "#555555" }]}
         >
           <Text>
             ARM

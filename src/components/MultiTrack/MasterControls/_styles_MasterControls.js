@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   main: {
-    backgroundColor: '#666',
+    backgroundColor: '#222',
     width: '100%',
     height: '10%',
     alignItems: 'center',
@@ -11,16 +11,15 @@ export default StyleSheet.create({
 
 
   buttonWrapper: {
-    width: '60%',
+    width: '75%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
 
   trackControl: {
-    padding: 5,
-    width: 50,
-    height: 50,
+    width: 64,
+    height: 64,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -31,15 +30,13 @@ export default StyleSheet.create({
   },
 
   buttonPlay: {
-    borderRadius: 5,
     backgroundColor: 'forestgreen',
   },
   buttonRecord: {
-    borderRadius: 25,
+    borderRadius: 32,
     backgroundColor: 'tomato',
   },
   buttonStop: {
-    borderRadius: 5,
     backgroundColor: 'steelblue',
   },
 

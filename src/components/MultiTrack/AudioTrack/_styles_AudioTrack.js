@@ -5,7 +5,7 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     backgroundColor: '#333',
     width: '100%',
-    height: '22%',
+    height: '20%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -16,7 +16,7 @@ export default StyleSheet.create({
   },
 
   armButton: {
-    width: 60,
+    width: 40,
     height: 40,
     justifyContent: "center",
     alignItems: "center",
