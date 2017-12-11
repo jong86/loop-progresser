@@ -18,7 +18,7 @@ export const toggleArmTrack = (options) => {
 }
 
 export const setTrackIsLoading = (options) => {
-  console.log('options', options);
+  console.log('inside setTrackIsLoading for track', options);
   return {
     type: 'SET_TRACK_IS_LOADING',
     ...options,

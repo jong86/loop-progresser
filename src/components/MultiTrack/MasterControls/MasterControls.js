@@ -28,15 +28,16 @@ export default class MasterControls extends Component {
   }
 
 
-  _stopPlaybackAndBeginRecording = async (track) => {
+  _stopPlaybackAndBeginRecording = async (audioTrackIndex) => {
     const { setTrackIsLoading } = this.props;
-    console.log('inside _stopPlaybackAndBeginRecording -- track:', track)
+    console.log('inside _stopPlaybackAndBeginRecording -- audioTrackIndex:', audioTrackIndex)
+    console.log('inside _stopPlaybackAndBeginRecording -- this.props:', this.props)
 
     // TODO -- dispatch:
     /*
     track.isLoading: true,
     */
-    // setTrackIsLoading(track)
+    setTrackIsLoading(audioTrackIndex)
 
 
     // TODO -- Maybe scrap this stuff or minimize it to reduce lag on record start
