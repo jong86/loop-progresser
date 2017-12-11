@@ -42,20 +42,6 @@ const rootReducer = (state = initialState, action) => {
         })
       }
 
-    case 'SET_TRACK_IS_LOADING_STATUS':
-      const { status } = action;
-      return update(state, {
-        multiTracks: {
-          [multiTrackId]: {
-            audioTracks: {
-              [audioTrackIndex]: {
-                isLoading: {$set: status}
-              }
-            }
-          }
-        }
-      })
-
     case 'SET_RECORDING_DURATION':
       const { duration } = action;
       return update(state, {
@@ -64,6 +50,20 @@ const rootReducer = (state = initialState, action) => {
             audioTracks: {
               [audioTrackIndex]: {
                 recordingDuration: {$set: duration}
+              }
+            }
+          }
+        }
+      })
+
+    case 'SET_RECORDING_DURATION':
+      const { sound } = action;
+      return update(state, {
+        multiTracks: {
+          [multiTrackId]: {
+            audioTracks: {
+              [audioTrackIndex]: {
+                sound: {$set: sound}
               }
             }
           }

@@ -9,7 +9,7 @@ import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 export default class AudioTrack extends Component {
   _getRecordingTimestamp = () => {
     _formatMilliseconds = (ms) => {
-      return new Date(ms).toISOString().slice(14, -2);
+      return new Date(ms).toISOString().slice(14, -5);
     }
 
     if (this.props.recordingDuration) {

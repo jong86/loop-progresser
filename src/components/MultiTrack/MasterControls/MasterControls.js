@@ -73,10 +73,8 @@ export default class MasterControls extends Component {
     }, () => {
       console.log('Recording...', this.state.recording);
     })
-
     this.state.recording.startAsync() // Starts recording
-
-    this.state.recording.setProgressUpdateInterval(10);
+    this.state.recording.setProgressUpdateInterval(2);
     this.state.recording.setOnRecordingStatusUpdate((ms) => {
       const { setRecordingDuration } = this.props;
       setRecordingDuration(this._getArmedTrackIndex(), ms)
@@ -90,14 +88,28 @@ export default class MasterControls extends Component {
       isRecordingAllowed: false,
     });
     this.state.recording.stopAndUnloadAsync()
-      .then(() => {
-        console.log('this.state.recording', this.state.recording);
-        FileSystem.getInfoAsync(this.state.recording.getURI())
-          .then((info) => {
-            console.log(`FILE INFO: ${JSON.stringify(info)}`);
-            this._getReadyToRecord();
+    .then(() => {
+      console.log('this.state.recording', this.state.recording);
+      FileSystem.getInfoAsync(this.state.recording.getURI())
+        .then((info) => {
+          console.log(`FILE INFO: ${JSON.stringify(info)}`);
+
+          this.state.recording.createNewLoadedSound({
+            isLooping: true,
+            isMuted: this.state.muted,
+            volume: this.state.volume,
+            rate: this.state.rate,
+            shouldCorrectPitch: this.state.shouldCorrectPitch,
+          }).then(({ sound, status }) => {
+            console.log('sound', sound);
+            // TODO: dispatch SAVE_SOUND action
+            const { saveSound } = this.props;
+            saveSound(this._getArmedTrackIndex(), sound)
           })
-      })
+
+          this._getReadyToRecord();
+        })
+    })
   }
 
   render() {

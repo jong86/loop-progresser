@@ -16,16 +16,16 @@ export const toggleArmTrack = (options) => {
   }
 }
 
-export const setTrackIsLoadingStatus = (options) => {
+export const setRecordingDuration = (options) => {
   return {
-    type: 'SET_TRACK_IS_LOADING_STATUS',
+    type: 'SET_RECORDING_DURATION',
     ...options,
   }
 }
 
-export const setRecordingDuration = (options) => {
+export const saveSound = (options) => {
   return {
-    type: 'SET_RECORDING_DURATION',
+    type: 'SAVE_SOUND',
     ...options,
   }
 }
