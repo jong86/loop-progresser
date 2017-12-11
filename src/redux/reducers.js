@@ -9,7 +9,7 @@ initialState = {
 }
 
 const rootReducer = (state = initialState, action) => {
-  const { audioTrackIndex, audioTrackId, multiTrackId} = action;
+  const { audioTrackIndex, multiTrackId } = action;
   switch (action.type) {
 
     case 'ADD_TRACK':
@@ -24,16 +24,11 @@ const rootReducer = (state = initialState, action) => {
     case 'TOGGLE_ARM_TRACK':
       const targetTrackList = state.multiTracks[multiTrackId].audioTracks
       const targetTrack = state.multiTracks[multiTrackId].audioTracks[audioTrackIndex];
-
       if (!targetTrack.isArmed) {
-      // TODO could do this ^ check before dispatching
-        // console.log('exclusively arming track', targetTrack.id);
-
-        // Disable all first (track arming is exclusive)
+        // Unarm all tracks first (track arming is exclusive):
         for (let i = 0; i < targetTrackList.length; i++) {
           targetTrackList[i].isArmed = false;
         }
-
         return update(state, {
           multiTracks: {
             [multiTrackId]: {
@@ -46,6 +41,19 @@ const rootReducer = (state = initialState, action) => {
           }
         })
       }
+
+    case 'SET_TRACK_IS_LOADING':
+      return update(state, {
+        multiTracks: {
+          [multiTrackId]: {
+            audioTracks: {
+              [audioTrackIndex]: {
+                isLoading: {$set: true}
+              }
+            }
+          }
+        }
+      })
 
     default:
       return state;

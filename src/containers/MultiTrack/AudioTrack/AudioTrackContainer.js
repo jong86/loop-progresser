@@ -11,9 +11,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  const { audioTrackIndex, audioTrackId, multiTrackId } = ownProps;
+  const { audioTrackIndex, multiTrackId } = ownProps;
   return({
-    toggleArmTrack: () => {dispatch(toggleArmTrack(audioTrackIndex, audioTrackId, multiTrackId))}
+    toggleArmTrack: () => {dispatch(toggleArmTrack({ audioTrackIndex, multiTrackId }))}
   })
 }
 

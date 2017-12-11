@@ -12,7 +12,6 @@ export default class AudioTrack extends Component {
     _formatMilliseconds = (ms) => {
       return new Date(ms).toISOString().slice(14, -1);
     }
-
     if (this.props.recordingDuration != null) {
       return `${_formatMilliseconds(this.props.recordingDuration)}`;
     }
@@ -24,8 +23,6 @@ export default class AudioTrack extends Component {
     return (
       <View style={styles.main}>
         <ArmButton
-          audioTrackIndex={this.props.audioTrackIndex}
-          multiTrackId={'0'}
           isArmed={this.props.isArmed}
           toggleArmTrack={this.props.toggleArmTrack}
         />

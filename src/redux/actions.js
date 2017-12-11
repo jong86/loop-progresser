@@ -1,55 +1,25 @@
-import { Audio } from 'expo';
-
 //
 // Action creators
 //
 
-export const addTrack = (audioTrackId, multiTrackId) => {
-  // console.log('addAudioTrack called for:', audioTrackId, multiTrackId)
+export const addTrack = (options) => {
   return {
     type: 'ADD_TRACK',
-    audioTrackId: String(audioTrackId),
-    multiTrackId: String(multiTrackId),
-    audioTrackInitialState: {
-      id: audioTrackId,
-      fontLoaded: false,
-      isArmed: false,
-      isLoading: false,
-      isPlaybackAllowed: false,
-      isPlaying: false,
-      isRecording: false,
-      isSeeking: false,
-      muted: false,
-      rate: 1.0,
-      recording: null,
-      recordingDuration: null,
-      shouldPlay: false,
-      shouldPlayAtEndOfSeek: false,
-      shouldCorrectPitch: true,
-      sound: null,
-      soundDuration: null,
-      soundPosition: null,
-      volume: 1.0,
-      recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
-    },
+    ...options,
   }
 }
 
-export const toggleArmTrack = (audioTrackIndex, audioTrackId, multiTrackId) => {
-  // console.log("arm track toggled for:", audioTrackId, multiTrackId);
+export const toggleArmTrack = (options) => {
+  console.log("you sent:",options);
   return {
     type: 'TOGGLE_ARM_TRACK',
-    audioTrackIndex: String(audioTrackIndex),
-    audioTrackId: String(audioTrackId),
-    multiTrackId: String(multiTrackId),
+    ...options
   }
 }
 
-export const saveTake = (filepath, audioTrackId, multiTrackId) => {
+export const setTrackIsLoading = (options) => {
   return {
-    type: 'SAVE_TAKE',
-    filepath: filepath,
-    audioTrackId,
-    multiTrackId,
+    type: 'SET_TRACK_IS_LOADING',
+    ...options,
   }
 }

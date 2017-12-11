@@ -21,8 +21,6 @@ export default class MasterControls extends Component {
         break;
       }
     }
-    console.log('Armed track:', armedTrack)
-
     this._stopPlaybackAndBeginRecording(armedTrack)
   }
 

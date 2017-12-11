@@ -6,15 +6,15 @@ import styles from './_styles_AudioTrack';
 export default class ArmButton extends Component {
   constructor(props) {
     super(props)
-    this.props.toggleArmTrack(this.props.audioTrackIndex, this.props.audioTrackId, this.props.multiTrackId)
+    this.props.toggleArmTrack()
   }
 
   render() {
-    const { audioTrackIndex, audioTrackId, multiTrackId, toggleArmTrack, isArmed } = this.props
+    const { toggleArmTrack, isArmed } = this.props
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          toggleArmTrack(audioTrackIndex, audioTrackId, multiTrackId)
+          toggleArmTrack()
         }}
       >
 

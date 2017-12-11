@@ -17,7 +17,7 @@ export default class MultiTrack extends Component {
 
   render() {
     const audioTracks = this.props.multiTrackStatus.audioTracks;
-    // console.log('audioTracks', audioTracks);
+    console.log('audioTracks', audioTracks);
     return (
       <View style={styles.main}>
 
@@ -27,11 +27,11 @@ export default class MultiTrack extends Component {
             key={audioTrackData.id} // For React
             id={audioTrackData.id} // Unique identifier (uuid)
             audioTrackIndex={audioTrackIndex} // Index/position in multiTrack array
-            multiTrackId={'0'}
+            multiTrackId={this.props.multiTrackId}
           />
         )}
 
-        <MasterControlsContainer multiTrackId={'0'} />
+        <MasterControlsContainer multiTrackId={this.props.multiTrackId} />
 
       </View>
     )
