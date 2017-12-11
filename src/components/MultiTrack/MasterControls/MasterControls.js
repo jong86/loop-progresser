@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
+import { Audio, FileSystem } from 'expo';
+
 import ControlButton from './ControlButton';
 
 import styles from './_styles_MasterControls';
@@ -9,8 +11,18 @@ import styles from './_styles_MasterControls';
 export default class MasterControls extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      isRecordingAllowed: false,
+      isRecording: false,
+      recording: null,
+    }
 
     this._stopPlaybackAndBeginRecording = this._stopPlaybackAndBeginRecording.bind(this)
+  }
+
+  componentWillMount = () => {
+    console.log('MasterControls mounting');
+    this._getReadyToRecord()
   }
 
   _getArmedTrackIndex = () => {
@@ -23,64 +35,69 @@ export default class MasterControls extends Component {
     }
   }
 
-  _onRecordPressed = () => {
-    this._stopPlaybackAndBeginRecording(this._getArmedTrackIndex())
-  }
+  _getReadyToRecord = () => {
+    console.log('props', this.props);
 
-
-  _stopPlaybackAndBeginRecording = async (audioTrackIndex) => {
-    const { setTrackIsLoadingStatus } = this.props;
-    console.log('inside _stopPlaybackAndBeginRecording -- audioTrackIndex:', audioTrackIndex)
-    console.log('inside _stopPlaybackAndBeginRecording -- this.props:', this.props)
-
-
-    // TODO:
-    /*
-    isLoading: true
-    */
-    setTrackIsLoadingStatus(audioTrackIndex, true)
-
-
-    // TODO -- Maybe scrap this stuff or minimize it to reduce lag on record start
-    /*
-    if (this.sound !== null) {
-      await this.sound.unloadAsync();
-      this.sound.setOnPlaybackStatusUpdate(null);
-      this.sound = null;
-    }
-    await Audio.setAudioModeAsync({
+    Audio.setAudioModeAsync({
       allowsRecordingIOS: true,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       playsInSilentModeIOS: true,
       shouldDuckAndroid: true,
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-    });
-    if (this.recording !== null) {
-      this.recording.setOnRecordingStatusUpdate(null);
-      this.recording = null;
+    })
+      .then(() => {
+        const recordingInstance = new Audio.Recording();
+        recordingInstance.setProgressUpdateInterval(1000); // I added this line to update every ms
+        recordingInstance.prepareToRecordAsync(this.recordingSettings)
+          .then(() => {
+            recordingInstance.setOnRecordingStatusUpdate((ms) => {
+              console.log("inside arrow function", this.props)
+              const { setRecordingDuration } = this.props;
+              setRecordingDuration(this._getArmedTrackIndex(), ms)
+            })
+          })
+            .then(() => {
+              this.setState({
+                isRecordingAllowed: true,
+                recording: recordingInstance,
+              }, () => {
+                console.log('Ready to record.');
+              })
+            })
+          })
+  }
+
+  _onRecordPressed = () => {
+    if (this.state.isRecording) {
+      this._stopRecordingAndEnablePlayback();
+    } else {
+      this._stopPlaybackAndBeginRecording();
     }
-    */
+  }
 
+  _stopPlaybackAndBeginRecording = () => {
+    this.setState({
+      isRecording: true,
+    }, () => {
+      console.log('Recording...', this.state.recording);
+    })
+    this.state.recording.startAsync()
+  }
 
-    // TODO -- Refactor this to use promise notation (I like it more)
-    /*
-    const recording = new Audio.Recording();
-    recording.setProgressUpdateInterval(1); // I added this line to update every ms
-    await recording.prepareToRecordAsync(this.recordingSettings);
-    recording.setOnRecordingStatusUpdate(this._updateScreenForRecordingStatus);
-
-    this.recording = recording;
-    await this.recording.startAsync(); // Will call this._updateScreenForRecordingStatus to update the screen.
-    */
-
-
-    // TODO: when done:
-    /*
-    isLoading: false,
-    saveFilePathToState() // And add file path param to audioTrack in store
-    */
-    setTrackIsLoadingStatus(audioTrackIndex, false) // needs to be inside promise return (set false when recording over)
-
+  _stopRecordingAndEnablePlayback = () => {
+    this.setState({
+      isRecording: false,
+      isRecordingAllowed: false,
+    });
+    this.state.recording.stopAndUnloadAsync()
+      .then(() => {
+        console.log('this.state.recording', this.state.recording);
+        FileSystem.getInfoAsync(this.state.recording.getURI())
+          .then((info) => {
+            console.log(`FILE INFO: ${JSON.stringify(info)}`);
+            this._getReadyToRecord();
+          })
+      })
   }
 
   render() {
@@ -97,11 +114,13 @@ export default class MasterControls extends Component {
             type="STOP"
             // specificFunction={this._onStopPressed}
           />
-          <ControlButton
-            // isOn={this.state.isRecording}
-            type="REC"
-            specificFunction={this._onRecordPressed}
-          />
+          { this.state.isRecordingAllowed &&
+            <ControlButton
+              // isOn={this.state.isRecording}
+              type="REC"
+              specificFunction={this._onRecordPressed}
+            />
+          }
         </View>
 
       </View>

@@ -5,9 +5,8 @@ import AudioTrack from '../../../components/MultiTrack/AudioTrack/AudioTrack';
 import { toggleArmTrack } from '../../../redux/actions';
 
 function mapStateToProps(state, ownProps) {
-  // console.log("ownProps in audioTrackContainer", ownProps)
   return {
-    audioTrackState: state.multiTracks[ownProps.multiTrackId].audioTracks[ownProps.audioTrackIndex]
+    audioTrackState: state.multiTracks[ownProps.multiTrackId].audioTracks[ownProps.audioTrackIndex],
   }
 }
 

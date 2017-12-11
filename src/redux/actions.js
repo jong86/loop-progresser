@@ -10,7 +10,6 @@ export const addTrack = (options) => {
 }
 
 export const toggleArmTrack = (options) => {
-  // console.log("you sent:",options);
   return {
     type: 'TOGGLE_ARM_TRACK',
     ...options
@@ -18,9 +17,15 @@ export const toggleArmTrack = (options) => {
 }
 
 export const setTrackIsLoadingStatus = (options) => {
-  console.log('inside setTrackIsLoading for track', options);
   return {
     type: 'SET_TRACK_IS_LOADING_STATUS',
+    ...options,
+  }
+}
+
+export const setRecordingDuration = (options) => {
+  return {
+    type: 'SET_RECORDING_DURATION',
     ...options,
   }
 }

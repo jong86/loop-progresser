@@ -56,6 +56,20 @@ const rootReducer = (state = initialState, action) => {
         }
       })
 
+    case 'SET_RECORDING_DURATION':
+      const { duration } = action;
+      return update(state, {
+        multiTracks: {
+          [multiTrackId]: {
+            audioTracks: {
+              [audioTrackIndex]: {
+                recordingDuration: {$set: duration}
+              }
+            }
+          }
+        }
+      })
+
     default:
       return state;
   }

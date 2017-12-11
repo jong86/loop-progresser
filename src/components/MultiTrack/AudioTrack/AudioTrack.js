@@ -11,8 +11,10 @@ export default class AudioTrack extends Component {
     _formatMilliseconds = (ms) => {
       return new Date(ms).toISOString().slice(14, -1);
     }
-    if (this.props.recordingDuration != null) {
-      return `${_formatMilliseconds(this.props.recordingDuration)}`;
+
+    if (this.props.recordingDuration) {
+      const { durationMillis } = this.props.recordingDuration
+      return `${_formatMilliseconds(durationMillis)}`;
     }
     return `${_formatMilliseconds(0)}`;
   }
