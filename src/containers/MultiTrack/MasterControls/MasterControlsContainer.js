@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import MasterControls from '../../../components/MultiTrack/MasterControls/MasterControls';
 
-import { setTrackIsLoading } from '../../../redux/actions';
+import { setTrackIsLoadingStatus } from '../../../redux/actions';
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -15,7 +15,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   const { multiTrackId }= ownProps;
   return {
-    setTrackIsLoading: (audioTrackIndex) => {dispatch(setTrackIsLoading({ audioTrackIndex, multiTrackId }))},
+    setTrackIsLoadingStatus: (audioTrackIndex, status) => {dispatch(setTrackIsLoadingStatus({ audioTrackIndex, multiTrackId, status }))},
   }
 }
 

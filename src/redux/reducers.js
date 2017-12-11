@@ -42,13 +42,14 @@ const rootReducer = (state = initialState, action) => {
         })
       }
 
-    case 'SET_TRACK_IS_LOADING':
+    case 'SET_TRACK_IS_LOADING_STATUS':
+      const { status } = action;
       return update(state, {
         multiTracks: {
           [multiTrackId]: {
             audioTracks: {
               [audioTrackIndex]: {
-                isLoading: {$set: true}
+                isLoading: {$set: status}
               }
             }
           }
