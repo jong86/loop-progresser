@@ -47,24 +47,16 @@ export default class MasterControls extends Component {
     })
       .then(() => {
         const recordingInstance = new Audio.Recording();
-        recordingInstance.setProgressUpdateInterval(1000); // I added this line to update every ms
         recordingInstance.prepareToRecordAsync(this.recordingSettings)
           .then(() => {
-            recordingInstance.setOnRecordingStatusUpdate((ms) => {
-              console.log("inside arrow function", this.props)
-              const { setRecordingDuration } = this.props;
-              setRecordingDuration(this._getArmedTrackIndex(), ms)
+            this.setState({
+              isRecordingAllowed: true,
+              recording: recordingInstance,
+            }, () => {
+              console.log('Ready to record.');
             })
           })
-            .then(() => {
-              this.setState({
-                isRecordingAllowed: true,
-                recording: recordingInstance,
-              }, () => {
-                console.log('Ready to record.');
-              })
-            })
-          })
+        })
   }
 
   _onRecordPressed = () => {
@@ -81,7 +73,15 @@ export default class MasterControls extends Component {
     }, () => {
       console.log('Recording...', this.state.recording);
     })
-    this.state.recording.startAsync()
+
+    this.state.recording.startAsync() // Starts recording
+
+    this.state.recording.setProgressUpdateInterval(10);
+    this.state.recording.setOnRecordingStatusUpdate((ms) => {
+      const { setRecordingDuration } = this.props;
+      setRecordingDuration(this._getArmedTrackIndex(), ms)
+    })
+
   }
 
   _stopRecordingAndEnablePlayback = () => {
