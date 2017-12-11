@@ -5,17 +5,21 @@ import MasterControls from '../../../components/MultiTrack/MasterControls/Master
 
 function mapStateToProps(state, ownProps) {
   return {
-    // TODO: refactor this to only return isArmed status of the audioTracks
+    // TODO: refactor this to return only the info that is used
     multiTrackStatus: state.multiTracks[ownProps.multiTrackId]
   };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  const { audioTrackIndex, multiTrackId } = ownProps;
+  // const { multiTrackId } = ownProps;
+
+  // console.log("MasterControlsContainer ownProps:", ownProps);
+
+
+
   return({
-    toggleArmTrack: () => {dispatch(toggleArmTrack(audioTrackIndex, multiTrackId))},
-    setTrackIsLoading: () => {dispatch(setTrackIsLoading(audioTrackIndex, multiTrackId))},
+    setTrackIsLoading: (armedTrack) => {dispatch(setTrackIsLoading(armedTrack))},
   })
 }
 
-export default MasterControlsContainer = connect(mapStateToProps)(MasterControls)
+export default MasterControlsContainer = connect(mapStateToProps, mapDispatchToProps)(MasterControls)

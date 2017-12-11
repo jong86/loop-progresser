@@ -9,29 +9,34 @@ import styles from './_styles_MasterControls';
 export default class MasterControls extends Component {
   constructor(props) {
     super(props)
+
+    this._stopPlaybackAndBeginRecording = this._stopPlaybackAndBeginRecording.bind(this)
+  }
+
+  _getArmedTrackIndex = () => {
+    const audioTracksList = this.props.multiTrackStatus.audioTracks
+    const audioTracksListLength = audioTracksList.length;
+    for (let i = 0; i < audioTracksListLength; i++) {
+      if (audioTracksList[i].isArmed) {
+        return i;
+      }
+    }
   }
 
   _onRecordPressed = () => {
-    const audioTracksList = this.props.multiTrackStatus.audioTracks
-    const audioTracksListLength = audioTracksList.length;
-    let armedTrack;
-    for (let i = 0; i < audioTracksListLength; i++) {
-      if (audioTracksList[i].isArmed) {
-        armedTrack = audioTracksList[i];
-        break;
-      }
-    }
-    this._stopPlaybackAndBeginRecording(armedTrack)
+    this._stopPlaybackAndBeginRecording(this._getArmedTrackIndex())
   }
 
 
-  async _stopPlaybackAndBeginRecording(track) {
+  _stopPlaybackAndBeginRecording = async (track) => {
+    const { setTrackIsLoading } = this.props;
     console.log('inside _stopPlaybackAndBeginRecording -- track:', track)
 
     // TODO -- dispatch:
     /*
     track.isLoading: true,
     */
+    // setTrackIsLoading(track)
 
 
     // TODO -- Maybe scrap this stuff or minimize it to reduce lag on record start

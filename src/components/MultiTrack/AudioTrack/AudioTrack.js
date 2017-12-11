@@ -7,7 +7,6 @@ import styles from './_styles_AudioTrack';
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 
 export default class AudioTrack extends Component {
-
   _getRecordingTimestamp = () => {
     _formatMilliseconds = (ms) => {
       return new Date(ms).toISOString().slice(14, -1);
@@ -19,13 +18,14 @@ export default class AudioTrack extends Component {
   }
 
   render() {
-    // console.log('audioTrack props for track', this.props.audioTrackIndex, ":", this.props);
+    console.log('audioTrack props for track', this.props.audioTrackIndex, ":", this.props);
     return (
       <View style={styles.main}>
         <ArmButton
           isArmed={this.props.isArmed}
           toggleArmTrack={this.props.toggleArmTrack}
         />
+        <Text>{this.props.audioTrackIndex}</Text>
         <Text style={styles.text}>{this._getRecordingTimestamp()}</Text>
       </View>
     )

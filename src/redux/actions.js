@@ -10,7 +10,7 @@ export const addTrack = (options) => {
 }
 
 export const toggleArmTrack = (options) => {
-  console.log("you sent:",options);
+  // console.log("you sent:",options);
   return {
     type: 'TOGGLE_ARM_TRACK',
     ...options
@@ -18,6 +18,7 @@ export const toggleArmTrack = (options) => {
 }
 
 export const setTrackIsLoading = (options) => {
+  console.log('options', options);
   return {
     type: 'SET_TRACK_IS_LOADING',
     ...options,
