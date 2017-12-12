@@ -23,9 +23,9 @@ export const setRecordingDuration = (options) => {
   }
 }
 
-export const saveSound = (options) => {
+export const saveSoundURI = (options) => {
   return {
-    type: 'SAVE_SOUND',
+    type: 'SAVE_SOUND_URI',
     ...options,
   }
 }

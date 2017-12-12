@@ -23,22 +23,22 @@ function mapDispatchToProps(dispatch) {
       multiTrackId: DEV_MULTITRACK_ID,
       audioTrackInitialState: {
         id: uuidv4(),
-        fontLoaded: false,
         isArmed: false,
         isPlaybackAllowed: false,
         isPlaying: false,
         isSeeking: false,
         muted: false,
         rate: 1.0,
-        recording: null,
+        recording: null, // could be stored locally
         recordingDuration: null,
         shouldPlay: false,
         shouldPlayAtEndOfSeek: false,
         shouldCorrectPitch: true,
-        sound: null,
+        sound: null,  // could be stored locally
+        soundURI: null,
         soundDuration: null,
-        soundPosition: null,
-        volume: 1.0,
+        soundPosition: null, // could be stored locally
+        volume: 1.0,  // could be stored locally
         recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
       },
     }))}

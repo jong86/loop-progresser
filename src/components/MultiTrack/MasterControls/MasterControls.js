@@ -93,20 +93,19 @@ export default class MasterControls extends Component {
       FileSystem.getInfoAsync(this.state.recording.getURI())
         .then((info) => {
           console.log(`FILE INFO: ${JSON.stringify(info)}`);
-
           this.state.recording.createNewLoadedSound({
             isLooping: true,
             isMuted: this.state.muted,
             volume: this.state.volume,
             rate: this.state.rate,
             shouldCorrectPitch: this.state.shouldCorrectPitch,
-          }).then(({ sound, status }) => {
-            console.log('sound', sound);
+          }).then(({ status }) => {
+            console.log('status', status);
             // TODO: dispatch SAVE_SOUND action
-            const { saveSound } = this.props;
-            saveSound(this._getArmedTrackIndex(), sound)
+            // => Maybe just save the URI (it's in status) and load that when playing back
+            const { saveSoundURI } = this.props;
+            saveSoundURI(this._getArmedTrackIndex(), status.uri)
           })
-
           this._getReadyToRecord();
         })
     })
