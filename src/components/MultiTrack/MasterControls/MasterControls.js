@@ -13,7 +13,7 @@ export default class MasterControls extends Component {
     super(props)
     this.state = {
       isPlaying: false,
-      isPlayingAllowed: false,
+      isPlayingAllowed: true,
       isRecording: false,
       isRecordingAllowed: false,
       recording: null,
@@ -47,15 +47,15 @@ export default class MasterControls extends Component {
     }).then(() => {
       const recordingInstance = new Audio.Recording();
       recordingInstance.prepareToRecordAsync(this.recordingSettings)
-        .then(() => {
-          this.setState({
-            isRecordingAllowed: true,
-            recording: recordingInstance,
-          }, () => {
-            console.log('Ready to record.');
-          })
+      .then(() => {
+        this.setState({
+          isRecordingAllowed: true,
+          recording: recordingInstance,
+        }, () => {
+          console.log('Ready to record.');
         })
       })
+    })
   }
 
   _getReadyToPlay = () => {
@@ -137,33 +137,35 @@ export default class MasterControls extends Component {
       const { setRecordingDuration } = this.props;
       setRecordingDuration(this._getArmedTrackIndex(), ms)
     })
-
   }
 
   _stopRecordingAndEnablePlayback = () => {
-    this.setState({
-      isRecording: false,
-      isRecordingAllowed: false,
-    });
     this.state.recording.stopAndUnloadAsync()
     .then(() => {
-      this._getReadyToPlay()
-      .then(() => {
-        FileSystem.getInfoAsync(this.state.recording.getURI())
-        .then((info) => {
-          this.state.recording.createNewLoadedSound({
-            isLooping: true,
-            isMuted: false,
-            volume: 1.0,
-            rate: 1.0,
-            shouldCorrectPitch: true,
-          }).then((sound) => {
-            console.log('sound', sound);
-            const { saveSound } = this.props;
-            saveSound(this._getArmedTrackIndex(), sound);
-          }).then(() => {
-            this.setState({
-              isPlayingAllowed: true,
+      this.setState({
+        isRecording: false,
+        isRecordingAllowed: false,
+      }, () => {
+        this._getReadyToPlay()
+        .then(() => {
+          FileSystem.getInfoAsync(this.state.recording.getURI())
+          .then((info) => {
+            this.state.recording.createNewLoadedSound({
+              isLooping: true,
+              isMuted: false,
+              volume: 1.0,
+              rate: 1.0,
+              shouldCorrectPitch: true,
+            }).then((sound) => {
+              console.log('sound', sound);
+              const { saveSound } = this.props;
+              saveSound(this._getArmedTrackIndex(), sound);
+            }).then(() => {
+              this.setState({
+                isPlayingAllowed: true,
+                isRecordingAllowed: true,
+                recording: null,
+              })
             })
           })
         })
