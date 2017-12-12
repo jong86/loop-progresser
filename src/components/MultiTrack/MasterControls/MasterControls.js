@@ -12,7 +12,6 @@ export default class MasterControls extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isPlaying: false,
       isPlayingAllowed: false,
       isRecordingAllowed: false,
       isRecording: false,
@@ -40,7 +39,7 @@ export default class MasterControls extends Component {
   _getReadyToRecord = () => {
     // Invoked when component mounted and after recording
     Audio.setAudioModeAsync({
-      allowsRecordingIOS: true,
+      allowsRecordingIOS: true, // Makes sound come out of phone speaker on iPhone...
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       playsInSilentModeIOS: true,
       shouldDuckAndroid: true,
@@ -61,22 +60,22 @@ export default class MasterControls extends Component {
 
   _onPlayPausePressed = () => {
     const { audioTracks } = this.props.multiTrackStatus;
-    const soundsToPlay = [];
+    const soundsInTracks = [];
     for (let i = 0; i < audioTracks.length; i++) {
       const { sound } = audioTracks[i]
-      if (sound) soundsToPlay.push(sound)
+      if (sound) soundsInTracks.push(sound)
     }
-    console.log('soundsToPlay', soundsToPlay);
 
-    if (this.state.isPlaying) {
-      soundsToPlay.forEach(sound => {
+    soundsInTracks.forEach((sound) => {
+      console.log('sound', sound);
+      if (sound.status.isPlaying) {
         sound.sound.pauseAsync();
-      })
-    } else {
-      soundsToPlay.forEach(sound => {
+        sound.status.isPlaying = false
+      } else {
         sound.sound.playAsync();
-      })
-    }
+        sound.status.isPlaying = true
+      }
+    })
   }
 
   _onRecordPressed = () => {
@@ -85,6 +84,21 @@ export default class MasterControls extends Component {
     } else {
       this._stopPlaybackAndBeginRecording();
     }
+  }
+
+  _onStopPressed = () => {
+    const { audioTracks } = this.props.multiTrackStatus;
+    const soundsInTracks = [];
+    for (let i = 0; i < audioTracks.length; i++) {
+      const { sound } = audioTracks[i]
+      if (sound) soundsInTracks.push(sound)
+    }
+
+    soundsInTracks.forEach((sound) => {
+      if (sound.status.isPlaying) {
+        sound.sound.stopAsync();
+      }
+    })
   }
 
   _stopPlaybackAndBeginRecording = () => {
@@ -111,7 +125,7 @@ export default class MasterControls extends Component {
       .then(() => {
         console.log('this.state.recording', this.state.recording);
         Audio.setAudioModeAsync({
-          allowsRecordingIOS: false,
+          allowsRecordingIOS: false, // Makes sound come out of regular speaker on iPhone
           interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
           playsInSilentModeIOS: true,
           playsInSilentLockedModeIOS: true,
