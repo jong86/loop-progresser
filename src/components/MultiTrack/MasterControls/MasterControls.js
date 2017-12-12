@@ -12,9 +12,10 @@ export default class MasterControls extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isPlaying: false,
       isPlayingAllowed: false,
-      isRecordingAllowed: false,
       isRecording: false,
+      isRecordingAllowed: false,
       recording: null,
     }
 
@@ -22,7 +23,6 @@ export default class MasterControls extends Component {
   }
 
   componentWillMount = () => {
-    console.log('MasterControls mounting');
     this._getReadyToRecord()
   }
 
@@ -38,7 +38,7 @@ export default class MasterControls extends Component {
 
   _getReadyToRecord = () => {
     // Invoked when component mounted and after recording
-    Audio.setAudioModeAsync({
+    return Audio.setAudioModeAsync({
       allowsRecordingIOS: true, // Makes sound come out of phone speaker on iPhone...
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       playsInSilentModeIOS: true,
@@ -58,22 +58,61 @@ export default class MasterControls extends Component {
       })
   }
 
-  _onPlayPausePressed = () => {
+  _getReadyToPlay = () => {
+    return Audio.setAudioModeAsync({
+      allowsRecordingIOS: false, // Makes sound come out of regular speaker on iPhone
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      playsInSilentModeIOS: true,
+      playsInSilentLockedModeIOS: true,
+      shouldDuckAndroid: true,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+    })
+  }
+
+  _getTracksWithSounds = () => {
     const { audioTracks } = this.props.multiTrackStatus;
     const soundsInTracks = [];
     for (let i = 0; i < audioTracks.length; i++) {
       const { sound } = audioTracks[i]
       if (sound) soundsInTracks.push(sound)
     }
+    return soundsInTracks;
+  }
 
-    soundsInTracks.forEach((sound) => {
-      console.log('sound', sound);
-      if (sound.status.isPlaying) {
-        sound.sound.pauseAsync();
-        sound.status.isPlaying = false
+  _onPlayPausePressed = () => {
+    this._getTracksWithSounds().forEach((sound) => {
+      if (this.state.isPlaying) {
+        // Pause when sound is playing:
+        this.setState({
+          isPlaying: false,
+        })
+        sound.sound.pauseAsync()
+        .then(() => {
+          this._getReadyToRecord();
+        })
       } else {
-        sound.sound.playAsync();
-        sound.status.isPlaying = true
+        // Play when sound not playing:
+        this.setState({
+          isPlaying: true,
+        })
+        this._getReadyToPlay()
+        .then(() => {
+          sound.sound.playAsync()
+        });
+      }
+    })
+  }
+
+  _onStopPressed = () => {
+    this._getTracksWithSounds().forEach((sound) => {
+      if (this.state.isPlaying) {
+        this.setState({
+          isPlaying: false,
+        })
+        sound.sound.stopAsync()
+        .then(() => {
+          this._getReadyToRecord();
+        })
       }
     })
   }
@@ -84,21 +123,6 @@ export default class MasterControls extends Component {
     } else {
       this._stopPlaybackAndBeginRecording();
     }
-  }
-
-  _onStopPressed = () => {
-    const { audioTracks } = this.props.multiTrackStatus;
-    const soundsInTracks = [];
-    for (let i = 0; i < audioTracks.length; i++) {
-      const { sound } = audioTracks[i]
-      if (sound) soundsInTracks.push(sound)
-    }
-
-    soundsInTracks.forEach((sound) => {
-      if (sound.status.isPlaying) {
-        sound.sound.stopAsync();
-      }
-    })
   }
 
   _stopPlaybackAndBeginRecording = () => {
@@ -122,33 +146,29 @@ export default class MasterControls extends Component {
       isRecordingAllowed: false,
     });
     this.state.recording.stopAndUnloadAsync()
+    .then(() => {
+      this._getReadyToPlay()
       .then(() => {
-        console.log('this.state.recording', this.state.recording);
-        Audio.setAudioModeAsync({
-          allowsRecordingIOS: false, // Makes sound come out of regular speaker on iPhone
-          interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-          playsInSilentModeIOS: true,
-          playsInSilentLockedModeIOS: true,
-          shouldDuckAndroid: true,
-          interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-        }).then(() => {
-          FileSystem.getInfoAsync(this.state.recording.getURI())
-            .then((info) => {
-              this.state.recording.createNewLoadedSound({
-                isLooping: true,
-                isMuted: false,
-                volume: 1.0,
-                rate: 1.0,
-                shouldCorrectPitch: true,
-              }).then((sound) => {
-                console.log('sound', sound);
-                const { saveSound } = this.props;
-                saveSound(this._getArmedTrackIndex(), sound);
-              })
-              this._getReadyToRecord();
+        FileSystem.getInfoAsync(this.state.recording.getURI())
+        .then((info) => {
+          this.state.recording.createNewLoadedSound({
+            isLooping: true,
+            isMuted: false,
+            volume: 1.0,
+            rate: 1.0,
+            shouldCorrectPitch: true,
+          }).then((sound) => {
+            console.log('sound', sound);
+            const { saveSound } = this.props;
+            saveSound(this._getArmedTrackIndex(), sound);
+          }).then(() => {
+            this.setState({
+              isPlayingAllowed: true,
             })
+          })
         })
       })
+    })
   }
 
   render() {
@@ -156,18 +176,18 @@ export default class MasterControls extends Component {
       <View style={styles.main}>
 
         <View style={styles.buttonWrapper}>
-          <ControlButton
-            // isOn={this.state.isPlaying}
-            type="PLAY"
-            specificFunction={this._onPlayPausePressed}
-          />
+          { this.state.isPlayingAllowed &&
+            <ControlButton
+              type="PLAY"
+              specificFunction={this._onPlayPausePressed}
+            />
+          }
           <ControlButton
             type="STOP"
-            // specificFunction={this._onStopPressed}
+            specificFunction={this._onStopPressed}
           />
           { this.state.isRecordingAllowed &&
             <ControlButton
-              // isOn={this.state.isRecording}
               type="REC"
               specificFunction={this._onRecordPressed}
             />
