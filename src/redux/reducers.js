@@ -56,14 +56,14 @@ const rootReducer = (state = initialState, action) => {
         }
       })
 
-    case 'SAVE_SOUND_URI':
-      const { soundURI } = action;
+    case 'SAVE_SOUND':
+      const { sound } = action;
       return update(state, {
         multiTracks: {
           [multiTrackId]: {
             audioTracks: {
               [audioTrackIndex]: {
-                soundURI: {$set: soundURI}
+                sound: {$set: sound}
               }
             }
           }

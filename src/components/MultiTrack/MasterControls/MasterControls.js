@@ -12,6 +12,8 @@ export default class MasterControls extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isPlaying: false,
+      isPlayingAllowed: false,
       isRecordingAllowed: false,
       isRecording: false,
       recording: null,
@@ -36,27 +38,45 @@ export default class MasterControls extends Component {
   }
 
   _getReadyToRecord = () => {
-    console.log('props', this.props);
-
+    // Invoked when component mounted and after recording
     Audio.setAudioModeAsync({
       allowsRecordingIOS: true,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       playsInSilentModeIOS: true,
       shouldDuckAndroid: true,
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-    })
-      .then(() => {
-        const recordingInstance = new Audio.Recording();
-        recordingInstance.prepareToRecordAsync(this.recordingSettings)
-          .then(() => {
-            this.setState({
-              isRecordingAllowed: true,
-              recording: recordingInstance,
-            }, () => {
-              console.log('Ready to record.');
-            })
+    }).then(() => {
+      const recordingInstance = new Audio.Recording();
+      recordingInstance.prepareToRecordAsync(this.recordingSettings)
+        .then(() => {
+          this.setState({
+            isRecordingAllowed: true,
+            recording: recordingInstance,
+          }, () => {
+            console.log('Ready to record.');
           })
         })
+      })
+  }
+
+  _onPlayPausePressed = () => {
+    const { audioTracks } = this.props.multiTrackStatus;
+    const soundsToPlay = [];
+    for (let i = 0; i < audioTracks.length; i++) {
+      const { sound } = audioTracks[i]
+      if (sound) soundsToPlay.push(sound)
+    }
+    console.log('soundsToPlay', soundsToPlay);
+
+    if (this.state.isPlaying) {
+      soundsToPlay.forEach(sound => {
+        sound.sound.pauseAsync();
+      })
+    } else {
+      soundsToPlay.forEach(sound => {
+        sound.sound.playAsync();
+      })
+    }
   }
 
   _onRecordPressed = () => {
@@ -88,27 +108,33 @@ export default class MasterControls extends Component {
       isRecordingAllowed: false,
     });
     this.state.recording.stopAndUnloadAsync()
-    .then(() => {
-      console.log('this.state.recording', this.state.recording);
-      FileSystem.getInfoAsync(this.state.recording.getURI())
-        .then((info) => {
-          console.log(`FILE INFO: ${JSON.stringify(info)}`);
-          this.state.recording.createNewLoadedSound({
-            isLooping: true,
-            isMuted: this.state.muted,
-            volume: this.state.volume,
-            rate: this.state.rate,
-            shouldCorrectPitch: this.state.shouldCorrectPitch,
-          }).then(({ status }) => {
-            console.log('status', status);
-            // TODO: dispatch SAVE_SOUND action
-            // => Maybe just save the URI (it's in status) and load that when playing back
-            const { saveSoundURI } = this.props;
-            saveSoundURI(this._getArmedTrackIndex(), status.uri)
-          })
-          this._getReadyToRecord();
+      .then(() => {
+        console.log('this.state.recording', this.state.recording);
+        Audio.setAudioModeAsync({
+          allowsRecordingIOS: false,
+          interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+          playsInSilentModeIOS: true,
+          playsInSilentLockedModeIOS: true,
+          shouldDuckAndroid: true,
+          interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+        }).then(() => {
+          FileSystem.getInfoAsync(this.state.recording.getURI())
+            .then((info) => {
+              this.state.recording.createNewLoadedSound({
+                isLooping: true,
+                isMuted: false,
+                volume: 1.0,
+                rate: 1.0,
+                shouldCorrectPitch: true,
+              }).then((sound) => {
+                console.log('sound', sound);
+                const { saveSound } = this.props;
+                saveSound(this._getArmedTrackIndex(), sound);
+              })
+              this._getReadyToRecord();
+            })
         })
-    })
+      })
   }
 
   render() {
@@ -119,7 +145,7 @@ export default class MasterControls extends Component {
           <ControlButton
             // isOn={this.state.isPlaying}
             type="PLAY"
-            // specificFunction={this._onPlayPausePressed}
+            specificFunction={this._onPlayPausePressed}
           />
           <ControlButton
             type="STOP"
