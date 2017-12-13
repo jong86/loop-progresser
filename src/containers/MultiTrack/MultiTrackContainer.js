@@ -24,16 +24,9 @@ function mapDispatchToProps(dispatch) {
       audioTrackInitialState: {
         id: uuidv4(),
         isArmed: false,
-        isPlaybackAllowed: false,
-        isPlaying: false,
-        isSeeking: false,
-        recording: null, // could be stored locally
         recordingDuration: null,
-        shouldPlay: false,
-        shouldPlayAtEndOfSeek: false,
-        sound: null,  // could be stored locally
+        sound: null,
         soundDuration: null,
-        soundPosition: null, // could be stored locally
         recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
       },
     }))}

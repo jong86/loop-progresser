@@ -12,18 +12,12 @@ export default class MasterControls extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isPlaying: false,
-      isPlayingAllowed: true,
-      isRecording: false,
-      isRecordingAllowed: false,
+      isMultiTrackPlaying: false,
+      isMultiTrackPlayingAllowed: true,
+      isMultiTrackRecording: false,
+      isMultiTrackRecordingAllowed: false,
       recording: null,
     }
-
-    this._stopPlaybackAndBeginRecording = this._stopPlaybackAndBeginRecording.bind(this)
-  }
-
-  componentWillMount = () => {
-    this._getReadyToRecord()
   }
 
   _getArmedTrackIndex = () => {
@@ -36,25 +30,24 @@ export default class MasterControls extends Component {
     }
   }
 
-  _getReadyToRecord = () => {
+  _getReadyToRecord = async() => {
+    console.log('Getting ready to record...');
     // Invoked when component mounted and after recording
-    return Audio.setAudioModeAsync({
+    await Audio.setAudioModeAsync({
       allowsRecordingIOS: true, // Makes sound come out of phone speaker on iPhone...
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       playsInSilentModeIOS: true,
       shouldDuckAndroid: true,
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-    }).then(() => {
-      const recordingInstance = new Audio.Recording();
-      recordingInstance.prepareToRecordAsync(this.recordingSettings)
-      .then(() => {
-        this.setState({
-          isRecordingAllowed: true,
-          recording: recordingInstance,
-        }, () => {
-          console.log('Ready to record.');
-        })
-      })
+    })
+    const recordingInstance = new Audio.Recording();
+    await recordingInstance.prepareToRecordAsync(this.recordingSettings)
+    await this.setState({
+      isMultiTrackRecordingAllowed: true,
+      recording: recordingInstance,
+    }, () => {
+      console.log('Ready to record.');
+      return;
     })
   }
 
@@ -79,97 +72,84 @@ export default class MasterControls extends Component {
     return soundsInTracks;
   }
 
-  _onPlayPausePressed = () => {
-    this._getTracksWithSounds().forEach((sound) => {
-      if (this.state.isPlaying) {
-        // Pause when sound is playing:
+  _onPlayPausePressed = async() => {
+    this._getTracksWithSounds().forEach(({ sound }) => {
+      if (this.state.isMultiTrackPlaying) {
         this.setState({
-          isPlaying: false,
+          isMultiTrackPlaying: false,
         })
-        sound.sound.pauseAsync()
-        .then(() => {
-          this._getReadyToRecord();
-        })
+        sound.pauseAsync()
       } else {
-        // Play when sound not playing:
         this.setState({
-          isPlaying: true,
+          isMultiTrackPlaying: true,
         })
         this._getReadyToPlay()
-        .then(() => {
-          sound.sound.playAsync()
-        });
+        sound.playAsync()
+      }
+    })
+  }
+
+  _stopAllTracks = async() => {
+    this._getTracksWithSounds().forEach(({ sound }) => {
+      if (this.state.isMultiTrackPlaying) {
+        this.setState({
+          isMultiTrackPlaying: false,
+        })
+        sound.stopAsync()
       }
     })
   }
 
   _onStopPressed = () => {
-    this._getTracksWithSounds().forEach((sound) => {
-      if (this.state.isPlaying) {
-        this.setState({
-          isPlaying: false,
-        })
-        sound.sound.stopAsync()
-        .then(() => {
-          this._getReadyToRecord();
-        })
-      }
-    })
+    this._stopAllTracks()
   }
 
   _onRecordPressed = () => {
-    if (this.state.isRecording) {
+    if (this.state.isMultiTrackRecording) {
       this._stopRecordingAndEnablePlayback();
     } else {
       this._stopPlaybackAndBeginRecording();
     }
   }
 
-  _stopPlaybackAndBeginRecording = () => {
+  _stopPlaybackAndBeginRecording = async() => {
+    if (!this.state.recording) {
+      await this._getReadyToRecord()
+    }
     this.setState({
-      isRecording: true,
-    }, () => {
-      console.log('Recording...', this.state.recording);
+      isMultiTrackRecording: true,
     })
-    this.state.recording.startAsync() // Starts recording
+    await this.state.recording.startAsync()
+    console.log('Recording...', this.state.recording);
+
+    // For updating recording duration in GUI for audioTrack:
     this.state.recording.setProgressUpdateInterval(2);
     this.state.recording.setOnRecordingStatusUpdate((ms) => {
-      const { setRecordingDuration } = this.props;
-      setRecordingDuration(this._getArmedTrackIndex(), ms)
+      this.props.setRecordingDuration(this._getArmedTrackIndex(), ms)
     })
   }
 
-  _stopRecordingAndEnablePlayback = () => {
-    this.state.recording.stopAndUnloadAsync()
-    .then(() => {
-      this.setState({
-        isRecording: false,
-        isRecordingAllowed: false,
-      }, () => {
-        this._getReadyToPlay()
-        .then(() => {
-          FileSystem.getInfoAsync(this.state.recording.getURI())
-          .then((info) => {
-            this.state.recording.createNewLoadedSound({
-              isLooping: true,
-              isMuted: false,
-              volume: 1.0,
-              rate: 1.0,
-              shouldCorrectPitch: true,
-            }).then((sound) => {
-              console.log('sound', sound);
-              const { saveSound } = this.props;
-              saveSound(this._getArmedTrackIndex(), sound);
-            }).then(() => {
-              this.setState({
-                isPlayingAllowed: true,
-                isRecordingAllowed: true,
-                recording: null,
-              })
-            })
-          })
-        })
-      })
+  _stopRecordingAndEnablePlayback = async() => {
+    await this.state.recording.stopAndUnloadAsync()
+    this.setState({
+      isMultiTrackRecording: false,
+      isMultiTrackRecordingAllowed: false,
+    })
+    await this._getReadyToPlay()
+    const info = await FileSystem.getInfoAsync(this.state.recording.getURI())
+    const sound = await this.state.recording.createNewLoadedSound({
+      isLooping: true,
+      isMuted: false,
+      volume: 1.0,
+      rate: 1.0,
+      shouldCorrectPitch: true,
+    })
+    // Save recorded sound in store:
+    this.props.saveSound(this._getArmedTrackIndex(), sound);
+    this.setState({
+      isMultiTrackPlayingAllowed: true,
+      isMultiTrackRecordingAllowed: true,
+      recording: null,
     })
   }
 
@@ -178,7 +158,7 @@ export default class MasterControls extends Component {
       <View style={styles.main}>
 
         <View style={styles.buttonWrapper}>
-          { this.state.isPlayingAllowed &&
+          { this.state.isMultiTrackPlayingAllowed &&
             <ControlButton
               type="PLAY"
               specificFunction={this._onPlayPausePressed}
@@ -188,12 +168,10 @@ export default class MasterControls extends Component {
             type="STOP"
             specificFunction={this._onStopPressed}
           />
-          { this.state.isRecordingAllowed &&
             <ControlButton
               type="REC"
               specificFunction={this._onRecordPressed}
             />
-          }
         </View>
 
       </View>
