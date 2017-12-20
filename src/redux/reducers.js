@@ -3,7 +3,9 @@ import update from 'react-addons-update'
 initialState = {
   multiTracks: {
     0: {
-      audioTracks: []
+      audioTracks: [],
+      isPlaying: false,
+      isRecording: false,
     }
   }
 }
@@ -22,10 +24,10 @@ const rootReducer = (state = initialState, action) => {
       })
 
     case 'TOGGLE_ARM_TRACK':
+      // Unarms all tracks first (track arming is exclusive):
       const targetTrackList = state.multiTracks[multiTrackId].audioTracks
       const targetTrack = state.multiTracks[multiTrackId].audioTracks[audioTrackIndex];
       if (!targetTrack.isArmed) {
-        // Unarm all tracks first (track arming is exclusive):
         for (let i = 0; i < targetTrackList.length; i++) {
           targetTrackList[i].isArmed = false;
         }
@@ -42,6 +44,24 @@ const rootReducer = (state = initialState, action) => {
         })
       }
 
+    case 'TOGGLE_IS_MULTI_TRACK_PLAYING':
+      return update(state, {
+        multiTracks: {
+          [multiTrackId]: {
+            isPlaying: {$apply: (value) => !value}
+          }
+        }
+      })
+
+    // case 'TOGGLE_IS_MULTI_TRACK_RECORDING':
+    //   return update(state, {
+    //     multiTracks: {
+    //       [multiTrackId]: {
+    //         isRecording: {$set: true}
+    //       }
+    //     }
+    //   })
+
     case 'SET_RECORDING_DURATION':
       const { duration } = action;
       return update(state, {
@@ -56,14 +76,14 @@ const rootReducer = (state = initialState, action) => {
         }
       })
 
-    case 'SAVE_SOUND':
-      const { sound } = action;
+    case 'SAVE_SOUND_DATA':
+      const { soundData } = action;
       return update(state, {
         multiTracks: {
           [multiTrackId]: {
             audioTracks: {
               [audioTrackIndex]: {
-                sound: {$set: sound}
+                soundData: {$set: soundData}
               }
             }
           }

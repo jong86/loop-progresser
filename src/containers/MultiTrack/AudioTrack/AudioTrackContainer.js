@@ -7,13 +7,15 @@ import { toggleArmTrack } from '../../../redux/actions';
 function mapStateToProps(state, ownProps) {
   return {
     audioTrackState: state.multiTracks[ownProps.multiTrackId].audioTracks[ownProps.audioTrackIndex],
+    isMultiTrackPlaying: state.multiTracks[ownProps.multiTrackId].isPlaying,
   }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
   const { audioTrackIndex, multiTrackId } = ownProps;
   return({
-    toggleArmTrack: () => {dispatch(toggleArmTrack({ audioTrackIndex, multiTrackId }))}
+    toggleArmTrack: () => {dispatch(toggleArmTrack({ audioTrackIndex, multiTrackId }))},
+    // toggleTrackIsRecording: () => {dispatch(toggleTrackIsRecording({ }))}
   })
 }
 

@@ -12,7 +12,7 @@ export default class MasterControls extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isMultiTrackPlaying: false,
+      // isMultiTrackPlaying: false,
       isMultiTrackPlayingAllowed: true,
       isMultiTrackRecording: false,
       isMultiTrackRecordingAllowed: false,
@@ -66,38 +66,42 @@ export default class MasterControls extends Component {
     const { audioTracks } = this.props.multiTrackStatus;
     const soundsInTracks = [];
     for (let i = 0; i < audioTracks.length; i++) {
-      const { sound } = audioTracks[i]
-      if (sound) soundsInTracks.push(sound)
+      const { soundData } = audioTracks[i]
+      if (soundData) soundsInTracks.push(soundData)
     }
-    return soundsInTracks;
+    return soundsInTracks[0] ? soundsInTracks : false;
   }
 
-  _onPlayPausePressed = async() => {
-    this._getTracksWithSounds().forEach(({ sound }) => {
-      if (this.state.isMultiTrackPlaying) {
-        this.setState({
-          isMultiTrackPlaying: false,
-        })
-        sound.pauseAsync()
-      } else {
-        this.setState({
-          isMultiTrackPlaying: true,
-        })
-        this._getReadyToPlay()
-        sound.playAsync()
-      }
-    })
+  _onPlayPausePressed = () => {
+    const { toggleIsMultiTrackPlaying } = this.props;
+    const { isPlaying } = this.props.multiTrackStatus;
+    const tracksWithSounds = this._getTracksWithSounds();
+
+    if (isPlaying && tracksWithSounds) {
+      tracksWithSounds.forEach(({ sound }) => {
+        sound.pauseAsync();
+      })
+      toggleIsMultiTrackPlaying();
+    } else if (!isPlaying && tracksWithSounds) {
+      tracksWithSounds.forEach(({ sound }) => {
+        this._getReadyToPlay();
+        sound.playAsync();
+      })
+      toggleIsMultiTrackPlaying();
+    }
   }
 
-  _stopAllTracks = async() => {
-    this._getTracksWithSounds().forEach(({ sound }) => {
-      if (this.state.isMultiTrackPlaying) {
-        this.setState({
-          isMultiTrackPlaying: false,
-        })
+  _stopAllTracks = () => {
+    const { toggleIsMultiTrackPlaying } = this.props;
+    const { isPlaying } = this.props.multiTrackStatus;
+    const tracksWithSounds = this._getTracksWithSounds();
+
+    if (isPlaying && tracksWithSounds) {
+      tracksWithSounds.forEach(({ sound }) => {
         sound.stopAsync()
-      }
-    })
+      })
+      toggleIsMultiTrackPlaying();
+    }
   }
 
   _onStopPressed = () => {
@@ -137,7 +141,7 @@ export default class MasterControls extends Component {
     })
     await this._getReadyToPlay()
     const info = await FileSystem.getInfoAsync(this.state.recording.getURI())
-    const sound = await this.state.recording.createNewLoadedSound({
+    const soundData = await this.state.recording.createNewLoadedSound({
       isLooping: true,
       isMuted: false,
       volume: 1.0,
@@ -145,7 +149,7 @@ export default class MasterControls extends Component {
       shouldCorrectPitch: true,
     })
     // Save recorded sound in store:
-    this.props.saveSound(this._getArmedTrackIndex(), sound);
+    this.props.saveSoundData(this._getArmedTrackIndex(), soundData);
     this.setState({
       isMultiTrackPlayingAllowed: true,
       isMultiTrackRecordingAllowed: true,
@@ -168,10 +172,10 @@ export default class MasterControls extends Component {
             type="STOP"
             specificFunction={this._onStopPressed}
           />
-            <ControlButton
-              type="REC"
-              specificFunction={this._onRecordPressed}
-            />
+          <ControlButton
+            type="REC"
+            specificFunction={this._onRecordPressed}
+          />
         </View>
 
       </View>

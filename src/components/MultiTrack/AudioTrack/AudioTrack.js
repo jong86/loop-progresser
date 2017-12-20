@@ -20,7 +20,7 @@ export default class AudioTrack extends Component {
   }
 
   render() {
-    // console.log('audioTrack props for track', this.props.audioTrackIndex, ":", this.props);
+    console.log('audioTrack props for track', this.props.audioTrackIndex, ":", this.props);
     return (
       <View style={styles.main}>
         <ArmButton

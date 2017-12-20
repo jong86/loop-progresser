@@ -24,6 +24,7 @@ function mapDispatchToProps(dispatch) {
       audioTrackInitialState: {
         id: uuidv4(),
         isArmed: false,
+        // isRecording: false,
         recordingDuration: null,
         sound: null,
         soundDuration: null,
