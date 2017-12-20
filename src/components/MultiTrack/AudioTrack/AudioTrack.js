@@ -7,16 +7,24 @@ import styles from './_styles_AudioTrack';
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 
 export default class AudioTrack extends Component {
-  _getRecordingTimestamp = () => {
-    _formatMilliseconds = (ms) => {
-      return new Date(ms).toISOString().slice(14, -2);
+  _getTimestamp = () => {
+    _formatMilliseconds = (milliseconds) => {
+      return new Date(Number(milliseconds)).toISOString().slice(14, -2);
     }
 
-    if (this.props.recordingDuration) {
-      const { durationMillis } = this.props.recordingDuration
-      return `${_formatMilliseconds(durationMillis)}`;
-    }
+    if (!this.props.isMultiTrackPlaying && this.props.recordingDuration) {
+      // If a sound is currently being recorded
+      const milliseconds = this.props.recordingDuration.durationMillis;
+      console.log('milliseconds recorded:', milliseconds);
+      return `${_formatMilliseconds(milliseconds)}`;
+    } else if (this.props.isMultiTrackPlaying && this.props.soundData.status) {
+      // If there's a sound already recorded
+      const milliseconds = this.props.soundData.status.positionMillis;
+      console.log('milliseconds played:', milliseconds);
+      return `${_formatMilliseconds(milliseconds)}`;
+    } else {
     return `${_formatMilliseconds(0)}`;
+    }
   }
 
   render() {
@@ -28,7 +36,7 @@ export default class AudioTrack extends Component {
           toggleArmTrack={this.props.toggleArmTrack}
         />
         <Text>{this.props.audioTrackIndex}</Text>
-        <Text style={styles.text}>{this._getRecordingTimestamp()}</Text>
+        <Text style={styles.text}>{this._getTimestamp()}</Text>
       </View>
     )
   }

@@ -90,6 +90,22 @@ const rootReducer = (state = initialState, action) => {
         }
       })
 
+    case 'UPDATE_SOUND_STATUS':
+      const { status } = action;
+      return update(state, {
+        multiTracks: {
+          [multiTrackId]: {
+            audioTracks: {
+              [audioTrackIndex]: {
+                soundData: {
+                  status: {$set: status}
+                }
+              }
+            }
+          }
+        }
+      })
+
     default:
       return state;
   }

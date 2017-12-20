@@ -41,3 +41,11 @@ export const saveSoundData = (options) => {
     ...options,
   }
 }
+
+export const updateSoundStatus = (options) => {
+  console.log('options', options);
+  return {
+    type: 'UPDATE_SOUND_STATUS',
+    ...options,
+  }
+}

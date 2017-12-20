@@ -26,7 +26,7 @@ function mapDispatchToProps(dispatch) {
         isArmed: false,
         // isRecording: false,
         recordingDuration: null,
-        sound: null,
+        soundData: {},
         soundDuration: null,
         recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
       },

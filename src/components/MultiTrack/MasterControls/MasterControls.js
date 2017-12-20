@@ -67,38 +67,45 @@ export default class MasterControls extends Component {
     const soundsInTracks = [];
     for (let i = 0; i < audioTracks.length; i++) {
       const { soundData } = audioTracks[i]
+      console.log('soundData', soundData);
       if (soundData) soundsInTracks.push(soundData)
     }
     return soundsInTracks[0] ? soundsInTracks : false;
+    // The ternary makes this return false if array is empty
   }
 
-  _onPlayPausePressed = () => {
+  _onPlayPausePressed = async () => {
     const { toggleIsMultiTrackPlaying } = this.props;
     const { isPlaying } = this.props.multiTrackStatus;
     const tracksWithSounds = this._getTracksWithSounds();
-
     if (isPlaying && tracksWithSounds) {
       tracksWithSounds.forEach(({ sound }) => {
-        sound.pauseAsync();
+        if (sound) {
+          sound.pauseAsync();
+        }
       })
       toggleIsMultiTrackPlaying();
     } else if (!isPlaying && tracksWithSounds) {
       tracksWithSounds.forEach(({ sound }) => {
-        this._getReadyToPlay();
-        sound.playAsync();
+        if (sound) {
+          this._getReadyToPlay();
+          sound.setProgressUpdateIntervalAsync(2);
+          sound.playAsync();
+        }
       })
       toggleIsMultiTrackPlaying();
     }
   }
 
-  _stopAllTracks = () => {
+  _stopAllTracks = async () => {
     const { toggleIsMultiTrackPlaying } = this.props;
     const { isPlaying } = this.props.multiTrackStatus;
     const tracksWithSounds = this._getTracksWithSounds();
-
     if (isPlaying && tracksWithSounds) {
       tracksWithSounds.forEach(({ sound }) => {
-        sound.stopAsync()
+        if (sound) {
+          sound.stopAsync()
+        }
       })
       toggleIsMultiTrackPlaying();
     }
@@ -140,16 +147,18 @@ export default class MasterControls extends Component {
       isMultiTrackRecordingAllowed: false,
     })
     await this._getReadyToPlay()
-    const info = await FileSystem.getInfoAsync(this.state.recording.getURI())
+    const armedTrackIndex = this._getArmedTrackIndex();
     const soundData = await this.state.recording.createNewLoadedSound({
       isLooping: true,
       isMuted: false,
       volume: 1.0,
       rate: 1.0,
       shouldCorrectPitch: true,
+    }, (status) => {
+      this.props.updateSoundStatus(armedTrackIndex, status)
     })
     // Save recorded sound in store:
-    this.props.saveSoundData(this._getArmedTrackIndex(), soundData);
+    this.props.saveSoundData(armedTrackIndex, soundData);
     this.setState({
       isMultiTrackPlayingAllowed: true,
       isMultiTrackRecordingAllowed: true,
