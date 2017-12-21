@@ -7,8 +7,8 @@ import styles from './_styles_Menu';
 export default class Menu extends Component {
 
   _onBackPressed = () => {
-    console.log("pressed back button");
-    this.props.backToWorldView();
+    console.log("pressed back button", this.props);
+    this.props.guiChangeView();
   }
 
   render() {

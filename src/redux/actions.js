@@ -53,9 +53,16 @@ export const updateSoundStatus = (options) => {
   }
 }
 
-export const setCurrentView = (options) => {
+export const guiChangeView = (options) => {
   return {
-    type: 'SET_CURRENT_VIEW',
+    type: 'GUI_CHANGE_VIEW',
+    ...options,
+  }
+}
+
+export const guiUpdateZoom = (options) => {
+  return {
+    type: 'GUI_UPDATE_ZOOM',
     ...options,
   }
 }

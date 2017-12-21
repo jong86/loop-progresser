@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import AudioTrack from '../../../../components/World/MultiTrack/AudioTrack/AudioTrack';
 import { toggleArmTrack } from '../../../../redux/actions';

@@ -11,8 +11,6 @@ const multiplierMap = 8
 export default class World extends Component {
 
   componentDidMount() {
-    console.log('this.refs.sv', this.refs.sv);
-
     this.refs.scrollView.scrollTo({
       // Need to change this to actually get the x and y of the specific multiTrack:
       x: Dimensions.get('screen').width * multiplierMap * multiplierMain / 2 - Dimensions.get('screen').width / 2,
@@ -22,7 +20,8 @@ export default class World extends Component {
   }
 
   render() {
-    console.log(Dimensions.get('screen'))
+    console.log('this.props for World.js', this.props);
+
     return (
       <ScrollView
         contentContainerStyle={styles.main}
@@ -30,6 +29,12 @@ export default class World extends Component {
         minimumZoomScale={0.1}
         horizontal
         ref='scrollView'
+        zoomScale={this.props.zoom}
+        centerContent
+        onScroll={(event) => {
+          this.props.guiUpdateZoom(event.nativeEvent.zoomScale)
+        }}
+        scrollEventThrottle={1}
       >
         <View
           style={styles.map}
