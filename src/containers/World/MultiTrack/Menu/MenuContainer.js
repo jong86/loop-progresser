@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 
 import Menu from '../../../../components/World/MultiTrack/Menu/Menu';
 
-import { guiChangeView } from '../../../../redux/actions';
+import { setZoomScale } from '../../../../redux/actions';
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
+  console.log('ownProps in menuContainer', ownProps);
   return({
-    guiChangeView: () => {dispatch(guiChangeView({view: 'world'}))}
+    setZoomScale: () => {dispatch(setZoomScale({zoomScale: 0.1}))},
+    scrollToPosition: ownProps.scrollToPosition,
   })
 }
 

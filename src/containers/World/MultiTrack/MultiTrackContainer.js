@@ -17,7 +17,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
+  console.log('ownProps in MultiTrackContainer', ownProps);
   return({
     addTrack: () => {dispatch(addTrack({
       multiTrackId: DEV_MULTITRACK_ID,
@@ -29,8 +30,10 @@ function mapDispatchToProps(dispatch) {
         soundData: {},
         soundDuration: null,
         recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
-      },
-    }))}
+      }
+    }))},
+
+    scrollToPosition: ownProps.scrollToPosition,
   })
 }
 

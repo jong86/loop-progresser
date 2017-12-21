@@ -9,13 +9,27 @@ const multiplierMain = 1.2
 const multiplierMap = 8
 
 export default class World extends Component {
+  constructor() {
+    super()
+    this.centerXY = {
+      x: Dimensions.get('screen').width / 2,
+      y: Dimensions.get('screen').height / 2,
+    }
+
+    this.scrollToPosition = this.scrollToPosition.bind(this)
+  }
 
   componentDidMount() {
+    this.scrollToPosition(null, true)
+  }
+
+  scrollToPosition(givenPosition, moveToCenter) {
+    console.log('position', position);
+    const position = moveToCenter ? this.centerXY : givenPosition;
     this.refs.scrollView.scrollTo({
-      // Need to change this to actually get the x and y of the specific multiTrack:
-      x: Dimensions.get('screen').width * multiplierMap * multiplierMain / 2 - Dimensions.get('screen').width / 2,
-      y: Dimensions.get('screen').height * multiplierMap * multiplierMain / 2 - Dimensions.get('screen').height / 2,
-      animated: false
+      x: position.x,
+      y: position.y,
+      animated: false,
     })
   }
 
@@ -29,18 +43,21 @@ export default class World extends Component {
         minimumZoomScale={0.1}
         horizontal
         ref='scrollView'
-        zoomScale={this.props.zoom}
+        zoomScale={this.props.zoomScale}
         centerContent
-        onScroll={(event) => {
-          this.props.guiUpdateZoom(event.nativeEvent.zoomScale)
-        }}
         scrollEventThrottle={1}
+        onScrollEndDrag={(event) => {
+          console.log("ended drag", event.nativeEvent.zoomScale)
+          this.props.setZoomScale(event.nativeEvent.zoomScale)
+        }}
       >
         <View
           style={styles.map}
         >
 
-          <MultiTrackContainer />
+          <MultiTrackContainer
+            scrollToPosition={this.scrollToPosition}
+          />
 
         </View>
       </ScrollView>

@@ -23,7 +23,9 @@ export default class MultiTrack extends Component {
     return (
       <View style={styles.main}>
 
-        <MenuContainer />
+        <MenuContainer
+          scrollToPosition={this.props.scrollToPosition}
+        />
 
         { audioTracks.map((audioTrackData, audioTrackIndex) =>
           <AudioTrackContainer

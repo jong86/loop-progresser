@@ -1,7 +1,7 @@
 import update from 'react-addons-update'
 
 initialState = {
-  zoom: 1.0,
+  zoomScale: 1.0,
   multiTracks: {
     0: {
       audioTracks: [],
@@ -107,17 +107,12 @@ const rootReducer = (state = initialState, action) => {
         }
       })
 
-    case 'GUI_CHANGE_VIEW':
-      const { view } = action;
-      const _zoom = view === 'world' ? 0.3 : 1.0;
-      return update(state, {
-        zoom: {$set: _zoom}
-      })
+    case 'SET_ZOOM_SCALE':
+      const { zoomScale } = action;
+      // Also need to change position to keep centered on that multiTrack
 
-    case 'GUI_UPDATE_ZOOM':
-      let { zoom } = action;
       return update(state, {
-        zoom: {$set: zoom}
+        zoomScale: {$set: zoomScale}
       })
 
     default:

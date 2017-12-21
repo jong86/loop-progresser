@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import World from '../../components/World/World';
-import { guiUpdateZoom } from '../../redux/actions';
+import { setZoomScale } from '../../redux/actions';
 
 function mapStateToProps(state) {
   return {
-    zoom: state.zoom
+    zoomScale: state.zoomScale
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return ({
-    guiUpdateZoom: (zoom) => {dispatch(guiUpdateZoom({zoom: zoom}))}
+    setZoomScale: (zoomScale) => {dispatch(setZoomScale({zoomScale: zoomScale}))}
   })
 }
 

@@ -7,6 +7,18 @@ import styles from './_styles_AudioTrack';
 import Expo, { Asset, Audio, FileSystem, Font, Permissions } from 'expo';
 
 export default class AudioTrack extends Component {
+  state = {
+    fontLoaded: false,
+  }
+
+  async componentDidMount() {
+      await Font.loadAsync({
+      'monospace': require('../../../../assets/fonts/OverpassMono-Bold.ttf'),
+    });
+
+    this.setState({ fontLoaded: true })
+  }
+
   _getTimestamp = () => {
     _formatMilliseconds = (milliseconds) => {
       return new Date(Number(milliseconds)).toISOString().slice(14, -2);
@@ -35,8 +47,18 @@ export default class AudioTrack extends Component {
           isArmed={this.props.isArmed}
           toggleArmTrack={this.props.toggleArmTrack}
         />
+
         <Text>{this.props.audioTrackIndex}</Text>
-        <Text style={styles.text}>{this._getTimestamp()}</Text>
+
+        {
+          this.state.fontLoaded && (
+            <Text
+              style={[styles.text, {fontFamily: 'monospace'}]}
+            >
+              {this._getTimestamp()}
+            </Text>
+          )
+        }
       </View>
     )
   }
