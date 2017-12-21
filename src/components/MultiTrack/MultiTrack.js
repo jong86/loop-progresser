@@ -3,6 +3,8 @@ import { View } from 'react-native';
 
 import MasterControlsContainer from '../../containers/MultiTrack/MasterControls/MasterControlsContainer';
 import AudioTrackContainer from '../../containers/MultiTrack/AudioTrack/AudioTrackContainer';
+import MenuContainer from '../../containers/MultiTrack/Menu/MenuContainer';
+
 import styles from './_styles_MultiTrack';
 
 
@@ -20,6 +22,8 @@ export default class MultiTrack extends Component {
     // console.log('audioTracks', audioTracks);
     return (
       <View style={styles.main}>
+
+        <MenuContainer />
 
         { audioTracks.map((audioTrackData, audioTrackIndex) =>
           <AudioTrackContainer
