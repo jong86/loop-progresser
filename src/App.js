@@ -5,7 +5,8 @@ import {
   View,
 } from 'react-native';
 
-import MultiTrackContainer from './containers/MultiTrack/MultiTrackContainer';
+
+import WorldContainer from './containers/World/WorldContainer';
 
 
 async function askForMicPermission() {
@@ -26,7 +27,7 @@ export default class App extends React.Component {
     return (
       <View>
         <StatusBar hidden />
-        <MultiTrackContainer />
+        <WorldContainer />
       </View>
     );
   }

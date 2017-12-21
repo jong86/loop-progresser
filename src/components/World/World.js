@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
-import { View} from 'react-native';
+import { Dimensions, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
+import MultiTrackContainer from '../../containers/MultiTrack/MultiTrackContainer';
 import styles from './_styles_World';
 
 
 export default class World extends Component {
   render() {
+    console.log(Dimensions.get('screen'))
+
     return (
-      <View
-        style={styles.main}
+      <ScrollView
+        contentContainerStyle={styles.main}
+        maximumZoomScale={1.0}
+        minimumZoomScale={0.1}
+        horizontal
       >
-      </View>
+        <View
+          style={styles.map}
+        >
+
+          <MultiTrackContainer  />
+
+        </View>
+      </ScrollView>
     )
   }
 }

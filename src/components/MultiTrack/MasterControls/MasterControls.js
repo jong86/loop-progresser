@@ -89,7 +89,7 @@ export default class MasterControls extends Component {
       tracksWithSounds.forEach(({ sound }) => {
         if (sound) {
           this._getReadyToPlay();
-          sound.setProgressUpdateIntervalAsync(2);
+          sound.setProgressUpdateIntervalAsync(10);
           sound.playAsync();
         }
       })
@@ -134,7 +134,7 @@ export default class MasterControls extends Component {
     console.log('Recording...', this.state.recording);
 
     // For updating recording duration in GUI for audioTrack:
-    this.state.recording.setProgressUpdateInterval(2);
+    this.state.recording.setProgressUpdateInterval(10);
     this.state.recording.setOnRecordingStatusUpdate((ms) => {
       this.props.setRecordingDuration(this._getArmedTrackIndex(), ms)
     })
