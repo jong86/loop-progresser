@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
 
-import AudioTrack from '../../../components/MultiTrack/AudioTrack/AudioTrack';
-import { toggleArmTrack } from '../../../redux/actions';
+import AudioTrack from '../../../../components/World/MultiTrack/AudioTrack/AudioTrack';
+import { toggleArmTrack } from '../../../../redux/actions';
 
 function mapStateToProps(state, ownProps) {
   return {

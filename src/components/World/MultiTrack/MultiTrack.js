@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View } from 'react-native';
 
-import MasterControlsContainer from '../../containers/MultiTrack/MasterControls/MasterControlsContainer';
-import AudioTrackContainer from '../../containers/MultiTrack/AudioTrack/AudioTrackContainer';
-import MenuContainer from '../../containers/MultiTrack/Menu/MenuContainer';
+import MasterControlsContainer from '../../../containers/World/MultiTrack/MasterControls/MasterControlsContainer';
+import AudioTrackContainer from '../../../containers/World/MultiTrack/AudioTrack/AudioTrackContainer';
+import MenuContainer from '../../../containers/World/MultiTrack/Menu/MenuContainer';
 
 import styles from './_styles_MultiTrack';
 

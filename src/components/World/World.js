@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dimensions, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import MultiTrackContainer from '../../containers/MultiTrack/MultiTrackContainer';
+import MultiTrackContainer from '../../containers/World/MultiTrack/MultiTrackContainer';
 import styles from './_styles_World';
 
 const multiplierMain = 1.2

@@ -12,18 +12,21 @@ export const addTrack = (options) => {
 export const toggleArmTrack = (options) => {
   return {
     type: 'TOGGLE_ARM_TRACK',
-    ...options
+    ...options,
   }
 }
 
-// export const toggleIsMultiTrackRecording = (options) => {
-
-// }
+export const toggleIsMultiTrackRecording = (options) => {
+  return {
+    type: 'TOGGLE_IS_MULTI_TRACK_RECORDING',
+    ...options,
+  }
+}
 
 export const toggleIsMultiTrackPlaying = (options) => {
   return {
     type: 'TOGGLE_IS_MULTI_TRACK_PLAYING',
-    ...options
+    ...options,
   }
 }
 
@@ -46,6 +49,13 @@ export const updateSoundStatus = (options) => {
   console.log('options', options);
   return {
     type: 'UPDATE_SOUND_STATUS',
+    ...options,
+  }
+}
+
+export const setCurrentView = (options) => {
+  return {
+    type: 'SET_CURRENT_VIEW',
     ...options,
   }
 }

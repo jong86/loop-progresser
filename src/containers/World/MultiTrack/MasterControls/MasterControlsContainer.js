@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import MasterControls from '../../../components/MultiTrack/MasterControls/MasterControls';
+import MasterControls from '../../../../components/World/MultiTrack/MasterControls/MasterControls';
 
 import {
   setRecordingDuration,
   saveSoundData,
   toggleIsMultiTrackPlaying,
   updateSoundStatus,
-} from '../../../redux/actions';
+} from '../../../../redux/actions';
 
 function mapStateToProps(state, ownProps) {
   return {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import MultiTrack from '../../components/MultiTrack/MultiTrack'
-import { addTrack } from '../../redux/actions';
+import MultiTrack from '../../../components/World/MultiTrack/MultiTrack'
+import { addTrack } from '../../../redux/actions';
 
 import { Audio } from 'expo';
 
