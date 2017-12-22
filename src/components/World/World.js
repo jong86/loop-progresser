@@ -29,7 +29,7 @@ export default class World extends Component {
     this.refs.scrollView.scrollTo({
       x: position.x,
       y: position.y,
-      animated: false,
+      animated: true,
     })
   }
 

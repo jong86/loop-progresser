@@ -59,3 +59,10 @@ export const setZoomScale = (options) => {
     ...options,
   }
 }
+
+export const setViewMode = (options) => {
+  return {
+    type: 'SET_VIEW_MODE',
+    ...options,
+  }
+}
