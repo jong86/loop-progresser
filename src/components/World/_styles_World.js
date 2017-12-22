@@ -16,7 +16,7 @@ export default StyleSheet.create({
     backgroundColor: '#226',
     width: Dimensions.get('screen').width * multiplierMap,
     height: Dimensions.get('screen').height * multiplierMap,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });

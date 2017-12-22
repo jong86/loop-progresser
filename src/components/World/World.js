@@ -21,6 +21,7 @@ export default class World extends Component {
 
   componentDidMount() {
     this.scrollToPosition(null, true)
+    console.log('this.refs.scrollView', this.refs.scrollView);
   }
 
   scrollToPosition(givenPosition, moveToCenter) {

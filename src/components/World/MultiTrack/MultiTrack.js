@@ -19,9 +19,18 @@ export default class MultiTrack extends Component {
 
   render() {
     const audioTracks = this.props.multiTrackStatus.audioTracks;
-    // console.log('audioTracks', audioTracks);
+    const { position } = this.props.multiTrackStatus;
+    
+    console.log('props for MultiTrack.js', this.props);
     return (
-      <View style={styles.main}>
+      <View
+        style={[
+          styles.main,{
+            top: position.y,
+            left: position.x,
+          }
+        ]}
+      >
 
         <MenuContainer
           scrollToPosition={this.props.scrollToPosition}
@@ -31,7 +40,7 @@ export default class MultiTrack extends Component {
           <AudioTrackContainer
             {...audioTrackData}
             key={audioTrackData.id} // For React
-            id={audioTrackData.id} // Unique identifier (uuid)
+            id={audioTrackData.id} // Unique identifier for me
             audioTrackIndex={audioTrackIndex} // Index/position in multiTrack array
             multiTrackId={this.props.multiTrackId}
           />

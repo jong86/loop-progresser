@@ -6,7 +6,7 @@ import { setZoomScale } from '../../redux/actions';
 
 function mapStateToProps(state) {
   return {
-    zoomScale: state.zoomScale
+    ...state
   }
 }
 

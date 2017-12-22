@@ -3,7 +3,7 @@ import update from 'react-addons-update'
 initialState = {
   multiTracks: {
     0: {
-      position: {x: 400, y: 400},
+      position: {x: 400, y: 800},
       audioTracks: [],
       isPlaying: false,
       isRecording: false,

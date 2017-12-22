@@ -6,7 +6,8 @@ export default StyleSheet.create({
     width: Dimensions.get('screen').width,
     height: Dimensions.get('screen').height,
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'absolute',
   },
 
   addTrackButton: {
@@ -15,7 +16,7 @@ export default StyleSheet.create({
     backgroundColor: '#ff0',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 50
+    margin: 50,
   },
   addTrackButtonText: {
     fontSize: 25,
