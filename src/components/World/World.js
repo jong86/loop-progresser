@@ -21,11 +21,9 @@ export default class World extends Component {
 
   componentDidMount() {
     this.scrollToPosition(null, true)
-    console.log('this.refs.scrollView', this.refs.scrollView);
   }
 
   scrollToPosition(givenPosition, moveToCenter) {
-    console.log('position', position);
     const position = moveToCenter ? this.centerXY : givenPosition;
     this.refs.scrollView.scrollTo({
       x: position.x,
@@ -35,7 +33,6 @@ export default class World extends Component {
   }
 
   render() {
-    console.log('this.props for World.js', this.props);
 
     return (
       <ScrollView
@@ -48,7 +45,7 @@ export default class World extends Component {
         centerContent
         scrollEventThrottle={1}
         onScrollEndDrag={(event) => {
-          console.log("ended drag", event.nativeEvent.zoomScale)
+          console.log("ended drag, nativeEvent:", event.nativeEvent)
           this.props.setZoomScale(event.nativeEvent.zoomScale)
         }}
       >

@@ -60,9 +60,23 @@ export const setZoomScale = (options) => {
   }
 }
 
+// export const setScrollPosition = (options) => {
+//   return {
+//     type: 'SET_SCROLL_POSITION',
+//     ...options,
+//   }
+// }
+
 export const setViewMode = (options) => {
   return {
     type: 'SET_VIEW_MODE',
     ...options,
+  }
+}
+
+export const action = (type, options) => {
+  return {
+    type: type,
+    ...options
   }
 }

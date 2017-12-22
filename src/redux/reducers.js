@@ -12,6 +12,7 @@ initialState = {
   focusedMultiTrack: 0,
   viewMode: 'WORLD', // or 'MULTI_TRACK'
   zoomScale: 1.0,
+  scrollPosition: {x: 0, y: 0},
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -112,9 +113,14 @@ const rootReducer = (state = initialState, action) => {
 
     case 'SET_ZOOM_SCALE':
       const { zoomScale } = action;
-      // Also need to change position to keep centered on that multiTrack
       return update(state, {
         zoomScale: {$set: zoomScale}
+      })
+
+    case 'SET_SCROLL_POSITION':
+      const { scrollPosition } = action;
+      return update(state, {
+        scrollPosition: {$set: scrollPosition}
       })
 
     case 'SET_VIEW_MODE':
@@ -129,3 +135,10 @@ const rootReducer = (state = initialState, action) => {
 }
 
 export default rootReducer
+
+
+// gui view modes:
+// 1. WORLD
+// 2. WORLD_EDIT_MULTI_TRACK
+// 3. MULTI_TRACK
+//
