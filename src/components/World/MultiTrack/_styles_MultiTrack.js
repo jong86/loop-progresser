@@ -8,6 +8,9 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     position: 'absolute',
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: 'rgba(0, 0, 0, 0)'
   },
 
   addTrackButton: {

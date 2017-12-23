@@ -7,6 +7,9 @@ export default StyleSheet.create({
     height: '10%',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: 'rgba(0, 0, 0, 0)'
   },
 
 

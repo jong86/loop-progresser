@@ -51,7 +51,7 @@ export default class MultiTrack extends Component {
       >
         <View
           style={[
-            styles.main,{
+            styles.main, {
               top: position.y,
               left: position.x,
             }
