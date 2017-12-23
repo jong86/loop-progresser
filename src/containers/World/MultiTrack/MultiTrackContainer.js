@@ -1,13 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-
-import MultiTrack from '../../../components/World/MultiTrack/MultiTrack'
-
-import { action } from '../../../redux/actions';
-
 import { Audio } from 'expo';
-
 import uuidv4 from 'uuid/v4';
+import { action } from '../../../redux/actions';
+import MultiTrack from '../../../components/World/MultiTrack/MultiTrack'
 
 const DEV_MULTITRACK_ID = 0
 
@@ -16,7 +12,6 @@ function mapStateToProps(state) {
     multiTrackStatus: state.multiTracks[DEV_MULTITRACK_ID],
     multiTrackId: DEV_MULTITRACK_ID,
     viewMode: state.viewMode,
-    scrollPosition: state.scrollPosition,
   };
 }
 

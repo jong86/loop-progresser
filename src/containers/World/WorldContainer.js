@@ -16,9 +16,6 @@ function mapDispatchToProps(dispatch) {
     setZoomScale: (zoomScale) => {
       dispatch(action('SET_ZOOM_SCALE', { zoomScale }))
     },
-    setScrollPosition: (scrollPosition) => {
-      dispatch(action('SET_SCROLL_POSITION', { scrollPosition }))
-    },
   })
 }
 

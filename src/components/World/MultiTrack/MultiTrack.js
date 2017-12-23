@@ -23,7 +23,6 @@ export default class MultiTrack extends Component {
   }
 
   checkDoubleTouch(functionToPerform, event) {
-    // console.log('doubleTouch nativeEvent', event.nativeEvent);
     if (Date.now() - this.touchTimeDiff < 200) {
       functionToPerform(event);
     }
@@ -31,7 +30,6 @@ export default class MultiTrack extends Component {
   }
 
   enterMultiTrackView() {
-    console.log('You have entered MultiTrackView', this.props.scrollPosition);
     this.props.switchToMultiTrackViewMode()
     this.props.zoomIn();
     this.props.scrollToPosition({

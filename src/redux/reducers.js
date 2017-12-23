@@ -10,9 +10,8 @@ initialState = {
     }
   },
   focusedMultiTrack: 0,
-  viewMode: 'WORLD', // or 'MULTI_TRACK'
+  viewMode: 'WORLD',
   zoomScale: 1.0,
-  scrollPosition: {x: 0, y: 0},
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -57,15 +56,6 @@ const rootReducer = (state = initialState, action) => {
           }
         }
       })
-
-    // case 'TOGGLE_IS_MULTI_TRACK_RECORDING':
-    //   return update(state, {
-    //     multiTracks: {
-    //       [multiTrackId]: {
-    //         isRecording: {$set: true}
-    //       }
-    //     }
-    //   })
 
     case 'SET_RECORDING_DURATION':
       const { duration } = action;
@@ -117,13 +107,11 @@ const rootReducer = (state = initialState, action) => {
         zoomScale: {$set: zoomScale}
       })
 
-    case 'SET_SCROLL_POSITION':
-      const { scrollPosition } = action;
-      return update(state, {
-        scrollPosition: {$set: scrollPosition}
-      })
-
     case 'SET_VIEW_MODE':
+      // Possible view modes:
+      // 1. WORLD
+      // 2. WORLD_EDIT_MULTI_TRACK
+      // 3. MULTI_TRACK
       const { viewMode } = action;
       return update(state, {
         viewMode: {$set: viewMode}
@@ -135,10 +123,3 @@ const rootReducer = (state = initialState, action) => {
 }
 
 export default rootReducer
-
-
-// gui view modes:
-// 1. WORLD
-// 2. WORLD_EDIT_MULTI_TRACK
-// 3. MULTI_TRACK
-//
