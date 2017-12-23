@@ -22,16 +22,22 @@ export default class MultiTrack extends Component {
     this.enterMultiTrackView = this.enterMultiTrackView.bind(this)
   }
 
-  checkDoubleTouch(functionToPerform) {
+  checkDoubleTouch(functionToPerform, event) {
+    // console.log('doubleTouch nativeEvent', event.nativeEvent);
     if (Date.now() - this.touchTimeDiff < 200) {
-      functionToPerform();
+      functionToPerform(event);
     }
     this.touchTimeDiff = Date.now();
   }
 
   enterMultiTrackView() {
-    console.log('You have entered MultiTrackView');
-    this.props.scrollToPosition(this.props.multiTrackStatus.position)
+    console.log('You have entered MultiTrackView', this.props.scrollPosition);
+    this.props.setZoomScale(1.0);
+
+    this.props.scrollToPosition({
+      x: this.props.multiTrackStatus.position.x,
+      y: this.props.multiTrackStatus.position.y,
+    })
   }
 
 
@@ -40,10 +46,9 @@ export default class MultiTrack extends Component {
     const audioTracks = this.props.multiTrackStatus.audioTracks;
     const { position } = this.props.multiTrackStatus;
 
-    console.log('props for MultiTrack.js', this.props);
     return (
       <TouchableHighlight
-        onPress={() => this.checkDoubleTouch(this.enterMultiTrackView)}
+        onPress={(event) => this.checkDoubleTouch(this.enterMultiTrackView, event)}
       >
         <View
           style={[

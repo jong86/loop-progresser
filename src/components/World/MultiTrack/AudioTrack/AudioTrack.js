@@ -27,12 +27,10 @@ export default class AudioTrack extends Component {
     if (!this.props.isMultiTrackPlaying && this.props.recordingDuration) {
       // If a sound is currently being recorded
       const milliseconds = this.props.recordingDuration.durationMillis;
-      console.log('milliseconds recorded:', milliseconds);
       return `${_formatMilliseconds(milliseconds)}`;
     } else if (this.props.isMultiTrackPlaying && this.props.soundData.status) {
       // If there's a sound already recorded
       const milliseconds = this.props.soundData.status.positionMillis;
-      console.log('milliseconds played:', milliseconds);
       return `${_formatMilliseconds(milliseconds)}`;
     } else {
     return `${_formatMilliseconds(0)}`;

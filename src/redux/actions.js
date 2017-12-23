@@ -75,6 +75,7 @@ export const setViewMode = (options) => {
 }
 
 export const action = (type, options) => {
+  // console.log('REDUX ACTION CALLED:', type, options);
   return {
     type: type,
     ...options

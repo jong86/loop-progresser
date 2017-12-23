@@ -15,6 +15,7 @@ function mapStateToProps(state) {
     multiTrackStatus: state.multiTracks[DEV_MULTITRACK_ID],
     multiTrackId: DEV_MULTITRACK_ID,
     viewMode: state.viewMode,
+    scrollPosition: state.scrollPosition,
   };
 }
 
@@ -33,7 +34,8 @@ function mapDispatchToProps(dispatch, ownProps) {
         recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
       }
     }))},
-    setScrollPosition: () => {dispatch(action('SET_SCROLL_POSITION', {x: 0, y: 0}))},
+
+    setZoomScale: (zoomScale) => {dispatch(action('SET_ZOOM_SCALE', { zoomScale: zoomScale }))},
 
     scrollToPosition: ownProps.scrollToPosition,
   })

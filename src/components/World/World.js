@@ -23,8 +23,26 @@ export default class World extends Component {
     this.scrollToPosition(null, true)
   }
 
+  handleEndDrag(event) {
+    const { nativeEvent } = event;
+    console.log("ended drag, nativeEvent:", nativeEvent)
+    this.props.setZoomScale(nativeEvent.zoomScale)
+
+    const position = {
+      x: nativeEvent.targetContentOffset ? nativeEvent.targetContentOffset.x : nativeEvent.contentOffset.x,
+      y: nativeEvent.targetContentOffset ? nativeEvent.targetContentOffset.y : nativeEvent.contentOffset.y,
+    }
+    // For providing offset viewport position in scrollView
+    this.props.setScrollPosition({
+      x: position.x,
+      y: position.y,
+    })
+  }
+
   scrollToPosition(givenPosition, moveToCenter) {
     const position = moveToCenter ? this.centerXY : givenPosition;
+
+    console.log('Scrolling to:', position);
     this.refs.scrollView.scrollTo({
       x: position.x,
       y: position.y,
@@ -44,10 +62,7 @@ export default class World extends Component {
         zoomScale={this.props.zoomScale}
         centerContent
         scrollEventThrottle={1}
-        onScrollEndDrag={(event) => {
-          console.log("ended drag, nativeEvent:", event.nativeEvent)
-          this.props.setZoomScale(event.nativeEvent.zoomScale)
-        }}
+        onScrollEndDrag={(event) => this.handleEndDrag(event)}
       >
         <View
           style={styles.map}

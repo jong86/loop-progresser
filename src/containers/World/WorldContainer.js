@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import World from '../../components/World/World';
-import { setZoomScale } from '../../redux/actions';
+import { action } from '../../redux/actions';
 
 function mapStateToProps(state) {
   return {
@@ -12,7 +12,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return ({
-    setZoomScale: (zoomScale) => {dispatch(setZoomScale({zoomScale: zoomScale}))}
+    setZoomScale: (zoomScale) => {dispatch(action('SET_ZOOM_SCALE', { zoomScale: zoomScale }))},
+    setScrollPosition: (scrollPosition) => {dispatch(action('SET_SCROLL_POSITION', { scrollPosition: scrollPosition }))},
   })
 }
 

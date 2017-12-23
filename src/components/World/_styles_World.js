@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-const multiplierMain = 1.2
+const multiplierMain = 1
 const multiplierMap = 8
 
 export default StyleSheet.create({
