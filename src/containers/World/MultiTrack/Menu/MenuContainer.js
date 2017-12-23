@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 
 import Menu from '../../../../components/World/MultiTrack/Menu/Menu';
 
-import { setZoomScale } from '../../../../redux/actions';
+import { action } from '../../../../redux/actions';
 
 function mapDispatchToProps(dispatch, ownProps) {
   console.log('ownProps in menuContainer', ownProps);
   return({
-    setZoomScale: () => {dispatch(setZoomScale({zoomScale: 0.1}))},
+    zoomOut: () => {dispatch(action('SET_ZOOM_SCALE', { zoomScale: 0.1 }))},
+    switchToWorldViewMode: () => {dispatch(action('SET_VIEW_MODE', { viewMode: 'WORLD' }))},
     scrollToPosition: ownProps.scrollToPosition,
   })
 }

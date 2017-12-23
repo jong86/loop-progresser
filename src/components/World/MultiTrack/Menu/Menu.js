@@ -6,7 +6,8 @@ import styles from './_styles_Menu';
 
 export default class Menu extends Component {
   _onBackPressed = () => {
-    this.props.setZoomScale();
+    this.props.zoomOut();
+    this.props.switchToWorldViewMode();
     this.props.scrollToPosition(null, true);
   }
 
