@@ -11,12 +11,13 @@ import styles from './_styles_MultiTrack';
 export default class MultiTrack extends Component {
   constructor(props) {
     super(props)
-    this.touchTimeDiff = 0
 
     this.props.addTrack()
     this.props.addTrack()
     this.props.addTrack()
     this.props.addTrack()
+
+    this.touchTimeDiff = 0
 
     this.checkDoubleTouch = this.checkDoubleTouch.bind(this)
     this.enterMultiTrackView = this.enterMultiTrackView.bind(this)

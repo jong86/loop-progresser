@@ -37,6 +37,7 @@ export default class World extends Component {
   }
 
   render() {
+    console.log('this.props inside World component:', this.props);
 
     return (
       <ScrollView
@@ -47,6 +48,8 @@ export default class World extends Component {
         ref='scrollView'
         zoomScale={this.props.zoomScale}
         centerContent
+        scrollEnabled={ this.props.viewMode === 'WORLD' ? true : false }
+        pinchGestureEnabled={ this.props.viewMode === 'WORLD' ? true : false }
         scrollEventThrottle={1}
         onScrollEndDrag={(event) => this.handleEndDrag(event)}
       >
