@@ -4,14 +4,18 @@ initialState = {
   multiTracks: {
     0: {
       position: {x: 400, y: 800},
+      name: 'MultiTrack 0', // not used yet
+      color: '#222', // not used yet
+      bpm: 120, // not used yet
+      isMetronomeEnabled: false, // not used yet
       audioTracks: [],
       isPlaying: false,
       isRecording: false,
     }
   },
-  focusedMultiTrack: 0,
-  viewMode: 'WORLD',
-  zoomScale: 1.0,
+  focusedMultiTrack: 0, // deprecated
+  viewMode: 'WORLD', // deprecated
+  zoomScale: 1.0, // deprecated
 }
 
 const rootReducer = (state = initialState, action) => {

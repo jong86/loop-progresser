@@ -16,20 +16,20 @@ export default ControlButton = (props) => {
   // (icons can go in here)
   let specificStyle;
   let icon;
-  const size = 32
+  const size = '75%'
   const color = "#000"
   switch(props.type) {
     case "PLAY":
       specificStyle = styles.buttonPlay;
-      icon = <Ionicons name="ios-play" size={size + 8} color={color} />
+      icon = <Ionicons name="ios-play" size={size} color='forestgreen' />
       break;
-      case "STOP":
-      specificStyle = styles.buttonStop;
-      icon = <Ionicons name="ios-square" size={size} color={color} />
-      break;
-      case "REC":
+    case "REC":
       specificStyle = styles.buttonRecord;
-      icon = <Ionicons name="ios-mic" size={size + 4} color={color} />
+      icon = <Ionicons name="ios-mic" size={size} color='tomato' />
+      break;
+    case "STOP":
+      specificStyle = styles.buttonStop;
+      icon = <Ionicons name="ios-square" size={size} color='steelblue' />
       break;
     default:
       break;

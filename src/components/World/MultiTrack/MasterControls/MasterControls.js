@@ -171,19 +171,17 @@ export default class MasterControls extends Component {
       <View style={styles.main}>
 
         <View style={styles.buttonWrapper}>
-          { this.state.isMultiTrackPlayingAllowed &&
-            <ControlButton
-              type="PLAY"
-              specificFunction={this._onPlayPausePressed}
-            />
-          }
           <ControlButton
-            type="STOP"
-            specificFunction={this._onStopPressed}
+            type="PLAY"
+            specificFunction={this._onPlayPausePressed}
           />
           <ControlButton
             type="REC"
             specificFunction={this._onRecordPressed}
+          />
+          <ControlButton
+            type="STOP"
+            specificFunction={this._onStopPressed}
           />
         </View>
 

@@ -4,25 +4,28 @@ export default StyleSheet.create({
   main: {
     backgroundColor: '#222',
     width: '100%',
-    height: '10%',
+    height: '25%',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0)'
   },
 
-
   buttonWrapper: {
-    width: '75%',
+    width: '100%',
+    height: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    position: 'absolute',
+    bottom: 0,
   },
 
   trackControl: {
-    width: 64,
-    height: 64,
+    width: '33.33333%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -33,14 +36,17 @@ export default StyleSheet.create({
   },
 
   buttonPlay: {
-    backgroundColor: 'forestgreen',
+    borderColor: 'forestgreen',
+    borderBottomLeftRadius: 10,
+    borderWidth: 2,
   },
   buttonRecord: {
-    borderRadius: 32,
-    backgroundColor: 'tomato',
+    borderColor: 'tomato',
+    borderWidth: 2,
   },
   buttonStop: {
-    backgroundColor: 'steelblue',
+    borderColor: 'steelblue',
+    borderBottomRightRadius: 10,
+    borderWidth: 2,
   },
-
 });

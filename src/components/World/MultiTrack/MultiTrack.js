@@ -46,36 +46,30 @@ export default class MultiTrack extends Component {
     const { position } = this.props.multiTrackStatus;
 
     return (
-      <TouchableHighlight
-        onPress={(event) => this.checkDoubleTouch(this.enterMultiTrackView, event)}
+      <View
+        style={[
+          styles.main, {
+            top: position.y,
+            left: position.x,
+          }
+        ]}
       >
-        <View
-          style={[
-            styles.main, {
-              top: position.y,
-              left: position.x,
-            }
-          ]}
-          pointerEvents={ this.props.viewMode === 'MULTI_TRACK' ? 'auto' : 'box-only' }
-        >
-          <MenuContainer
-            scrollToPosition={this.props.scrollToPosition}
+        <MenuContainer
+          scrollToPosition={this.props.scrollToPosition}
+        />
+
+        { audioTracks.map((audioTrackData, audioTrackIndex) =>
+          <AudioTrackContainer
+            {...audioTrackData}
+            key={audioTrackData.id} // For React
+            id={audioTrackData.id} // Unique identifier for me
+            audioTrackIndex={audioTrackIndex} // Index/position in multiTrack array
+            multiTrackId={this.props.multiTrackId}
           />
+        )}
 
-          { audioTracks.map((audioTrackData, audioTrackIndex) =>
-            <AudioTrackContainer
-              {...audioTrackData}
-              key={audioTrackData.id} // For React
-              id={audioTrackData.id} // Unique identifier for me
-              audioTrackIndex={audioTrackIndex} // Index/position in multiTrack array
-              multiTrackId={this.props.multiTrackId}
-            />
-          )}
-
-          <MasterControlsContainer multiTrackId={this.props.multiTrackId} />
-        </View>
-
-      </TouchableHighlight>
+        <MasterControlsContainer multiTrackId={this.props.multiTrackId} />
+      </View>
     )
   }
 }
