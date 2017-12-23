@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import AudioTrack from '../../../../components/World/MultiTrack/AudioTrack/AudioTrack';
-import { toggleArmTrack } from '../../../../redux/actions';
+
+import { action } from '../../../../redux/actions';
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -14,8 +15,9 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   const { audioTrackIndex, multiTrackId } = ownProps;
   return({
-    toggleArmTrack: () => {dispatch(toggleArmTrack({ audioTrackIndex, multiTrackId }))},
-    // toggleTrackIsRecording: () => {dispatch(toggleTrackIsRecording({ }))}
+    toggleArmTrack: () => {
+      dispatch(action('TOGGLE_ARM_TRACK', { audioTrackIndex, multiTrackId }))
+    },
   })
 }
 

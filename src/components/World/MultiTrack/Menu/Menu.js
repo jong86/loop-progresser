@@ -5,7 +5,7 @@ import styles from './_styles_Menu';
 
 
 export default class Menu extends Component {
-  _onBackPressed = () => {
+  onBackPressed = () => {
     this.props.zoomOut();
     this.props.switchToWorldViewMode();
     this.props.scrollToPosition(null, true);
@@ -15,7 +15,7 @@ export default class Menu extends Component {
     return (
       <TouchableHighlight
         style={styles.main}
-        onPress={this._onBackPressed}
+        onPress={this.onBackPressed}
       >
         <Ionicons name="ios-arrow-up" size={32} color={"white"} />
       </TouchableHighlight>

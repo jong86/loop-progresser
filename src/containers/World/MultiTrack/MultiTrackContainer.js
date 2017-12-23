@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import MultiTrack from '../../../components/World/MultiTrack/MultiTrack'
+
 import { action } from '../../../redux/actions';
 
 import { Audio } from 'expo';
@@ -22,22 +23,25 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, ownProps) {
   console.log('ownProps in MultiTrackContainer', ownProps);
   return({
-    addTrack: () => {dispatch(action('ADD_TRACK', {
-      multiTrackId: DEV_MULTITRACK_ID,
-      audioTrackInitialState: {
-        id: uuidv4(),
-        isArmed: false,
-        // isRecording: false,
-        recordingDuration: null,
-        soundData: {},
-        soundDuration: null,
-        recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
-      }
-    }))},
-
-    zoomIn: () => {dispatch(action('SET_ZOOM_SCALE', { zoomScale: 1.0 }))},
-    switchToMultiTrackViewMode: () => {dispatch(action('SET_VIEW_MODE', { viewMode: 'MULTI_TRACK' }))},
-
+    addTrack: () => {
+      dispatch(action('ADD_TRACK', {
+        multiTrackId: DEV_MULTITRACK_ID,
+        audioTrackInitialState: {
+          id: uuidv4(),
+          isArmed: false,
+          recordingDuration: null,
+          soundData: {},
+          soundDuration: null,
+          recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
+        }
+      }))
+    },
+    zoomIn: () => {
+      dispatch(action('SET_ZOOM_SCALE', { zoomScale: 1.0 }))
+    },
+    switchToMultiTrackViewMode: () => {
+      dispatch(action('SET_VIEW_MODE', { viewMode: 'MULTI_TRACK' }))
+    },
     scrollToPosition: ownProps.scrollToPosition,
   })
 }
