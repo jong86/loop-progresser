@@ -32,8 +32,8 @@ export default class MultiTrack extends Component {
 
   enterMultiTrackView() {
     console.log('You have entered MultiTrackView', this.props.scrollPosition);
-    this.props.setZoomScale(1.0);
-
+    this.props.switchToMultiTrackViewMode()
+    this.props.zoomIn();
     this.props.scrollToPosition({
       x: this.props.multiTrackStatus.position.x,
       y: this.props.multiTrackStatus.position.y,

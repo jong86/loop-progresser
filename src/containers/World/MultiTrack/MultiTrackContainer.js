@@ -35,7 +35,8 @@ function mapDispatchToProps(dispatch, ownProps) {
       }
     }))},
 
-    setZoomScale: (zoomScale) => {dispatch(action('SET_ZOOM_SCALE', { zoomScale: zoomScale }))},
+    zoomIn: () => {dispatch(action('SET_ZOOM_SCALE', { zoomScale: 1.0 }))},
+    switchToMultiTrackViewMode: () => {dispatch(action('SET_VIEW_MODE', { viewMode: 'MULTI_TRACK' }))},
 
     scrollToPosition: ownProps.scrollToPosition,
   })
