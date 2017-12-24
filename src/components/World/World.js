@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, ScrollView, Text, View } from 'react-native';
+import { Dimensions, ScrollView, Text, View, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import ModalAddMultiTrack from './ModalAddMultiTrack';
@@ -16,6 +16,7 @@ export default class World extends Component {
     }
     this.state = {
       isModalAddMultiTrackVisible : false,
+      isAddMultiTrackModeEnabled: false,
     }
 
     this.scrollToPosition = this.scrollToPosition.bind(this)
@@ -39,12 +40,11 @@ export default class World extends Component {
     })
   }
 
-  showModalAddMultiTrack = () => {
-    this.setState({ isModalAddMultiTrackVisible: true })
-  }
-
-  hideModalAddMultiTrack = () => {
-    this.setState({ isModalAddMultiTrackVisible: false })
+  toggleAddMultiTrackMode = () => {
+    console.log('you invoked toggleAddMultiTrackMode');
+    this.setState({
+      isAddMultiTrackModeEnabled: !this.state.isAddMultiTrackModeEnabled
+    })
   }
 
   render() {
@@ -60,22 +60,43 @@ export default class World extends Component {
           zoomScale={this.props.zoomScale}
           centerContent
           scrollEventThrottle={1}
-          onScrollEndDrag={(event) => this.handleEndDrag(event)}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          onScrollEndDrag={(event) => {
+            // console.log('ended drag on scrollView');
+            this.handleEndDrag(event)}
+          }
         >
-          <MultiTrackContainer
-            scrollToPosition={this.scrollToPosition}
-          />
+          <TouchableWithoutFeedback
+            onPress={(event) => {
+              console.log('you pressed the map', event);
+            }}
+          >
+            <View
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              <MultiTrackContainer
+                scrollToPosition={this.scrollToPosition}
+              />
 
+            </View>
+          </TouchableWithoutFeedback>
         </ScrollView>
 
         <GlobalMenu
-          showModalAddMultiTrack={this.showModalAddMultiTrack}
+          isAddMultiTrackModeEnabled={this.state.isAddMultiTrackModeEnabled}
+          toggleAddMultiTrackMode={this.toggleAddMultiTrackMode}
         />
 
-        <ModalAddMultiTrack
-          isModalAddMultiTrackVisible={this.state.isModalAddMultiTrackVisible}
-          hideModalAddMultiTrack={this.hideModalAddMultiTrack}
-        />
+        { this.state.isAddMultiTrackModeEnabled &&
+          <ModalAddMultiTrack
+            isAddMultiTrackModeEnabled={this.state.isAddMultiTrackModeEnabled}
+            toggleAddMultiTrackMode={this.toggleAddMultiTrackMode}
+          />
+        }
 
       </View>
 

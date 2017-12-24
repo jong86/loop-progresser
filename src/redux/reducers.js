@@ -105,13 +105,13 @@ const rootReducer = (state = initialState, action) => {
         }
       })
 
-    case 'SET_ZOOM_SCALE':
+    case 'SET_ZOOM_SCALE': // possibly deprecated
       const { zoomScale } = action;
       return update(state, {
         zoomScale: {$set: zoomScale}
       })
 
-    case 'SET_VIEW_MODE':
+    case 'SET_VIEW_MODE': // possibly deprecated
       // Possible view modes:
       // 1. WORLD
       // 2. WORLD_EDIT_MULTI_TRACK
