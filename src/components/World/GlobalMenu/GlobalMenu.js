@@ -15,6 +15,7 @@ export default class GlobalMenu extends Component {
         <Button
           icon={<Ionicons name="md-add-circle" size={32} color='#333' />}
           style={{position: 'absolute', right: 0}}
+          buttonFunction={this.props.showModalAddMultiTrack}
         />
       </View>
     )

@@ -5,14 +5,10 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './_styles_GlobalMenu';
 
 export default class Button extends Component {
-  handleOnPress() {
-    console.log("you touched me")
-  }
-
   render() {
     return (
       <TouchableWithoutFeedback
-        onPress={this.handleOnPress}
+        onPress={this.props.buttonFunction}
       >
         <View
           style={[styles.button, this.props.style]}
