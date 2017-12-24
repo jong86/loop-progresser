@@ -69,11 +69,12 @@ export default class World extends Component {
           <TouchableWithoutFeedback
             onPress={(event) => {
               if (this.state.isAddMultiTrackModeEnabled) {
-                const pressedPosition = {
+                const position = {
                   x: event.nativeEvent.locationX,
                   Y: event.nativeEvent.locationY,
                 }
-                console.log('you pressed the map at', pressedPosition);
+                console.log('you pressed the map at', position);
+                this.props.addMultiTrack(position);
                 this.toggleAddMultiTrackMode();
               }
             }}

@@ -22,6 +22,14 @@ const rootReducer = (state = initialState, action) => {
   const { audioTrackIndex, multiTrackId } = action;
   switch (action.type) {
 
+    case 'ADD_MULTI_TRACK':
+      const { multiTrackData } = action;
+      return update(state, {
+        multiTracks: {
+          [multiTrackData.id]: {$set: multiTrackData}
+        }
+      })
+
     case 'ADD_TRACK':
       return update(state, {
         multiTracks: {
