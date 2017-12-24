@@ -3,10 +3,8 @@ import { Dimensions, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import MultiTrackContainer from '../../containers/World/MultiTrack/MultiTrackContainer';
+import GlobalMenu from './GlobalMenu/GlobalMenu';
 import styles from './_styles_World';
-
-const multiplierMain = 1.2
-const multiplierMap = 8
 
 export default class World extends Component {
   constructor() {
@@ -41,29 +39,27 @@ export default class World extends Component {
     console.log('this.props inside World component:', this.props);
 
     return (
-      <ScrollView
-        contentContainerStyle={styles.main}
-        maximumZoomScale={1.0}
-        minimumZoomScale={0.1}
-        horizontal
-        ref='scrollView'
-        zoomScale={this.props.zoomScale}
-        centerContent
-        // scrollEnabled={ this.props.viewMode === 'WORLD' ? true : false }
-        // pinchGestureEnabled={ this.props.viewMode === 'WORLD' ? true : false }
-        scrollEventThrottle={1}
-        onScrollEndDrag={(event) => this.handleEndDrag(event)}
-      >
-        <View
-          style={styles.map}
+      <View>
+        <ScrollView
+          contentContainerStyle={styles.world}
+          maximumZoomScale={1.0}
+          minimumZoomScale={0.1}
+          horizontal
+          ref='scrollView'
+          zoomScale={this.props.zoomScale}
+          centerContent
+          scrollEventThrottle={1}
+          onScrollEndDrag={(event) => this.handleEndDrag(event)}
         >
-
           <MultiTrackContainer
             scrollToPosition={this.scrollToPosition}
           />
 
-        </View>
-      </ScrollView>
+        </ScrollView>
+
+        <GlobalMenu />
+      </View>
+
     )
   }
 }
