@@ -63,16 +63,23 @@ export default class World extends Component {
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           onScrollEndDrag={(event) => {
-            // console.log('ended drag on scrollView');
             this.handleEndDrag(event)}
           }
         >
           <TouchableWithoutFeedback
             onPress={(event) => {
-              console.log('you pressed the map', event);
+              if (this.state.isAddMultiTrackModeEnabled) {
+                const pressedPosition = {
+                  x: event.nativeEvent.locationX,
+                  Y: event.nativeEvent.locationY,
+                }
+                console.log('you pressed the map at', pressedPosition);
+                this.toggleAddMultiTrackMode();
+              }
             }}
           >
             <View
+              // Needed this extra View to get map touches working for some reason
               style={{
                 width: '100%',
                 height: '100%',
