@@ -20,7 +20,7 @@ export default class AudioTrack extends Component {
 
   _getTimestamp = () => {
     _formatMilliseconds = (milliseconds) => {
-      console.log('milliseconds:', milliseconds)
+      // console.log('milliseconds:', milliseconds)
       if (!milliseconds) milliseconds = 0;
       return new Date(Number(milliseconds)).toISOString().slice(14, -2);
     }

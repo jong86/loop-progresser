@@ -14,6 +14,20 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   const { multiTrackId } = ownProps;
   return {
+    addTrack: () => {
+      dispatch(action('ADD_TRACK', {
+        multiTrackId: ownProps.id,
+        audioTrackInitialState: {
+          id: uuidv4(),
+          isArmed: false,
+          recordingDuration: null,
+          soundData: {},
+          soundDuration: null,
+          recordingSettings: JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY)),
+        }
+      }))
+    },
+
     setRecordingDuration: (audioTrackIndex, duration) => {
       dispatch(action('SET_RECORDING_DURATION', { audioTrackIndex, multiTrackId, duration }))
     },

@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   main: {
+    position: 'absolute',
+    bottom: 0,
     backgroundColor: '#222',
     width: '100%',
     height: '25%',

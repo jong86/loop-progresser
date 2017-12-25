@@ -148,6 +148,7 @@ export default class MasterControls extends Component {
     })
     await this._getReadyToPlay()
     const armedTrackIndex = this._getArmedTrackIndex();
+    const { toggleIsMultiTrackPlaying } = this.props;
     const soundData = await this.state.recording.createNewLoadedSound({
       isLooping: false,
       isMuted: false,
@@ -155,6 +156,11 @@ export default class MasterControls extends Component {
       rate: 1.0,
       shouldCorrectPitch: true,
     }, (status) => {
+      console.log('i am called', status);
+      if (status.positionMillis === status.durationMillis) {
+        toggleIsMultiTrackPlaying();
+        this._stopAllTracks();
+      }
       this.props.updateSoundStatus(armedTrackIndex, status)
     })
     // Save recorded sound in store:

@@ -12,11 +12,6 @@ export default class MultiTrack extends Component {
   constructor(props) {
     super(props)
 
-    this.props.addTrack()
-    this.props.addTrack()
-    this.props.addTrack()
-    this.props.addTrack()
-
     this.touchTimeDiff = 0
 
     this.checkDoubleTouch = this.checkDoubleTouch.bind(this)
@@ -43,7 +38,6 @@ export default class MultiTrack extends Component {
 
   render() {
     const { multiTrackData } = this.props;
-    console.log('multiTrackData', multiTrackData);
     const audioTracks = this.props.multiTrackData.audioTracks;
     const { position } = this.props.multiTrackData;
 
