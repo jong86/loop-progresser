@@ -116,9 +116,11 @@ export default class MasterControls extends Component {
   }
 
   _onRecordPressed = () => {
+
     if (this.state.isMultiTrackRecording) {
       this._stopRecordingAndEnablePlayback();
     } else {
+      this.props.addTrack();
       this._stopPlaybackAndBeginRecording();
     }
   }

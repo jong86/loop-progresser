@@ -13,6 +13,7 @@ const rootReducer = (state = initialState, action) => {
 
     case 'ADD_MULTI_TRACK':
       const { multiTrackData } = action;
+      console.log('multiTrackData', multiTrackData)
       return update(state, {
         multiTracks: {
           [multiTrackData.id]: {$set: multiTrackData}
@@ -23,7 +24,7 @@ const rootReducer = (state = initialState, action) => {
       return update(state, {
         multiTracks: {
           [multiTrackId]: {
-            audioTracks: {$push: [action.audioTrackInitialState]},
+            audioTracks: {$push: [action.audioTrackData]},
           }
         }
       })

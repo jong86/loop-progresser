@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Audio } from 'expo';
+
 import MasterControls from '../../../../components/World/MultiTrack/MasterControls/MasterControls';
 
 import { action } from '../../../../redux/actions';
+
+import uuidv4 from 'uuid/v4';
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -16,8 +20,8 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     addTrack: () => {
       dispatch(action('ADD_TRACK', {
-        multiTrackId: ownProps.id,
-        audioTrackInitialState: {
+        multiTrackId: ownProps.multiTrackId,
+        audioTrackData: {
           id: uuidv4(),
           isArmed: false,
           recordingDuration: null,

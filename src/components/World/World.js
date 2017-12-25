@@ -26,6 +26,7 @@ export default class World extends Component {
   componentDidMount() {
     // console.log('this.props inside componentDidMount', this.props);
     this.scrollToPosition({x: 400, y: 800})
+    this.props.addMultiTrack({x: 400, y: 800});
   }
 
   handleEndDrag(event) {

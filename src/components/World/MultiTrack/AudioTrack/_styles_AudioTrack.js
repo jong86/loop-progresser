@@ -6,7 +6,7 @@ export default StyleSheet.create({
     borderColor: '#222',
     backgroundColor: '#333',
     width: '100%',
-    height: '15%',
+    height: 64,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
