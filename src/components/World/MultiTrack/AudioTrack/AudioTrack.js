@@ -15,15 +15,15 @@ export default class AudioTrack extends Component {
       await Font.loadAsync({
       'monospace': require('../../../../assets/fonts/OverpassMono-Bold.ttf'),
     });
-
     this.setState({ fontLoaded: true })
   }
 
   _getTimestamp = () => {
     _formatMilliseconds = (milliseconds) => {
+      console.log('milliseconds:', milliseconds)
+      if (!milliseconds) milliseconds = 0;
       return new Date(Number(milliseconds)).toISOString().slice(14, -2);
     }
-
     if (!this.props.isMultiTrackPlaying && this.props.recordingDuration) {
       // If a sound is currently being recorded
       const milliseconds = this.props.recordingDuration.durationMillis;
@@ -32,9 +32,8 @@ export default class AudioTrack extends Component {
       // If there's a sound already recorded
       const milliseconds = this.props.soundData.status.positionMillis;
       return `${_formatMilliseconds(milliseconds)}`;
-    } else {
-    return `${_formatMilliseconds(0)}`;
     }
+    return `${_formatMilliseconds(0)}`;
   }
 
   render() {

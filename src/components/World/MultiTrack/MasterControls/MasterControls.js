@@ -149,7 +149,7 @@ export default class MasterControls extends Component {
     await this._getReadyToPlay()
     const armedTrackIndex = this._getArmedTrackIndex();
     const soundData = await this.state.recording.createNewLoadedSound({
-      isLooping: true,
+      isLooping: false,
       isMuted: false,
       volume: 1.0,
       rate: 1.0,
