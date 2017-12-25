@@ -7,7 +7,7 @@ import { action } from '../../../../redux/actions';
 
 function mapStateToProps(state, ownProps) {
   return {
-    multiTrackStatus: state.multiTracks[ownProps.multiTrackId],
+    multiTrackData: state.multiTracks[ownProps.multiTrackId],
   };
 }
 

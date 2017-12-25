@@ -6,6 +6,7 @@ import ModalAddMultiTrack from './ModalAddMultiTrack';
 import MultiTrackContainer from '../../containers/World/MultiTrack/MultiTrackContainer';
 import GlobalMenu from './GlobalMenu/GlobalMenu';
 import styles from './_styles_World';
+import MultiTrack from './MultiTrack/MultiTrack';
 
 export default class World extends Component {
   constructor() {
@@ -23,7 +24,7 @@ export default class World extends Component {
   }
 
   componentDidMount() {
-    console.log('this.props inside componentDidMount', this.props);
+    // console.log('this.props inside componentDidMount', this.props);
     this.scrollToPosition({x: 400, y: 800})
   }
 
@@ -47,8 +48,23 @@ export default class World extends Component {
     })
   }
 
+  renderMultiTracks = () => {
+    return (
+      Object.entries(this.props.multiTracks).map(item => {
+        const multiTrackData = item[1]
+        return (
+          <MultiTrackContainer
+            key={multiTrackData.id}
+            id={multiTrackData.id}
+          />
+        )
+      })
+    )
+  }
+
   render() {
     // console.log('this.props inside World component:', this.props);
+
     return (
       <View>
         <ScrollView
@@ -71,7 +87,7 @@ export default class World extends Component {
               if (this.state.isAddMultiTrackModeEnabled) {
                 const position = {
                   x: event.nativeEvent.locationX,
-                  Y: event.nativeEvent.locationY,
+                  y: event.nativeEvent.locationY,
                 }
                 console.log('you pressed the map at', position);
                 this.props.addMultiTrack(position);
@@ -86,9 +102,11 @@ export default class World extends Component {
                 height: '100%',
               }}
             >
-              <MultiTrackContainer
+              {/* <MultiTrackContainer
                 scrollToPosition={this.scrollToPosition}
-              />
+              /> */}
+
+              { this.renderMultiTracks() }
 
             </View>
           </TouchableWithoutFeedback>

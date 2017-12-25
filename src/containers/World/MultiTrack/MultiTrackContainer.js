@@ -5,22 +5,19 @@ import uuidv4 from 'uuid/v4';
 import { action } from '../../../redux/actions';
 import MultiTrack from '../../../components/World/MultiTrack/MultiTrack'
 
-const DEV_MULTITRACK_ID = 0
-
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    multiTrackStatus: state.multiTracks[DEV_MULTITRACK_ID],
-    multiTrackId: DEV_MULTITRACK_ID,
+    multiTrackData: state.multiTracks[ownProps.id],
+    multiTrackId: ownProps.id,
     viewMode: state.viewMode,
   };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  console.log('ownProps in MultiTrackContainer', ownProps);
   return({
     addTrack: () => {
       dispatch(action('ADD_TRACK', {
-        multiTrackId: DEV_MULTITRACK_ID,
+        multiTrackId: ownProps.id,
         audioTrackInitialState: {
           id: uuidv4(),
           isArmed: false,
@@ -37,7 +34,6 @@ function mapDispatchToProps(dispatch, ownProps) {
     switchToMultiTrackViewMode: () => {
       dispatch(action('SET_VIEW_MODE', { viewMode: 'MULTI_TRACK' }))
     },
-    scrollToPosition: ownProps.scrollToPosition,
   })
 }
 

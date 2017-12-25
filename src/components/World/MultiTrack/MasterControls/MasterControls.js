@@ -21,7 +21,7 @@ export default class MasterControls extends Component {
   }
 
   _getArmedTrackIndex = () => {
-    const audioTracksList = this.props.multiTrackStatus.audioTracks
+    const audioTracksList = this.props.multiTrackData.audioTracks
     const audioTracksListLength = audioTracksList.length;
     for (let i = 0; i < audioTracksListLength; i++) {
       if (audioTracksList[i].isArmed) {
@@ -63,7 +63,7 @@ export default class MasterControls extends Component {
   }
 
   _getTracksWithSounds = () => {
-    const { audioTracks } = this.props.multiTrackStatus;
+    const { audioTracks } = this.props.multiTrackData;
     const soundsInTracks = [];
     for (let i = 0; i < audioTracks.length; i++) {
       const { soundData } = audioTracks[i]
@@ -76,7 +76,7 @@ export default class MasterControls extends Component {
 
   _onPlayPausePressed = async () => {
     const { toggleIsMultiTrackPlaying } = this.props;
-    const { isPlaying } = this.props.multiTrackStatus;
+    const { isPlaying } = this.props.multiTrackData;
     const tracksWithSounds = this._getTracksWithSounds();
     if (isPlaying && tracksWithSounds) {
       tracksWithSounds.forEach(({ sound }) => {
@@ -99,7 +99,7 @@ export default class MasterControls extends Component {
 
   _stopAllTracks = async () => {
     const { toggleIsMultiTrackPlaying } = this.props;
-    const { isPlaying } = this.props.multiTrackStatus;
+    const { isPlaying } = this.props.multiTrackData;
     const tracksWithSounds = this._getTracksWithSounds();
     if (isPlaying && tracksWithSounds) {
       tracksWithSounds.forEach(({ sound }) => {

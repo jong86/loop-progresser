@@ -34,16 +34,18 @@ export default class MultiTrack extends Component {
     this.props.switchToMultiTrackViewMode()
     this.props.zoomIn();
     this.props.scrollToPosition({
-      x: this.props.multiTrackStatus.position.x,
-      y: this.props.multiTrackStatus.position.y,
+      x: this.props.multiTrackData.position.x,
+      y: this.props.multiTrackData.position.y,
     })
   }
 
 
 
   render() {
-    const audioTracks = this.props.multiTrackStatus.audioTracks;
-    const { position } = this.props.multiTrackStatus;
+    const { multiTrackData } = this.props;
+    console.log('multiTrackData', multiTrackData);
+    const audioTracks = this.props.multiTrackData.audioTracks;
+    const { position } = this.props.multiTrackData;
 
     return (
       <View
@@ -54,9 +56,7 @@ export default class MultiTrack extends Component {
           }
         ]}
       >
-        <MenuContainer
-          scrollToPosition={this.props.scrollToPosition}
-        />
+        <MenuContainer />
 
         { audioTracks.map((audioTrackData, audioTrackIndex) =>
           <AudioTrackContainer
